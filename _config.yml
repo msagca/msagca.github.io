@@ -1,0 +1,63 @@
+avatar: /assets/img/favicons/android-chrome-512x512.png
+baseurl: ""
+description: Mustafa Said Ağca
+google_site_verification: SgXcFtvKKnu5z3VZscyrDR6xFkBXCe_PWsFg82cudgc
+lang: en
+theme: jekyll-theme-chirpy
+tagline: Mustafa Said Ağca
+theme_mode: light
+timezone: Europe/Istanbul
+title: msagca
+toc: true
+url: "https://msagca.github.io"
+github:
+  username: msagca
+social:
+  name: Mustafa Said Ağca
+  links:
+    - https://linkedin.com/in/msagca
+    - https://github.com/msagca
+comments:
+  active: disqus
+  disqus:
+    shortname: msagca
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+paginate: 10
+collections:
+  tabs:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+  - scope:
+      path: assets/img/favicons
+    values:
+      swcache: true
+  - scope:
+      path: assets/js/dist
+    values:
+      swcache: true

@@ -1,0 +1,11 @@
+.bundle
+vendor
+Gemfile.lock
+.jekyll-cache
+_site
+*.gem
+node_modules
+package-lock.json
+.idea
+.vscode
+assets/js/dist
