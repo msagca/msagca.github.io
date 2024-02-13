@@ -1,0 +1,11 @@
+author:
+  name: 'Mustafa Said Ağca'
+baseurl: /
+highlighter: rouge
+markdown: kramdown
+paginate: 5
+permalink: /:title
+plugins: [jekyll-paginate]
+title: msagca
+url: https://msagca.github.io/
+version: 2.1.0
