@@ -1,5 +1,8 @@
 author:
   name: 'Mustafa Said Ağca'
+social:
+  github: msagca
+  linkedin: msagca
 baseurl: /
 highlighter: rouge
 markdown: kramdown
