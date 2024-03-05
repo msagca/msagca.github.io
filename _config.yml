@@ -1,14 +1,18 @@
-author:
-  name: 'Mustafa Said Ağca'
-social:
-  github: msagca
-  linkedin: msagca
-baseurl: /
-highlighter: rouge
-markdown: kramdown
-paginate: 5
-permalink: /:title
-plugins: [jekyll-paginate]
 title: msagca
+author: Mustafa Said Ağca
 url: https://msagca.github.io/
-version: 2.1.0
+baseurl: /
+permalink: /:title
+favicon: logo.svg
+remote_theme: riggraz/no-style-please
+theme_config:
+  appearance: auto
+  back_home_text: '..'
+  date_format: '%Y-%m-%d'
+  show_description: false
+sass:
+  style: compressed
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
+  - jekyll-seo-tag

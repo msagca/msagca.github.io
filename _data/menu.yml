@@ -1,0 +1,11 @@
+entries:
+  - title: links
+    entries:
+      - title: github
+        url: https://github.com/msagca
+      - title: linkedin
+        url: https://www.linkedin.com/in/msagca
+  - title: posts
+    post_list:
+      limit: 10
+      show_more: true
