@@ -1,18 +1,21 @@
 title: msagca
-author: Mustafa Said Ağca
-url: https://msagca.github.io/
-baseurl: /
+baseurl: ''
 permalink: /:title
-favicon: logo.svg
-remote_theme: riggraz/no-style-please
-theme_config:
-  appearance: auto
-  back_home_text: '..'
-  date_format: '%Y-%m-%d'
-  show_description: false
-sass:
-  style: compressed
-plugins:
-  - jekyll-feed
-  - jekyll-remote-theme
-  - jekyll-seo-tag
+description: ''
+show_excerpts: true
+paginate: 1
+dash:
+  date_format: "%b %-d, %Y"
+  disqus:
+    shortname: msagca
+  social_links:
+    - url: https://linkedin.com/in/msagca
+      icon: linkedin
+      color: indigo
+    - url: https://github.com/msagca
+      icon: github
+      color: purple
+  show_author: false
+  animation_speed: 50
+  rtl: false
+remote_theme: bitbrain/jekyll-dash
