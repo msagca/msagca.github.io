@@ -1,11 +1,12 @@
 title: msagca
-baseurl: ''
+description: 
+baseurl: 
 permalink: /:title
-description: ''
+paginate: 10
 show_excerpts: true
-paginate: 1
 dash:
   date_format: "%b %-d, %Y"
+  show_author: false
   disqus:
     shortname: msagca
   social_links:
@@ -15,7 +16,4 @@ dash:
     - url: https://github.com/msagca
       icon: github
       color: purple
-  show_author: false
-  animation_speed: 50
-  rtl: false
 remote_theme: bitbrain/jekyll-dash
