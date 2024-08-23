@@ -1,0 +1,31 @@
+title: "msagca"
+baseurl: ""
+permalink: "/:title/"
+favicon: "/assets/images/favicon.ico"
+author: "Mustafa Said Ağca"
+paginate: 30
+disqus: "msagca"
+locale: en_us
+lang: en_us
+feed_items: 10
+feed_update_period: daily
+feed_update_frequency: 1
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: :compressed
+social:
+  - name: github
+    url: "https://github.com/msagca"
+  - name: linkedin
+    url: "https://linkedin.com/in/msagca"
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
