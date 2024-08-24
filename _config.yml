@@ -1,7 +1,7 @@
 title: "msagca"
 baseurl: ""
 permalink: "/:title/"
-favicon: "/assets/images/favicon.ico"
+favicon: "assets/images/favicon.ico"
 author: "Mustafa Said Ağca"
 paginate: 30
 disqus: "msagca"
