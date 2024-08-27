@@ -21,8 +21,10 @@ sass:
 social:
   - name: github
     url: "https://github.com/msagca"
+    color: "#6e5494"
   - name: linkedin
     url: "https://linkedin.com/in/msagca"
+    color: "#0A66C2"
 plugins:
   - jekyll-paginate
   - jekyll-sitemap

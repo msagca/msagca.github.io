@@ -126,8 +126,10 @@
         }
       }
       @include media-breakpoint-up($next) {
-        flex-flow: row nowrap;
-        justify-content: flex-start;
+        & {
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+        }
         .navbar-nav {
           flex-direction: row;
           .dropdown-menu {
