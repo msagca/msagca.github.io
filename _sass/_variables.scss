@@ -6,6 +6,7 @@
 // Color system
 //
 // stylelint-disable
+@use 'sass:color';
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -132,7 +133,7 @@ $body-color: $gray-900 !default;
 // Style anchor elements.
 $link-color: theme-color("primary") !default;
 $link-decoration: none !default;
-$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-color: color.adjust($link-color, $lightness: -15%) !default;
 $link-hover-decoration: underline !default;
 // Paragraphs
 //
@@ -250,7 +251,7 @@ $table-head-color: $gray-700 !default;
 $table-dark-bg: $gray-900 !default;
 $table-dark-accent-bg: rgba($white, 0.05) !default;
 $table-dark-hover-bg: rgba($white, 0.075) !default;
-$table-dark-border-color: lighten($gray-900, 7.5%) !default;
+$table-dark-border-color: color.adjust($gray-900, $lightness: 7.5%) !default;
 $table-dark-color: $body-bg !default;
 // Buttons + Forms
 //
@@ -318,7 +319,7 @@ $input-border-radius: $border-radius !default;
 $input-border-radius-lg: $border-radius-lg !default;
 $input-border-radius-sm: $border-radius-sm !default;
 $input-focus-bg: $input-bg !default;
-$input-focus-border-color: lighten($component-active-bg, 25%) !default;
+$input-focus-border-color: color.adjust($component-active-bg, $lightness: 25%) !default;
 $input-focus-color: $input-color !default;
 $input-focus-width: $input-btn-focus-width !default;
 $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
@@ -358,8 +359,7 @@ $custom-control-indicator-checked-box-shadow: none !default;
 $custom-control-indicator-focus-box-shadow: 0 0 0 1px $body-bg,
   $input-btn-focus-box-shadow !default;
 $custom-control-indicator-active-color: $component-active-color !default;
-$custom-control-indicator-active-bg: lighten($component-active-bg,
-    35%) !default;
+$custom-control-indicator-active-bg: color.adjust($component-active-bg, $lightness: 35%) !default;
 $custom-control-indicator-active-box-shadow: none !default;
 $custom-checkbox-indicator-border-radius: $border-radius !default;
 $custom-checkbox-indicator-icon-checked: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"),
@@ -437,7 +437,7 @@ $dropdown-border-width: $border-width !default;
 $dropdown-divider-bg: $gray-200 !default;
 $dropdown-box-shadow: 0 0.5rem 1rem rgba($black, 0.175) !default;
 $dropdown-link-color: $gray-900 !default;
-$dropdown-link-hover-color: darken($gray-900, 5%) !default;
+$dropdown-link-hover-color: color.adjust($gray-900, $lightness: -5%) !default;
 $dropdown-link-hover-bg: $gray-100 !default;
 $dropdown-link-active-color: $component-active-color !default;
 $dropdown-link-active-bg: $component-active-bg !default;
@@ -562,7 +562,7 @@ $popover-border-width: $border-width !default;
 $popover-border-color: rgba($black, 0.2) !default;
 $popover-border-radius: $border-radius-lg !default;
 $popover-box-shadow: 0 0.25rem 0.5rem rgba($black, 0.2) !default;
-$popover-header-bg: darken($popover-bg, 3%) !default;
+$popover-header-bg: color.adjust($popover-bg, $lightness: -3%) !default;
 $popover-header-color: $headings-color !default;
 $popover-header-padding-y: 0.5rem !default;
 $popover-header-padding-x: 0.75rem !default;
@@ -572,7 +572,7 @@ $popover-body-padding-x: $popover-header-padding-x !default;
 $popover-arrow-width: 1rem !default;
 $popover-arrow-height: 0.5rem !default;
 $popover-arrow-color: $popover-bg !default;
-$popover-arrow-outer-color: fade-in($popover-border-color, 0.05) !default;
+$popover-arrow-outer-color: color.adjust($popover-border-color, $alpha: 0.05) !default;
 // Badges
 $badge-font-size: 75% !default;
 $badge-font-weight: $font-weight-bold !default;

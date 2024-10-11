@@ -10,6 +10,7 @@
 //
 // Example usage: change the default blue border and shadow to white for better
 // contrast against a dark gray background.
+@use 'sass:color';
 @mixin form-control-focus() {
   &:focus {
     color: $input-focus-color;
@@ -80,7 +81,7 @@
       ~.custom-control-label {
         color: $color;
         &::before {
-          background-color: lighten($color, 25%);
+          background-color: color.adjust($color, $lightness: 25%);
         }
       }
       ~.#{$state}-feedback,
@@ -89,7 +90,7 @@
       }
       &:checked {
         ~.custom-control-label::before {
-          @include gradient-bg(lighten($color, 10%));
+          @include gradient-bg(color.adjust($color, $lightness: 10%));
         }
       }
       &:focus {

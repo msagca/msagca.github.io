@@ -3,6 +3,7 @@
 // Utility mixins and functions for evalutating source code across our variables, maps, and mixins.
 // Ascending
 // Used to evaluate Sass maps like our grid breakpoints.
+@use 'sass:color';
 @mixin _assert-ascending($map, $map-name) {
   $prev-key: null;
   $prev-num: null;
@@ -46,9 +47,9 @@
 }
 // Color contrast
 @function color-yiq($color) {
-  $r: red($color);
-  $g: green($color);
-  $b: blue($color);
+  $r: color.channel($color, "red", $space: rgb);
+  $g: color.channel($color, "green", $space: rgb);
+  $b: color.channel($color, "blue", $space: rgb);
   $yiq: calc((($r * 299) + ($g * 587) + ($b * 114)) / 1000);
   @if ($yiq >=$yiq-contrasted-threshold) {
     @return $yiq-text-dark;
