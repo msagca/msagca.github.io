@@ -8,24 +8,24 @@
       {% else %}
       {% assign without-image = 'article-without-image' %}
       {% endif %}
-      <div class="article-content {{ without-image }}">
+      <div class="article-content {{without-image}}">
         <div class="article-tags">
           {% if post.tags.size >= 1 %}
           <div class="article-tags-box">
             {% for tag in post.tags %}
-            <a href="{{ site.baseurl }}/tag/{{ tag | downcase | replace: " ", " -" }}" class="article-tag">{{ tag }}</a>
+            <a href="{{site.baseurl}}/tag/{{tag | downcase | replace: " ", " -"}}" class="article-tag">{{tag}}</a>
             {% endfor %}
           </div>
           {% else %}
           {% endif %}
         </div>
         <h2 class="article-title">
-          <a href="{{ post.url | prepend: site.baseurl }}">{{post.title}}</a>
+          <a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a>
         </h2>
-        <p class="article-excerpt">{% if post.description %}{{ post.description }}{% else %}{{ post.content | strip_html | truncate: 185 }}{% endif %}</p>
+        <p class="article-excerpt">{% if post.description %}{{post.description}}{% else %}{{post.content | strip_html | truncate: 185}}{% endif %}</p>
         <div class="article-footer">
           <div class="article-meta">
-            <span class="article-date"><time datetime="{{ post.date | date_to_xmlschema }}">{% assign date_format = site.minima.date_format | default: "%B %-d, %Y" %}{{ post.date | date: date_format }}</time></span>
+            <span class="article-date"><time datetime="{{post.date | date_to_xmlschema}}">{% assign date_format = site.minima.date_format | default: "%B %-d, %Y" %}{{post.date | date: date_format}}</time></span>
           </div>
           <a href="{{post.url | prepend: site.baseurl}}" class="read-more">Keep Reading <i class="ion ion-ios-arrow-forward"></i></a>
         </div>

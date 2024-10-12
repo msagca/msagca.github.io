@@ -17,13 +17,6 @@ plugins:
   - jekyll/tagging
 paginate: 5
 paginate_path: "/page/:num"
-defaults:
-  - scope:
-      path: "_pages"
-    values:
-      permalink: /:basename:output_ext
-include:
-  - _pages
 tag_page_dir: tag
 tag_page_layout: tags
 tag_permalink_style: pretty

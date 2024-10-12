@@ -84,28 +84,6 @@
 .post-content {
   margin-bottom: 40px;
 }
-.post-share {
-  display: flex;
-  .share-title {
-    margin-right: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
-  .share-list {
-    .share-item {
-      display: inline-block;
-      margin: 0 10px;
-      a {
-        font-size: 18px;
-        color: $gray;
-        &:hover {
-          color: $dark;
-        }
-      }
-    }
-  }
-}
 .post-navigation {
   display: flex;
   align-items: baseline;
@@ -191,11 +169,5 @@
         margin-bottom: 20px;
       }
     }
-  }
-}
-.comments {
-  margin-bottom: 80px;
-  @media only screen and (max-width: $mobile) {
-    margin-bottom: 40px;
   }
 }
