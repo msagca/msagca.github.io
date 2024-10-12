@@ -1,74 +1,98 @@
 ---
 layout: default
-disqus: false
-archive: false
-post_class: post-template
 ---
-<!-- Begin Article
-================================================== -->
-<div class="row">
-    <!-- Post -->
-    <div class="col-sm">
-        <!-- Post Featured Image -->
-        {% if page.image %}<img class="featured-image img-fluid rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">{% endif %}
-        <!-- End Featured Image -->
-        <div class="mainheading">
-            <!-- Post Categories -->
-            <div class="after-post-tags">
-                <ul class="tags">
-                    {% assign sortedCategories = page.categories | sort %}
-                    {% for category in sortedCategories %}
-                    <li>
-                        <a href="{{ site.baseurl }}/categories#{{ category | slugify }}">{{ category }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Categories -->
-            <!-- Post Title -->
-            <h1 class="posttitle">{{ page.title }}</h1>
+<div class="container">
+  <div class="post-title-box">
+    <div class="row">
+      <div class="col col-10 push-1 col-11 push-t-1 col-m-12 push-m-0">
+        <span class="post-date">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{page.date | date: '%b %d, %Y'}}</time>
+        </span>
+        <h1 class="post-title">{{ page.title | escape }}</h1>
+        <div class="post-info">
+          <div class="post-author">
+            <a class="author-name">{{ site.author.name }}</a>
+          </div>
+          {% if page.tags.size >= 1 %}
+          <div class="post-tags">
+            {% for tag in page.tags %}
+            <a href="{{ site.baseurl }}/tag/{{ tag | downcase | replace: " ", " -" }}" class="post-tags-tag">{{ tag }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
         </div>
-        <!-- Post Content -->
-        <div class="article-post serif-font">
-            {{content}}
-            <div class="clearfix"></div>
-        </div>
-        <!-- Post Date -->
-        <p>
-            <small>
-                <span class="post-date"><time class="post-date" datetime="{{ page.date | date:" %Y-%m-%d" }}">{{
-                        page.date | date_to_string }}</time></span>
-                {% if page.last_modified_at %}
-                (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{
-                    page.last_modified_at | date: "%b %-d, %Y" }}</time>)
-                {% endif %}
-            </small>
-        </p>
-        <!-- Prev/Next -->
-        <div class="row PageNavigation mt-4 prevnextlinks d-flex justify-content-between">
-            {% if page.previous.url %}
-            <div class="col-md-6 rightborder pl-0">
-                <a class="thepostlink" href="{{page.previous.url | absolute_url}}">&laquo; {{page.previous.title}}</a>
-            </div>
-            {% endif %}
-            {% if page.next.url %}
-            <div class="col-md-6 text-right pr-0">
-                <a class="thepostlink" href="{{page.next.url | absolute_url}}">{{page.next.title}} &raquo;</a>
-            </div>
-            {% endif %}
-        </div>
-        <!-- End Prev/Next -->
-        <!-- Begin Comments
-            ================================================== -->
-        <section>
-            <div id="comments">
-                {% include disqus.html %}
-            </div>
-        </section>
-        <!--End Comments
-            ================================================== -->
+      </div>
     </div>
-    <!-- End Post -->
+  </div>
+  {% assign no-image = nil %}
+  {% if page.image %}
+  <div class="post-head">
+    <div class="post-image" style="background-image: url({{site.baseurl}}/images/{{page.image}})"></div>
+  </div>
+  {% else %}
+  {% assign no-image = 'post-no-image' %}
+  {% endif %}
 </div>
-<!-- End Article
-================================================== -->
+<div class="container">
+  <div class="row">
+    <article class="post {{ no-image }} col col-10 col-t-11 col-m-12">
+      <div class="post-content">
+        {{ content }}
+      </div>
+      <div class="post-share">
+        <span class="share-title">Share this article:</span>
+        <ul class="share-list list-reset">
+          <li class="share-item">
+            <a class="share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+          </li>
+          <li class="share-item">
+            <a class="share-twitter" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ site.baseurl }}{{ page.url }}" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+          </li>
+          <li class="share-item">
+            <a class="share-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ site.baseurl }}{{ page.url }}&title={{ page.title | uri_escape }}&summary={{ page.description | uri_escape }}&source={{ site.title | uri_escape }}" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+          </li>
+          <li class="share-item">
+            <a class="share-pinterest" href="http://pinterest.com/pin/create/button/?url={{ site.url }}{{ page.url }}&amp;media={{ site.url }}{{ site.baseurl }}/images/{{ page.image }}&amp;description={{ page.title | uri_escape }}" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" title="Share on Pinterest" rel="nofollow"><i class="ion ion-logo-pinterest"></i></a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</div>
+<div class="container">
+  <div class="post-navigation">
+    {% if page.previous.url %}
+    <div class="prev">
+      <!-- <a class="post-nav-image" href="{{ site.baseurl }}{{page.previous.url}}" style="background-image: url({{site.baseurl}}/images/{{page.previous.image}})"> </a> -->
+      <h2 class="post-nav-title">
+        <i class="ion ion-md-arrow-back"></i>
+        <a href="{{ site.baseurl }}{{page.previous.url}}">{{page.previous.title}}</a>
+      </h2>
+      <p class="prev-excerpt">
+        {% if page.previous.description %}
+        {{ page.previous.description }}
+        {% else %}
+        {{ page.previous.content | strip_html | truncate: 110 }}
+        {% endif %}
+      </p>
+    </div>
+    {% endif %}
+    {% if page.next.url %}
+    <div class="next">
+      <!-- <a class="post-nav-image" href="{{ site.baseurl }}{{page.next.url}}" style="background-image: url({{site.baseurl}}/images/{{page.next.image}})"> </a> -->
+      <h2 class="post-nav-title">
+        <a href="{{ site.baseurl }}{{page.next.url}}">{{page.next.title}}</a>
+        <i class="ion ion-md-arrow-forward"></i>
+      </h2>
+      <p class="next-excerpt">
+        {% if page.next.description %}
+        {{ page.next.description }}
+        {% else %}
+        {{ page.next.content | strip_html | truncate: 110 }}
+        {% endif %}
+      </p>
+    </div>
+    {% endif %}
+  </div>
+  {% if disqus-username %} {% include disqus-comments.html %} {% endif %}
+</div>

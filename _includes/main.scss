@@ -1,0 +1,25 @@
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+:: Template name: Zolan
+:: Description:
+:: Template Author: Artem Sheludko
+:: Version: 1.0
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+@import 'settings/variables';
+@import 'settings/mixins';
+@import 'settings/helpers';
+@import 'tools/normalize';
+@import 'tools/reset';
+@import 'tools/shared';
+@import 'tools/syntax';
+@import 'tools/grid';
+@import 'tools/zoom';
+@import 'base/base';
+@import 'modules/scroll-button-top';
+@import 'modules/header';
+@import 'modules/search';
+@import 'modules/pagination';
+@import 'layouts/page-home';
+@import 'layouts/page';
+@import 'layouts/article';
+@import 'layouts/post';
+@import 'layouts/tag-page';

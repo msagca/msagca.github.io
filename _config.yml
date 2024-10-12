@@ -1,33 +1,32 @@
-title: "msagca"
+title: msagca
+description: Personal website of Mustafa Said Ağca
+author:
+  name: Mustafa Said Ağca
+  socials:
+    github: "https://github.com/msagca"
+    linkedin: "https://linkedin.com/in/msagca"
+disqus-username: msagca
 baseurl: ""
+url: ""
 permalink: "/:title/"
-favicon: "assets/images/favicon.ico"
-author: "Mustafa Said Ağca"
-paginate: 30
-disqus: "msagca"
-locale: en_us
-lang: en_us
-feed_items: 10
-feed_update_period: daily
-feed_update_frequency: 1
-highlighter: rouge
 markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: :compressed
-social:
-  - name: github
-    url: "https://github.com/msagca"
-    color: "#6e5494"
-  - name: linkedin
-    url: "https://linkedin.com/in/msagca"
-    color: "#0A66C2"
+highlighter: rouge
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-archives
+  - jekyll/tagging
+paginate: 5
+paginate_path: "/page/:num"
+defaults:
+  - scope:
+      path: "_pages"
+    values:
+      permalink: /:basename:output_ext
+include:
+  - _pages
+tag_page_dir: tag
+tag_page_layout: tags
+tag_permalink_style: pretty
+sass:
+  sass_dir: _sass
+  style: compressed

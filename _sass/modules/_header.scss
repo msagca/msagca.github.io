@@ -1,0 +1,41 @@
+.header {
+  align-items: center;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  position: relative;
+  .header-overlay {
+    background-color: rgba(17, 17, 17, 0.7);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: all 0.5s ease;
+    visibility: hidden;
+    z-index: 10;
+    @media only screen and (max-width: $desktop) {
+      &.is-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .icon {
+    color: $dark;
+    cursor: pointer;
+    font-size: 30px;
+    &:hover {
+      color: $black;
+    }
+  }
+  .logo {
+    @extend .icon;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    max-height: 50px;
+    text-decoration: none;
+  }
+}

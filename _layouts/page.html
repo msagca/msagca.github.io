@@ -1,23 +1,26 @@
 ---
 layout: default
 ---
-<!-- Post Featured Image -->
-{% if page.image %}
-<div class="text-center mx-auto mb-5">
-  <img class="featured-image text-center mx-auto rounded" src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.title }}">
+<div class="container">
+	<div class="page-title-box">
+		<div class="row">
+			<div class="col col-10 push-1 col-11 push-t-1 col-m-12 push-m-0">
+				<h1 class="page-title">{{ page.title | escape }}</h1>
+			</div>
+		</div>
+	</div>
+	{% if page.image %}
+	<div class="page-head">
+		<div class="page-image" style="background-image: url({{site.baseurl}}/images/{{page.image}})"></div>
+	</div>
+	{% endif %}
 </div>
-{% endif %}
-<!-- End Featured Image -->
-<div class="col-lg-8 mx-auto">
-  <div class="mainheading">
-    <h1 class="posttitle">{{ page.title }}</h1>
-  </div>
-  <div class="article-post serif-font">
-    {{content}}
-  </div>
-  {% if page.comments == true %}
-  <div id="comments">
-    {% include disqus.html %}
-  </div>
-  {% endif %}
+<div class="container">
+	<div class="row">
+		<article class="page col col-10 col-t-11 col-m-12">
+			<div class="page-content">
+				{{ content }}
+			</div>
+		</article>
+	</div>
 </div>
