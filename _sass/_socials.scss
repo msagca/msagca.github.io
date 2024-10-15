@@ -1,0 +1,11 @@
+.socials {
+  .icon {
+    color: $dark;
+    cursor: pointer;
+    font-size: 30px;
+    &:hover {
+      color: $black;
+    }
+  }
+}
+
