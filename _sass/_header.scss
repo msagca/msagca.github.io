@@ -26,13 +26,14 @@
   .icon {
     color: $dark;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 24px;
     &:hover {
       color: $black;
     }
   }
   .logo {
     @extend .icon;
+    font-size: 32px;
     font-weight: 700;
     letter-spacing: 0.5px;
     max-height: 50px;

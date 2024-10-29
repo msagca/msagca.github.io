@@ -6,12 +6,13 @@
   <meta name='description' content='{% if page.description %}{{page.description | strip_html | strip_newlines | truncate: 160}}{% else %}{{description}}{% endif %}'>
   <link rel="canonical" href="{{page.url | replace:'index.html','' | absolute_url}}">
   <link rel="alternate" type="application/rss+xml" title="{{site.title | escape}}" href="{{" /feed.xml" | relative_url}}">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-  <link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
-  <style>
-    {% capture include_to_scssify %}
-      {% include main.scss %}
-    {% endcapture %}
-    {{include_to_scssify | scssify}}
-  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+  {% capture include_to_scssify %}
+    {% include main.scss %}
+  {% endcapture %}
+  {{include_to_scssify | scssify}}
+</style>
 </head>

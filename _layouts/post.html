@@ -27,7 +27,7 @@ layout: default
   {% assign no-image = nil %}
   {% if page.image %}
   <div class="post-head">
-    <div class="post-image" style="background-image: url({{site.baseurl}}/images/{{page.image}})"></div>
+    <div class="post-image" style="background-image: url({{site.baseurl}}/assets/images/{{page.image}})"></div>
   </div>
   {% else %}
   {% assign no-image = 'post-no-image' %}
@@ -46,32 +46,32 @@ layout: default
   <div class="post-navigation">
     {% if page.previous.url %}
     <div class="prev">
-      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.previous.url}}" style="background-image: url({{site.baseurl}}/images/{{page.previous.image}})"> </a> -->
+      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.previous.url}}" style="background-image: url({{site.baseurl}}/assets/images/{{page.previous.image}})"> </a> -->
       <h2 class="post-nav-title">
-        <i class="ion ion-md-arrow-back"></i>
-        <a href="{{site.baseurl}}{{page.previous.url}}">{{page.previous.title}}</a>
+        <i class="fas fa-arrow-left"></i>
+        <a href="{{site.baseurl}}{{page.previous.url}}">{{page.previous.title}} </a>
       </h2>
       <p class="prev-excerpt">
         {% if page.previous.description %}
         {{page.previous.description}}
         {% else %}
-        {{page.previous.content | strip_html | truncate: 110}}
+        {{page.previous.content | strip_html | truncate: 160}}
         {% endif %}
       </p>
     </div>
     {% endif %}
     {% if page.next.url %}
     <div class="next">
-      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.next.url}}" style="background-image: url({{site.baseurl}}/images/{{page.next.image}})"> </a> -->
+      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.next.url}}" style="background-image: url({{site.baseurl}}/assets/images/{{page.next.image}})"> </a> -->
       <h2 class="post-nav-title">
-        <a href="{{site.baseurl}}{{page.next.url}}">{{page.next.title}}</a>
-        <i class="ion ion-md-arrow-forward"></i>
+        <a href="{{site.baseurl}}{{page.next.url}}"> {{page.next.title}} </a>
+        <i class="fas fa-arrow-right"></i>
       </h2>
       <p class="next-excerpt">
         {% if page.next.description %}
         {{page.next.description}}
         {% else %}
-        {{page.next.content | strip_html | truncate: 110}}
+        {{page.next.content | strip_html | truncate: 160}}
         {% endif %}
       </p>
     </div>
