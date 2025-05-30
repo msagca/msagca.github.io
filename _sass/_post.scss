@@ -1,6 +1,8 @@
+@use "grid";
+@use "variables";
 .post-title-box {
   padding: 80px 0;
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid variables.$light-gray;
   .post-title {
     margin-bottom: 10px;
     width: 500px;
@@ -11,7 +13,7 @@
   .post-date {
     font-weight: 700;
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     padding: 40px 0;
     .post-title {
       margin: 10px 0;
@@ -27,7 +29,7 @@
     margin-right: 10px;
     font-weight: 700;
     .author-name {
-      color: $gray;
+      color: variables.$gray;
       border-bottom: 1px solid transparent;
       /* &:hover {
         border-bottom: 1px solid $gray;
@@ -48,7 +50,7 @@
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        background: $dark;
+        background: variables.$dark;
       }
     }
   }
@@ -57,7 +59,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: $light-gray;
+  background-color: variables.$light-gray;
   &:after {
     content: "";
     display: table;
@@ -71,7 +73,7 @@
   &.post-no-image {
     margin: 0 auto 80px;
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     margin: 40px auto;
     &.post-no-image {
       margin: 0 auto 40px;
@@ -89,7 +91,7 @@
   align-items: baseline;
   margin-bottom: 80px;
   padding-bottom: 80px;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid variables.$light-gray;
   .prev,
   .next {
     flex: 1 0 50%;
@@ -102,7 +104,7 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      background-color: $light-gray;
+      background-color: variables.$light-gray;
       transition: .35s ease-in-out;
       &:hover {
         opacity: 0.9;
@@ -129,9 +131,9 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: $dark;
+        color: variables.$dark;
         &:hover {
-          color: $black;
+          color: variables.$black;
         }
       }
     }
@@ -149,7 +151,7 @@
     margin: 0 auto;
     text-align: center;
   }
-  @media only screen and (max-width: $tablet) {
+  @media only screen and (max-width: grid.$tablet) {
     flex-wrap: wrap;
     .prev,
     .next {
@@ -160,7 +162,7 @@
       margin-top: 40px;
     }
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     margin-bottom: 40px;
     padding-bottom: 40px;
     .prev,

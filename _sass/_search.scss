@@ -1,3 +1,5 @@
+@use "grid";
+@use "variables";
 .search {
   position: fixed;
   top: 0;
@@ -7,7 +9,7 @@
   z-index: -1;
   transform: scale(0.95);
   opacity: 0;
-  background: $white;
+  background: variables.$white;
   transition: all 250ms ease;
   &.is-visible {
     transform: scale(1);
@@ -20,11 +22,11 @@
   width: 50%;
   margin: 0 auto;
   padding-top: 100px;
-  @media only screen and (max-width: $desktop) {
+  @media only screen and (max-width: grid.$desktop) {
     width: 70%;
     padding-top: 70px;
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     width: 100%;
     padding-top: 30px;
   }
@@ -37,7 +39,7 @@
     text-align: right;
     cursor: pointer;
     &:hover {
-      color: $black;
+      color: variables.$black;
     }
   }
   .search-text {
@@ -46,11 +48,11 @@
     letter-spacing: 0.5px;
     border-radius: 30px;
     border: 1px solid #f8f8f8;
-    color: $dark;
+    color: variables.$dark;
     background: #f8f8f8;
     &::placeholder {
       letter-spacing: 0.5px;
-      color: rgba($dark, 0.7);
+      color: rgba(variables.$dark, 0.7);
     }
   }
 }
@@ -76,14 +78,14 @@
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: $dark;
+    color: variables.$dark;
     &:hover {
-      color: $black;
+      color: variables.$black;
     }
   }
   .search-results-date {
     font-size: 12px;
-    color: $gray;
+    color: variables.$gray;
   }
   .no-results {
     list-style: none;

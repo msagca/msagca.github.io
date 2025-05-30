@@ -1,10 +1,11 @@
+@use "variables";
 .socials {
   .icon {
-    color: $dark;
+    color: variables.$dark;
     cursor: pointer;
     font-size: 24px;
     &:hover {
-      color: $black;
+      color: variables.$black;
     }
   }
 }

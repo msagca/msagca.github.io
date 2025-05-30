@@ -1,21 +1,23 @@
+@use "grid";
+@use "variables";
 .footer {
   position: relative;
   padding: 80px 0 40px;
   text-align: center;
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid variables.$light-gray;
   background: #f5f5f5;
   .contact {
     margin-bottom: 15px;
   }
   .copyright {
     a {
-      color: $dark;
+      color: variables.$dark;
       &:hover {
-        color: $brand-color;
+        color: variables.$brand-color;
       }
     }
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     padding: 40px 0 20px;
   }
 }

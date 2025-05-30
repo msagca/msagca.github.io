@@ -1,3 +1,4 @@
+@use "mixins";
 .text-left {
 	text-align: left;
 }
@@ -46,11 +47,11 @@
 	margin: 0;
 }
 .list-reset {
-	@include list-reset();
+	@include mixins.list-reset();
 }
 .clearfix {
-	@include clearfix();
+	@include mixins.clearfix();
 }
 .screen-reader-text {
-	@include screen-reader();
+	@include mixins.screen-reader();
 }

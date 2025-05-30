@@ -1,12 +1,14 @@
+@use "grid";
+@use "variables";
 .page-title-box {
   padding: 80px 0;
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid variables.$light-gray;
   .page-title {
     font-size: 57px;
     line-height: 70px;
     margin: 0;
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     padding: 40px 0;
     .page-title {
       font-size: 47px;
@@ -19,7 +21,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: $light-gray;
+    background-color: variables.$light-gray;
     &:after {
       content: "";
       display: table;
@@ -34,7 +36,7 @@
   img {
     margin: 30px 0;
   }
-  @media only screen and (max-width: $tablet) {
+  @media only screen and (max-width: grid.$tablet) {
     margin: 40px auto;
   }
 }
@@ -44,10 +46,10 @@
     a {
       display: inline-block;
       margin-left: 10px;
-      color: $dark;
+      color: variables.$dark;
       font-weight: 700;
       &:hover {
-        color: $black;
+        color: variables.$black;
       }
     }
   }

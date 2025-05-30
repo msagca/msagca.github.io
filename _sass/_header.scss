@@ -1,3 +1,5 @@
+@use "grid";
+@use "variables";
 .header {
   align-items: center;
   display: flex;
@@ -16,7 +18,7 @@
     transition: all 0.5s ease;
     visibility: hidden;
     z-index: 10;
-    @media only screen and (max-width: $desktop) {
+    @media only screen and (max-width: grid.$desktop) {
       &.is-visible {
         opacity: 1;
         visibility: visible;
@@ -24,11 +26,11 @@
     }
   }
   .icon {
-    color: $dark;
+    color: variables.$dark;
     cursor: pointer;
     font-size: 24px;
     &:hover {
-      color: $black;
+      color: variables.$black;
     }
   }
   .logo {

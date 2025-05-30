@@ -1,3 +1,5 @@
+@use "grid";
+@use "variables";
 .lates-title {
   position: relative;
   margin-bottom: 80px;
@@ -15,7 +17,7 @@
     top: 50%;
     transform: translateY(-50%);
     height: 1px;
-    background: $light-gray;
+    background: variables.$light-gray;
   }
   &:after {
     width: calc(50% - 90px);
@@ -25,7 +27,7 @@
     width: calc(50% - 90px);
     right: 0;
   }
-  @media only screen and (max-width: $tablet) {
+  @media only screen and (max-width: grid.$tablet) {
     margin-bottom: 40px;
     &:after,
     &:before {

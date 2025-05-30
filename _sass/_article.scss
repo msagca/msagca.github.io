@@ -1,3 +1,5 @@
+@use "grid";
+@use "variables";
 .article {
   margin-bottom: 40px;
   .article-wrapper {
@@ -10,7 +12,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: $light-gray;
+    background-color: variables.$light-gray;
     &:hover {
       opacity: 0.9;
     }
@@ -39,9 +41,9 @@
       margin-bottom: 20px;
       font-size: 30px;
       a {
-        color: $dark;
+        color: variables.$dark;
         &:hover {
-          color: $black;
+          color: variables.$black;
         }
       }
     }
@@ -54,7 +56,7 @@
       font-size: 12px;
       line-height: 18px;
       text-transform: uppercase;
-      color: $gray;
+      color: variables.$gray;
     }
     .article-footer {
       display: flex;
@@ -67,10 +69,10 @@
         letter-spacing: 1px;
         text-transform: uppercase;
         border-bottom: 1px solid transparent;
-        color: $gray;
+        color: variables.$gray;
         &:hover {
-          color: $dark;
-          border-color: $brand-color;
+          color: variables.$dark;
+          border-color: variables.$brand-color;
         }
       }
     }
@@ -79,7 +81,7 @@
     width: 100%;
     margin-left: auto;
   }
-  @media only screen and (max-width: $tablet) {
+  @media only screen and (max-width: grid.$tablet) {
     .article-wrapper {
       flex-direction: column;
     }
@@ -96,7 +98,7 @@
       margin: 0;
     }
   }
-  @media only screen and (max-width: $mobile) {
+  @media only screen and (max-width: grid.$mobile) {
     .article-content {
       .article-title {
         font-size: 27px;

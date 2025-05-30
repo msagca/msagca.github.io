@@ -6,7 +6,7 @@
       <a href="{{post.url | prepend: site.baseurl}}" class="article-image" style="background-image: url({{site.baseurl}}/assets/images/{{post.image}})">
       </a>
       {% else %}
-      {% assign without-image = 'article-without-image' %}
+      {% assign without-image = "article-without-image" %}
       {% endif %}
       <div class="article-content {{without-image}}">
         <div class="article-tags">

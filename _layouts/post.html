@@ -6,7 +6,7 @@ layout: default
     <div class="row">
       <div class="col col-10 push-1 col-11 push-t-1 col-m-12 push-m-0">
         <span class="post-date">
-          <time datetime="{{page.date | date_to_xmlschema}}">{{page.date | date: '%b %d, %Y'}}</time>
+          <time datetime="{{page.date | date_to_xmlschema}}">{{page.date | date: "%b %d, %Y"}}</time>
         </span>
         <h1 class="post-title">{{page.title | escape}}</h1>
         <div class="post-info">
@@ -30,7 +30,7 @@ layout: default
     <div class="post-image" style="background-image: url({{site.baseurl}}/assets/images/{{page.image}})"></div>
   </div>
   {% else %}
-  {% assign no-image = 'post-no-image' %}
+  {% assign no-image = "post-no-image" %}
   {% endif %}
 </div>
 <div class="container">
