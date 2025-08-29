@@ -1,7 +1,9 @@
 @use "sass:color";
 @use "grid";
 @use "variables";
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 body {
@@ -12,7 +14,8 @@ body {
   background-color: variables.$background-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  input, textarea {
+  input,
+  textarea {
     border: 1px solid variables.$border-color;
     outline: none;
     &:focus:required:invalid {
@@ -59,16 +62,20 @@ h6 {
   font-size: variables.$font-size-h6;
 }
 blockquote {
-  margin: 30px -100px;
-  font-size: 28px;
-  line-height: 45px;
-  letter-spacing: 0.5px;
-  font-style: normal;
-  text-align: center;
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  background-color: #f9f9f9;
+  border-left: 4px solid #ccc;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  > :last-child {
+    margin-bottom: 0;
+  }
   @media only screen and (max-width: grid.$tablet) {
-    margin: 30px 0;
-    font-size: 24px;
-    line-height: 38px;
+    margin: 1em 0;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 }
 pre {
@@ -84,7 +91,7 @@ img,
   max-width: 100%;
   height: auto;
   vertical-align: middle;
-  &+em {
+  & + em {
     text-align: center;
     display: block;
     font-style: normal;
@@ -111,3 +118,4 @@ hr {
   border: 0;
   background: variables.$light-gray;
 }
+

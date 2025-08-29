@@ -1,7 +1,7 @@
 title: msagca
-description: Personal website of Mustafa Said Ağca
+description: "Personal website of Mustafa Said Ağca"
 author:
-  name: Mustafa Said Ağca
+  name: "Mustafa Said Ağca"
   socials:
     github: "https://github.com/msagca"
     linkedin: "https://linkedin.com/in/msagca"
@@ -9,6 +9,8 @@ baseurl: ""
 url: ""
 permalink: "/:title/"
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
 highlighter: rouge
 plugins:
   - jekyll-paginate
@@ -22,3 +24,4 @@ tag_permalink_style: pretty
 sass:
   sass_dir: _sass
   style: compressed
+
