@@ -747,9 +747,9 @@ $$
 
 This operation is valid because the translation matrix ($T$) has a dimension of $3x4$ and it is multiplied by a $4x1$ vector, and the resulting vector is of size $3x1$. More importantly, it gives the correct result. So, we've finally obtained a translation matrix by introducing a new dimension.
 
-> This extra dimension ($w$) is called a **homogenous coordinate** and it has some other uses, which we'll see later on.
+> When a _3D_ point is represented in a _4D_ projective space, the new coordinate system is referred to as **homogenous coordinates**.
 
-There is one problem though. The $w$ coordinate we added to our original vector makes it impossible to perform multiplications with our scale matrix since the dimensions $3x3$ and $4x1$ are not compatible ($3\neq 4$). As a workaround, we could add one extra column of $0s$ to our scale matrix:
+There is a problem though. The $w$ component we added to our original vector makes it impossible to perform multiplications with our scale matrix since the dimensions $3x3$ and $4x1$ are not compatible ($3\neq 4$). As a workaround, we could add one extra column of $0s$ to our scale matrix:
 
 $$
 \begin{bmatrix}
@@ -770,7 +770,7 @@ S_z \cdot z
 \end{bmatrix}
 $$
 
-This seems to work, but we do not just perform one transformation on a vector and call it a day; it's often necessary to apply a series of transformations to the same vector. Let's say we intend to apply a translation next, can we do it? Notice that we no longer have a $4x1$ vector; we have lost the $w$ component, which makes it impossible to perform this operation. It's clear that we have to preserve the homogenous coordinate while operating on the vector.
+This seems to work, but we do not just perform one transformation on a vector and call it a day; it's often necessary to apply a series of transformations to the same vector. Let's say we intend to apply a translation next, can we do it? Notice that we no longer have a $4x1$ vector; we have lost the $w$ component, which makes it impossible to perform this operation. It's clear that we have to preserve the _4D_ representation while operating on the vector.
 
 What dimensions does the scale matrix need to have to produce a $4x1$ vector when multiplied by a $4x1$ vector? Yes, the answer is $4x4$. But, what values should we have in this new row? The $w$ component of the result must be $1$, which suggests $(0,0,0,1)$.
 
@@ -1076,7 +1076,7 @@ A transformation is typically defined per object, which means that it applies to
 
 > Uniform variables are global to the program object; if both vertex and fragment shaders define the same uniform, the linker treats them as referring to the same data.
 
-In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we add a homogenous coordinate to the original position so that it's compatible with the matrix, and it's `1.0` so that translation operations can be performed correctly.
+In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we represent the position in homogenous coordinates so that it's compatible with the matrix, and the $w$ component is `1.0` since this is a position vector.
 
 ```glsl
 #version 330 core
@@ -1101,7 +1101,7 @@ In most _3D_ applications, we define a few different coordinate spaces (or frame
 
 The use of multiple spaces requires us to apply a sequence of transformations to obtain the final (screen) position. However, they make it easier to selectively update any of the transform matrices. For example, if a _3D_ scene contains multiple cameras, and we want to give the user the ability to switch between them, then we only need to update the view matrix and can keep the rest.
 
-The matrix that transforms a point defined in an object's local frame to a point in the world frame is called the **model** matrix, and it's obtained the same way we constructed the `transform` matrix in the previous chapter. The matrix that moves points in the world frame to the camera's local frame is called the **view** matrix. The process to construct a view matrix is a bit different because of how we represent a camera in computer graphics. Unlike object, world and view spaces, clip space does not define a coordinate frame — it defines a bounded volume. The coordinates in the clip space are only meaningful relative to the homogenous coordinate ($w$), and their values are bounded by it. The matrix that transforms view space to clip space is called the **projection** matrix. Once everything is in clip space, an operation called **perspective division** maps clip space to _NDC_ space.
+The matrix that transforms a point defined in an object's local frame to a point in the world frame is called the **model** matrix, and it's obtained the same way we constructed the `transform` matrix in the previous chapter. The matrix that moves points in the world frame to the camera's local frame is called the **view** matrix. The process to construct a view matrix is a bit different because of how we represent a camera in computer graphics. Unlike object, world and view spaces, clip space does not define a coordinate frame — it defines a bounded volume. The coordinates in the clip space are only meaningful relative to the $w$ component, and their values are bounded by it. The matrix that transforms view space to clip space is called the **projection** matrix. Once everything is in clip space, an operation called **perspective division** maps clip space to _NDC_ space.
 
 ## Camera
 
@@ -1224,7 +1224,7 @@ int main() {
 
 ## Projection
 
-Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The $w$ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this homogenous coordinate to store the depth information. But, $z$ already represents depth (distance from camera) in view space, why do we need to use the $w$ component? After applying the projection, $z$ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space $z$ value into $w$. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, $w$ remains $1$ throughout the pipeline. Now, let's explore these two types of projection.
+Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The $w$ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, $z$ already represents depth (distance from camera) in view space, why do we need to use the $w$ component? After applying the projection, $z$ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space $z$ value into $w$. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, $w$ remains $1$ throughout the pipeline. Now, let's explore these two types of projection.
 
 ### Orthographic Projection
 
