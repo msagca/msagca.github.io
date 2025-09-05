@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-{% include head.html %}
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="{{ '/assets/js/antlr.js' | relative_url }}"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-latte.css" data-theme="light">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-macchiato.css" data-theme="dark">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
 <body>
-  {% include header.html %}
-  <main class="content">
-    {{content}}
-  </main>
-  <i class="top fas fa-angle-up" title="Top"></i>
-  {% include footer.html %}
-  {% include scripts.html %}
+  <div class="social-sidebar">
+    {% for social in site.social %}
+    <a href="https://{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] | capitalize }}">
+      <i class="fab fa-{{ social[0] }}"></i>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="container">
+    <header class="site-header">
+      <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+    </header>
+    <main class="content">
+      {{ content }}
+    </main>
+  </div>
+  <div class="social-bottom">
+    {% for social in site.social %}
+    <a href="https://{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] | capitalize }}">
+      <i class="fab fa-{{ social[0] }}"></i>
+    </a>
+    {% endfor %}
+  </div>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/social.js' | relative_url }}"></script>
 </body>
-
 </html>

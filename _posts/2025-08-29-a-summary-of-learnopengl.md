@@ -1,7 +1,6 @@
 ---
 layout: post
 title: A Summary of LearnOpenGL
-tags: OpenGL C++ GLSL
 ---
 
 I’ve prepared a concise summary of the lectures from <https://learnopengl.com/> for a quick reference.
@@ -98,12 +97,12 @@ With this knowledge, we can create our first _OpenGL_ application that displays 
 ```cpp
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-void UpdateBufferSize(GLFWwindow*, int, int);
+void FramebufferSizeCallback(GLFWwindow*, int, int);
 int main() {
   glfwInit();
   GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
   glfwMakeContextCurrent(window);
-  glfwSetFramebufferSizeCallback(window, UpdateBufferSize);
+  glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
   gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
   glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
   while (!glfwWindowShouldClose(window)) {
@@ -114,7 +113,7 @@ int main() {
   glfwTerminate();
   return 0;
 }
-void UpdateBufferSize(GLFWwindow* window, int width, int height) {
+void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
   glViewport(0, 0, width, height);
 }
 ```
@@ -288,7 +287,9 @@ glDeleteShader(vertexShader);
 glDeleteShader(fragmentShader);
 ```
 
-To activate a shader, we call `glUseProgram` with the program ID. The _VAO_ stores all the state needed to draw our triangle, so we bind it. Then, we make a draw call by telling _OpenGL_ how to interpret the data to assemble primitives, i.e., we set the draw mode to `GL_TRIANGLES` (see the [OpenGL primitive documentation](https://www.khronos.org/opengl/wiki/Primitive) for more detail). The `glDrawArrays` call accepts two more inputs: the start index in the enabled arrays, and the number of vertices to render. By default, _OpenGL_ fills the interior (i.e., faces) of polygon primitives, but this behavior can be changed by setting `glPolygonMode` to something different than `GL_FILL`, e.g., `GL_LINE`, which draws only the outline. A collection of vertices, edges that connect them, and faces that are formed by loops constitute a **mesh**.
+To activate a shader, we call `glUseProgram` with the program ID. The _VAO_ stores all the state needed to draw our triangle, so we bind it. Then, we make a draw call by telling _OpenGL_ how to interpret the data to assemble primitives, i.e., we set the draw mode to `GL_TRIANGLES` (see the [OpenGL primitive documentation](https://www.khronos.org/opengl/wiki/Primitive) for more detail). The `glDrawArrays` call accepts two more inputs: the start index in the enabled arrays, and the number of vertices to render. By default, _OpenGL_ fills the interior (i.e., faces) of polygon primitives, but this behavior can be changed by setting `glPolygonMode` to something different than `GL_FILL`, e.g., `GL_LINE`, which draws only the outline.
+
+> A collection of vertices, edges that connect them, and faces that are formed by loops constitute a **mesh**.
 
 ```cpp
 glUseProgram(shaderProgram);
@@ -1072,7 +1073,7 @@ int main() {
 }
 ```
 
-A transformation is typically defined per object, which means that it applies to all vertices of that object. When a draw call (e.g., `glDrawArrays`) is issued, _GPU_ launches many shader invocations in parallel — one per vertex, fragment, etc. _GLSL_ defines per-draw, read-only constants called **uniforms** that are stored in a dedicated, broadcast-friendly area in GPU memory. Every thread can access these uniforms at no additional cost.
+A transformation is typically defined per object — it applies to all vertices of that object. When a draw call (e.g., `glDrawArrays`) is issued, _GPU_ launches many shader invocations in parallel — one per vertex, fragment, etc. _GLSL_ defines per-draw, read-only constants called **uniforms** that are stored in a dedicated, broadcast-friendly area in GPU memory. Every thread can access these uniforms at no additional cost.
 
 > Uniform variables are global to the program object; if both vertex and fragment shaders define the same uniform, the linker treats them as referring to the same data.
 
@@ -1105,7 +1106,7 @@ The matrix that transforms a point defined in an object's local frame to a point
 
 ## Camera
 
-View space can be defined as the camera's coordinate frame. _GLM_ provides `glm::lookAt` to calculate the view matrix, which accepts three inputs: `eye` (camera position in world space), `center` (target position in world space), and `up` (positive $y$ direction in world space). _GLM_ internally calculates a **forward** ($z$) vector by subtracting the camera position from the target position. Then, it obtaines a **right** ($x$) vector by taking the cross product of the forward and up vectors. Because the provided up vector might not be orthogonal to both the forward and right vectors, _GLM_ calculates a local **up** ($y$) vector by taking the cross product of these two vectors. The final three direction vectors with the camera at the origin constitute a new coordinate frame.
+View space can be defined as the camera's coordinate frame. _GLM_ provides `glm::lookAt` to calculate the view matrix, which accepts three inputs: `eye` (camera position in world space), `center` (target position in world space), and `up` (positive $y$ direction in world space). _GLM_ internally calculates a **forward** ($z$) vector by subtracting the camera position from the target position. Then, it obtains a **right** ($x$) vector by taking the cross product of the forward and up vectors. Because the provided up vector might not be orthogonal to both the forward and right vectors, _GLM_ calculates a local **up** ($y$) vector by taking the cross product of these two vectors. The final three direction vectors with the camera at the origin constitute a new coordinate frame.
 
 ```cpp
 static constexpr glm::vec3 WORLD_UP = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -1230,7 +1231,7 @@ Clip space is the result of applying a projection matrix to a region of the view
 
 This type of projection is an affine transformation — it preserves straight lines, and ratios along a line (e.g., midpoints stay midpoints). It can be expressed as a combination of a linear transformation and a translation in Cartesian coordinates. To create an orthographic projection matrix, we first define a cubic viewing volume (a **cuboid**) bounded by six axis-aligned planes: near ($n$), far ($f$), left ($l$), right ($r$), bottom ($b$), and top ($t$). Then, we calculate the scaling factors and translation amounts that map each point in this volume to clip space ($[l, r][b, t][n, f] \rightarrow [-1,1]^3$), which is equal to _NDC_ when using orthographic projection.
 
-> $x_e$ is the eye (view) space, $x_c$ is the clip space, and $x_n$ is the _NDC_ coordinate.
+> $x_e$ is the eye (view) space, $x_c$ is the clip space, and $x_n$ is the _NDC_ space coordinate.
 
 $$
 \begin{align}
@@ -1286,7 +1287,7 @@ glm::mat4 projection = glm::ortho(left, -left, bottom, -bottom, near, far);
 
 Orthographic projection has its uses in many engineering applications since it preserves relative sizes of objects, i.e., there is no sense of depth. However, in many other 3D applications, we want to see realistic results. In the context of projection, realism can be achieved by simulating the natural phenomenon of perspective foreshortening — objects appear smaller when they are moved farther away from the eye (camera). For example, a human that is close to the camera may appear the same height as a mountain that is miles away. It's clear that a cuboid cannot represent this viewing volume — if it barely covers a human close to the near frame, it will cover only a fraction of the mountain at the other end, due to both faces having the same area. A more appropriate volume would have a pyramid-like shape, which extends in cross-sectional area with increasing distance. However, its top will be cut off due to near plane being slightly larger than zero (for various reasons). This unique shape is called a **frustum**.
 
-In orthographic projection, we projected each component of a point independently through linear transformations (scale + translate). In perspective projection, we have to map points on both near and far planes (and those in between) to the same $[-1,1]$ range, which implies that the larger plane must be "squeezed" more, and the scale amount is proportional to the depth. Scaling by $z$ (depth) is not a linear transformation — it's division by a component of the input vector. This cannot be represented as matrix multiplication; hence, it has to happen in a separate step called **perspective division**, after the projection matrix has been applied. Since we will lose the original $z_e$ value when we move from view space to clip space, we store it in the $w_e$ component.
+In orthographic projection, we projected each component of a point independently through linear transformations (scale + translate). In perspective projection, we have to map points on both near and far planes (and those in between) to the same $[-1,1]$ range, which implies that the larger plane must be "squeezed" more, and the scale amount is proportional to the depth. Scaling by $z$ (depth) is not a linear transformation — it's division by a component of the input vector. This cannot be represented as matrix multiplication; hence, it has to happen in a separate step called **perspective division**, after the projection matrix has been applied. Since we will lose the original $z_e$ value when we move from view space to clip space, we will store it in the $w_c$ component.
 
 We can hypothetically project any point inside the frustum onto the near plane to have a better understanding of where each point will end up in the final image. In the process, we calculate the ratios between the $x_e$ and $y_e$ coordinates and their projections ($x_p$ and $y_p$) using the properties of similar triangles.
 
@@ -1399,7 +1400,7 @@ glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 ## Debugging and Logging
 
-_OpenGL_ cannot output its debug messages unless our application provides a way to display them. We can receive these messages by registering a callback function via `glDebugMessageCallback` and process them within this function. The most common way to handle debug messaging is by using a logger like _spdlog_ to either store the messages or directly output them to a chosen target (sink) as formatted text.
+_OpenGL_ cannot output its debug messages unless our application provides a way to display them. We can receive these messages by registering a callback function via `glDebugMessageCallback` and process them within this function. The most common way to handle debug messaging is by using a logger like [spdlog](https://github.com/gabime/spdlog) to either store the messages or directly output them to a chosen target (sink) as formatted text.
 
 ```bash
 git submodule add https://github.com/gabime/spdlog /external/spdlog

@@ -1,80 +1,27 @@
 ---
 layout: default
 ---
-<div class="container">
-  <div class="post-title-box">
-    <div class="row">
-      <div class="col col-10 push-1 col-11 push-t-1 col-m-12 push-m-0">
-        <span class="post-date">
-          <time datetime="{{page.date | date_to_xmlschema}}">{{page.date | date: "%b %d, %Y"}}</time>
-        </span>
-        <h1 class="post-title">{{page.title | escape}}</h1>
-        <div class="post-info">
-          <div class="post-author">
-            <a class="author-name">{{site.author.name}}</a>
-          </div>
-          {% if page.tags.size >= 1 %}
-          <div class="post-tags">
-            {% for tag in page.tags %}
-            <a href="{{site.baseurl}}/tag/{{tag | downcase | replace: " ", " -"}}" class="post-tags-tag">{{tag}}</a>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
+      {{ page.date | date: "%B %d, %Y" }}
+    </time>
+  </header>
+  <div class="post-content">
+    {{ content }}
   </div>
-  {% assign no-image = nil %}
-  {% if page.image %}
-  <div class="post-head">
-    <div class="post-image" style="background-image: url({{site.baseurl}}/assets/images/{{page.image}})"></div>
-  </div>
-  {% else %}
-  {% assign no-image = "post-no-image" %}
+</article>
+<nav class="post-nav">
+  {% if page.previous.url %}
+  <a class="prev-post" href="{{ page.previous.url | relative_url }}">
+    <i class="fas fa-chevron-left"></i> {{ page.previous.title }}
+  </a>
   {% endif %}
-</div>
-<div class="container">
-  <div class="row">
-    <article class="post {{no-image}} col col-10 col-t-11 col-m-12">
-      <div class="post-content">
-        {{content}}
-      </div>
-    </article>
-  </div>
-</div>
-<div class="container">
-  <div class="post-navigation">
-    {% if page.previous.url %}
-    <div class="prev">
-      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.previous.url}}" style="background-image: url({{site.baseurl}}/assets/images/{{page.previous.image}})"> </a> -->
-      <h2 class="post-nav-title">
-        <i class="fas fa-arrow-left"></i>
-        <a href="{{site.baseurl}}{{page.previous.url}}">{{page.previous.title}} </a>
-      </h2>
-      <p class="prev-excerpt">
-        {% if page.previous.description %}
-        {{page.previous.description}}
-        {% else %}
-        {{page.previous.content | strip_html | truncate: 160}}
-        {% endif %}
-      </p>
-    </div>
-    {% endif %}
-    {% if page.next.url %}
-    <div class="next">
-      <!-- <a class="post-nav-image" href="{{site.baseurl}}{{page.next.url}}" style="background-image: url({{site.baseurl}}/assets/images/{{page.next.image}})"> </a> -->
-      <h2 class="post-nav-title">
-        <a href="{{site.baseurl}}{{page.next.url}}"> {{page.next.title}} </a>
-        <i class="fas fa-arrow-right"></i>
-      </h2>
-      <p class="next-excerpt">
-        {% if page.next.description %}
-        {{page.next.description}}
-        {% else %}
-        {{page.next.content | strip_html | truncate: 160}}
-        {% endif %}
-      </p>
-    </div>
-    {% endif %}
-  </div>
-</div>
+  {% if page.next.url %}
+  <a class="next-post" href="{{ page.next.url | relative_url }}">
+    {{ page.next.title }} <i class="fas fa-chevron-right"></i>
+  </a>
+  {% endif %}
+</nav>

@@ -1,27 +1,20 @@
-title: msagca
-description: "Personal website of Mustafa Said Ağca"
-author:
-  name: "Mustafa Said Ağca"
-  socials:
-    github: "https://github.com/msagca"
-    linkedin: "https://linkedin.com/in/msagca"
+title: "msagca"
+description: "Mustafa Said Ağca's personal blog about programming and game development."
+url: "https://msagca.github.io/"
 baseurl: ""
-url: ""
 permalink: "/:title/"
+social:
+  github: "github.com/msagca"
+  linkedin: "linkedin.com/in/msagca"
 markdown: kramdown
 kramdown:
   math_engine: mathjax
-highlighter: rouge
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll/tagging
-paginate: 5
-paginate_path: "/page/:num"
-tag_page_dir: tag
-tag_page_layout: tags
-tag_permalink_style: pretty
-sass:
-  sass_dir: _sass
-  style: compressed
-
+collections:
+  posts:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

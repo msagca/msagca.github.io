@@ -1,13 +1,23 @@
 ---
 layout: default
 ---
-<div class="container">
-  <div class="row">
-    {% if site.posts.size > 0 %}
-    {% for post in paginator.posts %}
-    {% include article.html %}
+
+<div class="home">
+  <div class="post-list">
+    {% for post in site.posts %}
+    <article class="post-preview">
+      <h2 class="post-preview-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      <time class="post-preview-date" datetime="{{ post.date | date_to_xmlschema }}">
+        {{ post.date | date: "%B %d, %Y" }}
+      </time>
+      {% if post.excerpt %}
+      <div class="post-excerpt">
+        {{ post.excerpt | strip_html | truncate: 200 }}
+      </div>
+      {% endif %}
+    </article>
     {% endfor %}
-    {% endif %}
   </div>
 </div>
-{% include pagination.html %}

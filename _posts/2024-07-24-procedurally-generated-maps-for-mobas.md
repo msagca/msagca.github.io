@@ -1,8 +1,6 @@
 ---
 layout: post
 title: Procedurally Generated Maps for MOBAs
-image: map-background.png
-tags: Unity C#
 ---
 
 In recent months, I"ve been exploring procedural level generation techniques and algorithms to streamline the level design process for my future game projects so that I can spend more time on gameplay programming. While I haven't delved into some of the more advanced stuff, I think I gained enough experience to quickly create levels suitable for various genres. In this post, I will talk about my progress in incorporating procedural map generation into a [MOBA](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena) game I"ve been working on (in [Unity](https://unity.com)).
@@ -50,8 +48,10 @@ for (var j = 0; j < octaves; j++) {
 
 By combining these two code blocks, I was able to create a mesh shaped like a terrain. But a mesh alone doesn't make a terrain; it needed colors to visually indicate the differences in elevation. I wanted to give the terrain a low-poly look; so, I applied flat shading to faces in [Shader Graph](https://docs.unity3d.com/Manual/shader-graph.html) as described in [this article](https://hextantstudios.com/unity-flat-low-poly-shader) by Hextant Studios. I picked five shades of ground/soil color and assigned them to individual vertices of the mesh based on elevation levels (each vertex falls into one of five levels). The following is the resulting terrain when viewed from above.
 
-![]({{site.baseurl}}/assets/images/map-terrain.png)
-_Procedurally generated terrain with elevation-based coloring_
+<figure>
+  <img src="/assets/images/map-terrain.png" alt="Procedurally generated terrain with elevation-based coloring">
+  <figcaption>Procedurally generated terrain with elevation-based coloring</figcaption>
+</figure>
 
 It looks natural enough, so I"m satisfied with the result. However, a barren land like this isn’t particularly interesting, so I decided to introduce obstacles (trees) into the terrain. In nature, trees don"t usually stand alone, instead they create formations. For this purpose, I could have set a threshold value and decided whether to place a tree at any point in the mesh by comparing its y value with the threshold. This approach would have resulted in tree covered areas that are above or below a certain height, resulting in unrealistic tree distributions. Instead, I decided to generate a distinct noise value for each point by adjusting the offset provided to `PerlinNoise` and re-running the algorithm. I stored the tree locations in a `HashSet` for later.
 
@@ -91,8 +91,10 @@ void Update () {
 }
 ```
 
-![]({{site.baseurl}}/assets/images/map-forest.png)
-_Tree formations created with Perlin Noise_
+<figure>
+  <img src="/assets/images/map-forest.png" alt="Tree formations created with Perlin Noise">
+  <figcaption>Tree formations created with Perlin Noise</figcaption>
+</figure>
 
 With the addition of the trees, the map became more interesting and visually pleasing. However, it lacked a clear purpose since I hadn"t specified any regions of interest on the map. Now, it was time to introduce the first special regions into the map: the teams" bases. Where to put the bases was obvious since the leading titles of the MOBA genre all follow the same rule: opposing ends of the diagonal from the bottom-left corner to the top-right corner. My terrain was centered around the xz-plane, so the first base would have negative x and z coordinates while the second one would be on the positive side of both axes. I had to decide on the base radius considering the distance between them and leave some margin from the borders of the terrain, as I wanted to cover the outer parts with trees to signify the boundaries of the map. Calculations of the center points of the bases are given below.
 
@@ -109,18 +111,24 @@ var secondCenter = new Vector2(x: borderDistance - baseDistance, y: borderDistan
 
 When I ran the tree placement algorithm again with the same parameters multiple times while excluding the base areas, I occasionally obtained some decent maps but mostly, they were unplayable such as the following one.
 
-![]({{site.baseurl}}/assets/images/map-disconnected.png)
-_Map with disconnected regions_
+<figure>
+  <img src="/assets/images/map-disconnected.png" alt="Map with disconnected regions">
+  <figcaption>Map with disconnected regions</figcaption>
+</figure>
 
 As you can see, the second base is fully covered by trees while the first one has access to only a small part of the map. I thought maybe I could get a better tree distribution by adjusting the parameters of the noise function. By increasing the frequency from `.04` to `.1`, I got the following result.
 
-![]({{site.baseurl}}/assets/images/map-detailed.png)
-_More interesting map with disconnected regions_
+<figure>
+  <img src="/assets/images/map-detailed.png" alt="More interesting map with disconnected regions">
+  <figcaption>More interesting map with disconnected regions</figcaption>
+</figure>
 
 Even though there is a large enough connected walkable area, both bases are disconnected from it and there are many areas that cannot be reached. I figured that the tree density was too high to allow path formation between the bases. By changing the threshold value, which is compared against the noise value calculated at each vertex to determine whether to place a tree there, I started to see nice, almost fully-connected regions on the map. The only thing I did was to lower the tree density setting from `.5` to `.4`, and I obtained the following map.
 
-![]({{site.baseurl}}/assets/images/map-connected.png)
-_Map with mostly connected regions_
+<figure>
+  <img src="/assets/images/map-connected.png" alt="Map with mostly connected regions">
+  <figcaption>Map with mostly connected regions</figcaption>
+</figure>
 
 However, I still saw cases where the bases were disconnected when I re-ran the algorithm. It was clear that no amount of micro-adjustments would guarantee an acceptable output unless I was willing to limit tree density to very low values. I thought I needed to give up on Perlin noise and started looking for another algorithm that could accomplish the task. I wanted something simple enough to implement but capable of producing complex results. [Cellular automaton](https://en.wikipedia.org/wiki/Cellular_automaton) was what I was looking for, but I didn't know which model to simulate. Since I was dealing with trees, I searched for known models involving trees. Then, I came across the [forest-fire model](https://scipython.com/blog/the-forest-fire-model).
 
@@ -133,12 +141,16 @@ The forest-fire model in the link above was implemented for grids, but it was ap
 
 I quickly implemented the algorithm for my graph with initial tree placements determined by Perlin noise (there was no escaping from it). I ran the algorithm using the same parameter values from the article (tree probability: `.05`, fire probability: `.001`) for 10 iterations and created an animated GIF of the simulation.
 
-![]({{site.baseurl}}/assets/images/forest-fire.gif)
-_Forest-fire simulation_
+<figure>
+  <img src="/assets/images/forest-fire.gif" alt="Forest-fire simulation">
+  <figcaption>Forest-fire simulation</figcaption>
+</figure>
 
 I then ran this model a couple iterations on a map generated using the parameter values that resulted in nice outputs in earlier trials. However, I used a much higher **initial** fire probability (`.1`) compared to the simulation above (`.001`). See how it helps to connect the islands by breaking through the walls.
 
-![]({{site.baseurl}}/assets/images/map-fire.gif)
-_Forest-fire simulation with higher initial fire probability_
+<figure>
+  <img src="/assets/images/map-fire.gif" alt="Forest-fire simulation with higher initial fire probability">
+  <figcaption>Forest-fire simulation with higher initial fire probability</figcaption>
+</figure>
 
 Still not satisfied with the results, I began to explore mazes...
