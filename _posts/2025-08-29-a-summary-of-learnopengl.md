@@ -9,7 +9,7 @@ I’ve prepared a concise summary of the lectures from <https://learnopengl.com/
 
 ## OpenGL
 
-[OpenGL](https://www.opengl.org/) is a cross-platform API for rendering graphics, maintained by the [Khronos Group](https://www.khronos.org/). It is a specification that should be implemented by _GPU_ vendors (or third parties) and made available through graphics driver software.
+[OpenGL](https://www.opengl.org/) is a cross-platform API for rendering graphics, maintained by the [Khronos Group](https://www.khronos.org/). It is a specification that must be implemented by _GPU_ vendors (or third parties) and made available through graphics driver software.
 
 If you're building your project with [CMake](https://cmake.org/) and want to use _OpenGL_ in your C++ application, the **CMakeLists.txt** should include the following commands:
 
@@ -39,7 +39,7 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC glfw)
 
 Due to the differences between implementations and platforms, _OpenGL_ function addresses aren't known at compile time. As a result, they need to be queried at runtime using platform-specific mechanisms. That's why there are libraries like [GLAD](https://github.com/Dav1dde/glad), which dynamically loads the function pointers.
 
-To generate a GLAD loader:
+To generate a _GLAD_ loader:
 
 - Go to <https://glad.dav1d.de/>
 - Select a GL API version (3.3+ is recommended)
@@ -68,7 +68,7 @@ For example, calling `glClearColor(r,g,b,a)` will update the state, and all subs
 
 ## How does GLAD load OpenGL functions?
 
-When a program that links to some shared library is launched, the operating system maps that library's segments (e.g., text and data) into this process's virtual address space. In our case, an _OpenGL_ stub library (e.g., `opengl32.dll` or `libGL.so`) is dynamically loaded for our application. When an _OpenGL_ context is created, the OS then loads the vendor-specific driver library into the process memory. A loader function such as `glfwGetProcAddress` can query the driver and get the addresses of actual implementations of the supported _OpenGL_ functions. GLAD calls this loader for each _OpenGL_ function name by iterating over a list for each version of the specification (until the one we set during GLAD generation) and stores those pointers in usable global function pointers.
+When a program that links to some shared library is launched, the operating system maps that library's segments (e.g., text and data) into this process's virtual address space. In our case, an _OpenGL_ stub library (e.g., `opengl32.dll` or `libGL.so`) is dynamically loaded for our application. When an _OpenGL_ context is created, the OS then loads the vendor-specific driver library into the process memory. A loader function such as `glfwGetProcAddress` can query the driver and get the addresses of actual implementations of the supported _OpenGL_ functions. _GLAD_ calls this loader for each _OpenGL_ function name by iterating over a list for each version of the specification (until the one we set during _GLAD_ generation) and stores those pointers in usable global function pointers.
 
 ## Render Loop
 

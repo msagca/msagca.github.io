@@ -137,21 +137,17 @@ function antlrLanguage(hljs) {
       SPECIAL_CHARS,
       DOT,
       {
-        // Rule separator
         className: "punctuation",
         begin: /:/,
       },
       {
-        // Alternative separator
         className: "operator",
         begin: /\|/,
       },
       {
-        // End of rule
         className: "punctuation",
         begin: /;/,
       },
     ],
   };
 }
-

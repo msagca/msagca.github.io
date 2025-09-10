@@ -9,12 +9,3 @@ social:
 markdown: kramdown
 kramdown:
   math_engine: mathjax
-collections:
-  posts:
-    output: true
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"

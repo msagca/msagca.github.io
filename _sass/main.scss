@@ -57,6 +57,54 @@ body {
   background-color: var(--bg-primary);
   overflow-x: hidden;
 }
+.MathJax_Display {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+.MathJax {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.MathJax_Preview {
+  display: none !important;
+}
+.mjx-chtml {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.mjx-math {
+  max-width: 100% !important;
+}
+mjx-container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+}
+mjx-container[jax="CHTML"][display="true"] {
+  text-align: center !important;
+  margin: 1em 0 !important;
+}
+.math-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+  margin: 0.5rem 0;
+}
+.math-scroll {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  padding: 0.5rem 0 !important;
+  border-radius: var(--border-radius);
+  background-color: var(--bg-secondary);
+  margin: var(--space-sm) 0;
+}
 .container {
   display: grid;
   grid-template-columns: 1fr;
@@ -67,10 +115,19 @@ body {
   padding: var(--space-md) var(--space-lg);
   gap: var(--space-xl);
 }
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
+  .container {
+    max-width: 90%;
+  }
+}
+@media (max-width: 1024px) {
   .container {
     max-width: 95%;
-    padding: var(--space-md) var(--space-sm);
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
   }
 }
 .social-sidebar {
@@ -131,7 +188,7 @@ body {
   color: var(--accent-primary);
   background-color: var(--hover-tint);
 }
-@media (max-width: 768px), (max-zoom: 1.2) {
+@media (max-width: 768px) {
   .social-sidebar {
     display: none;
   }
@@ -140,6 +197,14 @@ body {
   }
   .container {
     padding-bottom: 5rem;
+  }
+}
+@media (max-width: 1024px) and (min-resolution: 1.1dppx) {
+  .social-sidebar {
+    display: none;
+  }
+  .social-bottom {
+    display: flex;
   }
 }
 .site-header {
@@ -151,6 +216,8 @@ body {
   font-size: 2.5rem;
   font-weight: 600;
   transition: all 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .site-title a {
   color: var(--text-primary);
@@ -166,6 +233,7 @@ body {
   grid-row: 2;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  min-width: 0;
 }
 h1,
 h2,
@@ -179,6 +247,9 @@ h6 {
   margin: var(--space-xl) 0 var(--space-md) 0;
   color: var(--text-primary);
   transition: all 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 h1:hover,
 h2:hover,
@@ -211,12 +282,15 @@ p {
   margin: var(--space-md) 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  hyphens: auto;
 }
 a {
   color: var(--accent-secondary);
   text-decoration: none;
   font-weight: 700;
   transition: all 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 a:hover {
   color: var(--accent-primary);
@@ -232,6 +306,7 @@ code {
   transition: all 0.3s ease;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 code:hover {
   background-color: var(--hover-tint);
@@ -270,6 +345,8 @@ blockquote {
   position: relative;
   transition: all 0.3s ease;
   box-shadow: 0 0.125rem 0.5rem var(--shadow);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 blockquote:hover {
   background-color: var(--bg-tertiary);
@@ -287,6 +364,8 @@ blockquote:hover {
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   box-shadow: 0 0.125rem 0.5rem var(--shadow);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .post-preview:hover {
   background-color: var(--bg-tertiary);
@@ -297,6 +376,9 @@ blockquote:hover {
 .post-preview-title {
   margin: 0 0 var(--space-sm) 0;
   font-size: 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .post-preview-title a {
   color: var(--text-primary);
@@ -315,6 +397,9 @@ blockquote:hover {
   color: var(--text-secondary);
   margin-top: var(--space-md);
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .post-header {
   margin-bottom: var(--space-xl);
@@ -324,6 +409,9 @@ blockquote:hover {
 .post-title {
   margin: 0 0 var(--space-sm) 0;
   font-size: 2.25rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .post-date {
   color: var(--text-muted);
@@ -332,6 +420,9 @@ blockquote:hover {
 }
 .post-content {
   line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .post-content img {
   display: block;
@@ -371,6 +462,9 @@ blockquote:hover {
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 .post-nav a:hover {
   background-color: var(--bg-tertiary);
@@ -401,6 +495,7 @@ table {
   overflow: hidden;
   box-shadow: 0 0.125rem 0.5rem var(--shadow);
   transition: all 0.3s ease;
+  table-layout: auto;
 }
 table:hover {
   box-shadow: 0 0.25rem 1rem var(--hover-tint);
@@ -411,6 +506,9 @@ td {
   text-align: left;
   border-bottom: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 th {
   background-color: var(--bg-tertiary);
@@ -429,6 +527,7 @@ li {
   margin: var(--space-sm) 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  hyphens: auto;
 }
 @media (max-width: 480px) {
   .container {
@@ -478,4 +577,6 @@ figcaption {
   color: var(--text-muted);
   margin-top: var(--space-xs);
   line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
