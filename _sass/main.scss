@@ -211,7 +211,7 @@ mjx-container[jax="CHTML"][display="true"] {
   grid-column: 1;
   grid-row: 1;
 }
-.title {
+.site-title {
   margin: 0;
   font-family: var(--font-title);
   font-size: 2.5rem;
@@ -220,12 +220,12 @@ mjx-container[jax="CHTML"][display="true"] {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-.title a {
+.site-title a {
   color: var(--text-primary);
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.title a:hover {
+.site-title a:hover {
   color: var(--accent-primary);
   text-shadow: 0 0 1rem var(--hover-tint);
 }
@@ -539,7 +539,7 @@ li {
     max-width: 100%;
     padding: var(--space-sm);
   }
-  .title {
+  .site-title {
     font-size: 2rem;
   }
   h1 {
