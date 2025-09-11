@@ -10,9 +10,10 @@
   --border-color: #e0d5cc;
   --border-radius: 0.5rem;
   --border-width: 0.125rem;
-  --font-code: "Roboto Mono", monospace;
-  --font-text: "Open Sans";
-  --font-title: "Audiowide";
+  --font-blockquote: "Fuzzy Bubbles";
+  --font-code: "Google Sans Code", monospace;
+  --font-text: "Poppins";
+  --font-title: "Monomakh";
   --hover-tint: rgba(212, 165, 165, 0.2);
   --shadow: rgba(74, 74, 74, 0.1);
   --space-lg: 1.5rem;
@@ -210,7 +211,7 @@ mjx-container[jax="CHTML"][display="true"] {
   grid-column: 1;
   grid-row: 1;
 }
-.site-title {
+.title {
   margin: 0;
   font-family: var(--font-title);
   font-size: 2.5rem;
@@ -219,12 +220,12 @@ mjx-container[jax="CHTML"][display="true"] {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-.site-title a {
+.title a {
   color: var(--text-primary);
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.site-title a:hover {
+.title a:hover {
   color: var(--accent-primary);
   text-shadow: 0 0 1rem var(--hover-tint);
 }
@@ -241,7 +242,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-text);
+  font-family: var(--font_text);
   font-weight: 600;
   line-height: 1.3;
   margin: var(--space-xl) 0 var(--space-md) 0;
@@ -341,22 +342,21 @@ code.copied {
   border-color: var(--accent-quaternary) !important;
 }
 blockquote {
+  font-family: var(--font-blockquote);
   margin: 0;
-  padding: 0 var(--space-md);
-  background-color: var(--bg-secondary);
-  border-left: 0.25rem solid var(--blockquote-accent);
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  font-style: italic;
+  padding: 0 var(--space-lg) 0;
   position: relative;
-  transition: all 0.3s ease;
-  box-shadow: 0 0.125rem 0.5rem var(--shadow);
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-blockquote:hover {
-  background-color: var(--bg-tertiary);
-  border-left-color: var(--accent-primary);
-  box-shadow: 0 0.25rem 1rem var(--hover-tint);
+blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--blockquote-accent);
+  font-weight: bold;
 }
 .post-list {
   display: grid;
@@ -539,7 +539,7 @@ li {
     max-width: 100%;
     padding: var(--space-sm);
   }
-  .site-title {
+  .title {
     font-size: 2rem;
   }
   h1 {
