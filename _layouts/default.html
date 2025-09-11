@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <!-- fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- mathjax -->
   <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     MathJax = {
@@ -17,12 +20,14 @@
       }
     };
   </script>
+  <!-- highlight.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="{{ '/assets/js/antlr.js' | relative_url }}"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-latte.css" data-theme="light">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-macchiato.css" data-theme="dark">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
+
 <body>
   <div class="social-sidebar">
     {% for social in site.social %}
@@ -46,7 +51,10 @@
     </a>
     {% endfor %}
   </div>
+  <!-- scripts -->
   <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/social.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
 </body>
+
 </html>

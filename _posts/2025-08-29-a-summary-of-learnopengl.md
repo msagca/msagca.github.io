@@ -986,7 +986,7 @@ $$
 \end{bmatrix}
 $$
 
-Using trigonometric identities, e.g., $\cos{\gamma}\sin{\alpha} - \sin{\gamma}\cos{\alpha} = \sin{\alpha-\gamma}$, we can rewrite this matrix as:
+Using trigonometric identities, e.g., $\cos{\gamma}\sin{\alpha} - \sin{\gamma}\cos{\alpha} = \sin{(\alpha-\gamma)}$, we can rewrite this matrix as:
 
 $$
 \begin{bmatrix}
@@ -1051,7 +1051,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/glm")
 target_link_libraries("${PROJECT_NAME}" PUBLIC glm)
 ```
 
-Now, we can `include` the required _GLM_ headers and define the transformation matrices. We usually start with a unit matrix, and call either one of `glm::rotate`, `glm::scale`, or `glm::translate`, to obtain a combined matrix. Since _GLM_, like _OpenGL_, represents matrices in **column-major** order, we place the first transformation to apply at the end in the multiplication.
+Now, we can include the required _GLM_ headers and define the transformation matrices. We usually start with a unit matrix, and call either one of `glm::rotate`, `glm::scale`, or `glm::translate`, to obtain a combined matrix. Since _GLM_, like _OpenGL_, represents matrices in **column-major** order, we place the first transformation to apply at the end in the multiplication.
 
 ```cpp
 #include <glm/glm.hpp>
