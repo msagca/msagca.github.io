@@ -1036,11 +1036,11 @@ z \\
 \end{bmatrix}
 $$
 
-As you can see, if translation is applied first, then the translation vector is scaled as well. If it was rotation that followed translation, then the object would be rotated about a shifted origin, which would result in an arc shaped movement. If scale follows rotation, then it's applied with respect to the new orientation, which would make even a uniform scale look non-uniform. In most applications, we want to scale first, then rotate, and finally translate: $TRS\vec{v}$.
+As you can see, if translation is applied first, then the translation vector is scaled as well. If it was rotation that followed translation, then the object would be rotated about a shifted origin, which would result in an arc shaped movement. If scale follows rotation, then it's applied with respect to the new orientation, which would make even a uniform scale look non-uniform. In many applications, we want to scale first, then rotate, and finally translate: $TRS\vec{v}$.
 
 ## GLM
 
-In graphics applications, it's common, and often necessary, to perform matrix operations on the _CPU_. For example, in a game engine, object hierarchies are stored in _CPU_ memory, and the transforms need to be re-calculated only when an object's local transform or a parent transform changes, which can be done more efficiently on the _CPU_. The **OpenGL Mathematics Library (GLM)** is a header-only _C++_ math library that provides a large set of classes and functions that follow the same naming conventions and functionality as _GLSL_. It can be added to a _CMake_ project as we did with _GLFW_.
+In graphics applications, it's common, and often necessary, to perform matrix operations on the _CPU_. For example, in a game engine, object hierarchies are stored in _CPU_ memory, and the transforms need to be re-calculated only when an object's local transform or a parent transform changes, which can be done more efficiently on the _CPU_. The **OpenGL Mathematics Library (GLM)** is a header-only C++ math library that provides a large set of classes and functions that follow the same naming conventions and functionality as _GLSL_. It can be added to a _CMake_ project as we did with _GLFW_.
 
 ```bash
 git submodule add https://github.com/g-truc/glm /external/glm

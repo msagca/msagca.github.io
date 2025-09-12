@@ -49,7 +49,7 @@ for (var j = 0; j < octaves; j++) {
 By combining these two code blocks, I was able to create a mesh shaped like a terrain. But a mesh alone doesn't make a terrain; it needed colors to visually indicate the differences in elevation. I wanted to give the terrain a low-poly look; so, I applied flat shading to faces in [Shader Graph](https://docs.unity3d.com/Manual/shader-graph.html) as described in [this article](https://hextantstudios.com/unity-flat-low-poly-shader) by Hextant Studios. I picked five shades of ground/soil color and assigned them to individual vertices of the mesh based on elevation levels (each vertex falls into one of five levels). The following is the resulting terrain when viewed from above.
 
 <figure>
-  <img src="/assets/images/map-terrain.png" alt="Procedurally generated terrain with elevation-based coloring">
+  <img src="/assets/img/map-terrain.png" alt="Procedurally generated terrain with elevation-based coloring">
   <figcaption>Procedurally generated terrain with elevation-based coloring</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ void Update () {
 ```
 
 <figure>
-  <img src="/assets/images/map-forest.png" alt="Tree formations created with Perlin Noise">
+  <img src="/assets/img/map-forest.png" alt="Tree formations created with Perlin Noise">
   <figcaption>Tree formations created with Perlin Noise</figcaption>
 </figure>
 
@@ -112,21 +112,21 @@ var secondCenter = new Vector2(x: borderDistance - baseDistance, y: borderDistan
 When I ran the tree placement algorithm again with the same parameters multiple times while excluding the base areas, I occasionally obtained some decent maps but mostly, they were unplayable such as the following one.
 
 <figure>
-  <img src="/assets/images/map-disconnected.png" alt="Map with disconnected regions">
+  <img src="/assets/img/map-disconnected.png" alt="Map with disconnected regions">
   <figcaption>Map with disconnected regions</figcaption>
 </figure>
 
 As you can see, the second base is fully covered by trees while the first one has access to only a small part of the map. I thought maybe I could get a better tree distribution by adjusting the parameters of the noise function. By increasing the frequency from `.04` to `.1`, I got the following result.
 
 <figure>
-  <img src="/assets/images/map-detailed.png" alt="More interesting map with disconnected regions">
+  <img src="/assets/img/map-detailed.png" alt="More interesting map with disconnected regions">
   <figcaption>More interesting map with disconnected regions</figcaption>
 </figure>
 
 Even though there is a large enough connected walkable area, both bases are disconnected from it and there are many areas that cannot be reached. I figured that the tree density was too high to allow path formation between the bases. By changing the threshold value, which is compared against the noise value calculated at each vertex to determine whether to place a tree there, I started to see nice, almost fully-connected regions on the map. The only thing I did was to lower the tree density setting from `.5` to `.4`, and I obtained the following map.
 
 <figure>
-  <img src="/assets/images/map-connected.png" alt="Map with mostly connected regions">
+  <img src="/assets/img/map-connected.png" alt="Map with mostly connected regions">
   <figcaption>Map with mostly connected regions</figcaption>
 </figure>
 
@@ -142,14 +142,14 @@ The forest-fire model in the link above was implemented for grids, but it was ap
 I quickly implemented the algorithm for my graph with initial tree placements determined by Perlin noise (there was no escaping from it). I ran the algorithm using the same parameter values from the article (tree probability: `.05`, fire probability: `.001`) for 10 iterations and created an animated GIF of the simulation.
 
 <figure>
-  <img src="/assets/images/forest-fire.gif" alt="Forest-fire simulation">
+  <img src="/assets/img/forest-fire.gif" alt="Forest-fire simulation">
   <figcaption>Forest-fire simulation</figcaption>
 </figure>
 
-I then ran this model a couple iterations on a map generated using the parameter values that resulted in nice outputs in earlier trials. However, I used a much higher **initial** fire probability (`.1`) compared to the simulation above (`.001`). See how it helps to connect the islands by breaking through the walls.
+I then ran this model a couple iterations on a map generated using the parameter values that resulted in nice outputs in earlier trials. However, I used a much higher **initial** fire probability compared to the simulation above. See how it helps to connect the islands by breaking through the walls.
 
 <figure>
-  <img src="/assets/images/map-fire.gif" alt="Forest-fire simulation with higher initial fire probability">
+  <img src="/assets/img/map-fire.gif" alt="Forest-fire simulation with higher initial fire probability">
   <figcaption>Forest-fire simulation with higher initial fire probability</figcaption>
 </figure>
 

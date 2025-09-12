@@ -9,7 +9,7 @@ After some serious work, I completed (or so I thought) the SystemVerilog grammar
 
 Since I was dealing with Verilog grammars, which are **IEEE** standards, I was only interested in the formal syntax described using **Backus-Naur Form (BNF)**. In IEEE 1800-2017 (SystemVerilog standard), Annex A (formal syntax section), there is a list of conventions used in describing the formal syntax:
 
-- Keywords and punctuation are in **bold-red**{: style="color: red;" } text.
+- Keywords and punctuation are in **bold-red**{: style="color: var(--brick-red);" } text.
 - Syntactic categories are named in nonbold text.
 - A vertical bar (`|`) separates alternatives.
 - Square brackets (`[` `]`) enclose optional items.
@@ -35,7 +35,7 @@ rule_definition : rule_identifier "::=" rule_alternatives ;
 ```
 
 <figure>
-  <img src="/assets/images/formal-syntax.svg" alt="Railroad diagram of the rule formal_syntax">
+  <img src="/assets/img/formal-syntax.svg" alt="Railroad diagram of the rule formal_syntax">
   <figcaption>Railroad diagram of the rule formal_syntax</figcaption>
 </figure>
 

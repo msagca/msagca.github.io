@@ -230,7 +230,7 @@ The agents in the scene are rendered via [DrawMeshInstanced](https://docs.unity3
 
 <figure>
     <video width="100%" preload="auto" autoplay controls loop muted>
-        <source src="/assets/videos/battleground.webm" type="video/webm">
+        <source src="/assets/vid/battleground.webm" type="video/webm">
         Your browser does not support the video tag.
     </video>
     <figcaption>Agents battling it out until only one remains standing</figcaption>
