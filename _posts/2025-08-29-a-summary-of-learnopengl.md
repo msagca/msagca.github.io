@@ -1373,7 +1373,7 @@ while (!glfwWindowShouldClose(window)) {
 }
 ```
 
-Since we have enabled depth testing, we can correctly render more complex 3D shapes. Let's replace our triangle with a cube by specifying the positions of its $36$ vertices — a cube has six faces (quads), each of which is formed by two triangles (six vertices). Of the four vertices that define a quad (when connected), two are shared between the triangles that form the quad. Each corner of the cube is also shared by four faces. Depending on how we split the faces in half, the same vertex may appear four to six times in the `vertices` array.
+Since we have enabled depth testing, we can correctly render more complex 3D shapes. Let's replace our triangle with a cube by specifying the positions of its $36$ vertices — a cube has six faces (quads), each of which is formed by two triangles (six vertices). Of the four vertices that define a quad (when connected), two are shared between the triangles that form the quad. Each corner of the cube is also shared by three faces. Depending on how we split the faces in half, the same vertex may appear three to six times in the `vertices` array.
 
 ```cpp
 float vertices[] = {
