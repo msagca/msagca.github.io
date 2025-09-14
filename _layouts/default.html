@@ -1,60 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-  <!-- fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Macondo+Swash+Caps&family=Monomakh&family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- mathjax -->
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      }
-    };
-  </script>
-  <!-- highlight.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="{{ '/assets/js/antlr.js' | relative_url }}"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-latte.css" data-theme="light">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-macchiato.css" data-theme="dark">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-</head>
+<html lang="en-us">
+{% include head.html %}
 
 <body>
-  <div class="social-sidebar">
-    {% for social in site.social %}
-    <a href="https://{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] | capitalize }}">
-      <i class="fab fa-{{ social[0] }}"></i>
-    </a>
-    {% endfor %}
+  {% include sidebar.html %}
+  <div class="content container">
+    {{ content }}
   </div>
-  <div class="container">
-    <header class="site-header">
-      <h1 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-    </header>
-    <main class="content">
-      {{ content }}
-    </main>
-  </div>
-  <div class="social-bottom">
-    {% for social in site.social %}
-    <a href="https://{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] | capitalize }}">
-      <i class="fab fa-{{ social[0] }}"></i>
-    </a>
-    {% endfor %}
-  </div>
-  <!-- scripts -->
-  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/social.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
 </body>
 
 </html>

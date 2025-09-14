@@ -356,9 +356,9 @@ glBindVertexArray(0);
 
 ## Coordinate Spaces, Systems and Frames
 
-Notice that so far, we've used points within the range $[-1,1]$ on all axes. Also, recall that our vertex shader did not do any transformations, and directly output the values we set via a VBO. For a vertex to be visible on the screen in OpenGL, it must be in **Normalized Device Coordinates (NDC)** after it is processed. NDC is a space where all coordinates are normalized to $[-1,1]^3$. These numbers, however, are merely percentages that need to be transformed to a coordinate frame, e.g., screen coordinates, to represent actual positions.
+Notice that so far, we've used points within the range $[-1,1]$ on all axes. Also, recall that our vertex shader did not do any transformations, and directly output the values we set via a VBO. For a vertex to be visible on the screen in OpenGL, it must be in **Normalized Device Coordinates (NDC)** after it is processed. NDC is a space where all coordinates are normalized to $[-1,1]^3$. These numbers, however, are merely percentages that need to be transformed to a coordinate frame, e.g., screen coordinates, to represent actual positions. Before we go any further, it's important to define the terms "space", "system" and "frame".
 
-Before we go any further, it's important to make a distinction between a coordinate space, a coordinate system, and a coordinate frame. A **geometric space** is an abstract framework that defines the geometric rules (axioms), e.g., how to measure distances or angles, or how lines behave, to represent physical space. A **Euclidean** space is one such space where Euclidean geometry rules apply; for example, distances are calculated using the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) formula. A **coordinate system** describes how to uniquely specify each point in a space. A **Cartesian** coordinate system specifies points using real numbers called **coordinates**, which are the signed distances from perpendicular oriented lines called coordinate lines or axes. The point where these axes meet is called the **origin**. The direction vectors that represent these axes (e.g., $(1,0,0)$, $(0,1,0)$ and $(0,0,1)$) form an **orthogonal basis**, meaning that they are mutually orthogonal, and any vector in this system can be represented as a finite linear combination of these basis vectors. A **coordinate frame** is a specific instance of a coordinate system with a defined origin and basis. In computer graphics, a **coordinate space** usually means a frame of reference in space (a coordinate frame).
+A **geometric space** is an abstract framework that defines the geometric rules (axioms), e.g., how to measure distances or angles, or how lines behave, to represent physical space. A **Euclidean** space is one such space where Euclidean geometry rules apply; for example, distances are calculated using the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) formula. A **coordinate system** describes how to uniquely specify each point in a space. A **Cartesian** coordinate system specifies points using real numbers called **coordinates**, which are the signed distances from perpendicular oriented lines called coordinate lines or axes. The point where these axes meet is called the **origin**. The direction vectors that represent these axes (e.g., $(1,0,0)$, $(0,1,0)$ and $(0,0,1)$) form an **orthogonal basis**, meaning that they are mutually orthogonal, and any vector in this system can be represented as a finite linear combination of these basis vectors. A **coordinate frame** is a specific instance of a coordinate system with a defined origin and basis. In computer graphics, a **coordinate space** usually means a frame of reference in space (a coordinate frame).
 
 In graphics applications, some calculations can be done more efficiently and are more intuitive in certain coordinate spaces. We move a vector from one space to another by applying a **transformation**. Before diving into transformations, it's important to build a solid understanding of vectors and matrices.
 
@@ -1300,7 +1300,7 @@ $$
 \end{align}
 $$
 
-Once they're on the near plane, we can linearly map both $x_p$ and $y_p$ to NDC ($x_n$ and $y_n$) just like we did in orthographic projection — coefficients are the same. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in $w_c$. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with $z_e$ are just clip space coordinates.
+Once they're on the near plane, we can linearly map both $x_p$ and $y_p$ to NDC ($x_n$ and $y_n$) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in $w_c$. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with $z_e$ are just clip space coordinates.
 
 $$
 \begin{align}
@@ -1319,10 +1319,7 @@ We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, w
 
 $$
 \begin{align}
--1 = \frac{-na+b}{n} \\
-1 = \frac{-fa+b}{f} \\
-a = -\frac{f+n}{f-n} \\
-b = -\frac{2fn}{f-n} \\
+-1 = \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \Rightarrow a = -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
 z_c = -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
 \end{align}
 $$

@@ -1,0 +1,19 @@
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="{{ '/' | relative_url }}">
+          {{ site.title }}
+        </a>
+      </h1>
+      <p class="lead">{{ site.description }}</p>
+    </div>
+    <div class="sidebar-social">
+      {% for social in site.author.social %}
+      <a href="https://{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] | capitalize }}">
+        <i class="fab fa-{{ social[0] }}"></i>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

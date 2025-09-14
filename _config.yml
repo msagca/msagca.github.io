@@ -1,11 +1,16 @@
+author:
+  name: "Mustafa Said Ağca"
+  social:
+    github: "github.com/msagca"
+    linkedin: "linkedin.com/in/msagca"
 title: "msagca"
-description: ""
-url: "https://msagca.github.io/"
+description: "A blog about programming and game development"
+url: "https://msagca.github.io"
 baseurl: ""
 permalink: "/:title/"
-social:
-  github: "github.com/msagca"
-  linkedin: "linkedin.com/in/msagca"
 markdown: kramdown
 kramdown:
   math_engine: mathjax
+  syntax_highlighter: rouge
+plugins: [jekyll-paginate]
+paginate: 5

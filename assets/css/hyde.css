@@ -1,0 +1,130 @@
+/*
+ *  __                  __
+ * /\ \                /\ \
+ * \ \ \___   __  __   \_\ \     __
+ *  \ \  _ `\/\ \/\ \  /'_` \  /'__`\
+ *   \ \ \ \ \ \ \_\ \/\ \_\ \/\  __/
+ *    \ \_\ \_\/`____ \ \___,_\ \____\
+ *     \/_/\/_/`/___/> \/__,_ /\/____/
+ *                /\___/
+ *                \/__/
+ *
+ * Designed, built, and released under MIT license by @mdo. Learn more at
+ * https://github.com/poole/hyde.
+ */
+html {
+  font-family: "Ubuntu Sans", sans-serif;
+}
+@media (min-width: 48rem) {
+  html {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 58rem) {
+  html {
+    font-size: 1.25rem;
+  }
+}
+.sidebar {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #202020;
+}
+@media (min-width: 48rem) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 18rem;
+    text-align: left;
+  }
+}
+.sidebar a {
+  color: white;
+}
+.sidebar-about h1 {
+  color: white;
+  margin-top: 0;
+  font-family: "Monomakh", serif;
+  font-size: 3.25rem;
+}
+.sidebar-nav {
+  margin-bottom: 1rem;
+}
+.sidebar-nav-item {
+  display: block;
+  line-height: 1.75;
+}
+a.sidebar-nav-item:hover,
+a.sidebar-nav-item:focus {
+  text-decoration: underline;
+}
+.sidebar-nav-item.active {
+  font-weight: bold;
+}
+.sidebar-social {
+  display: flex;
+  flex-direction: row;
+  font-size: 2rem;
+}
+.sidebar-social .social-link {
+  display: flex;
+  color: gray;
+  text-decoration: none;
+}
+.sidebar-social .social-link:hover {
+  color: white;
+}
+@media (min-width: 48rem) {
+  .sidebar-sticky {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
+.content {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+@media (min-width: 48rem) {
+  .content {
+    max-width: 38rem;
+    margin-left: 20rem;
+    margin-right: 2rem;
+  }
+}
+@media (min-width: 64rem) {
+  .content {
+    margin-left: 22rem;
+    margin-right: 4rem;
+  }
+}
+@media (min-width: 48rem) {
+  .layout-reverse .sidebar {
+    left: auto;
+    right: 0;
+  }
+  .layout-reverse .content {
+    margin-left: 2rem;
+    margin-right: 20rem;
+  }
+}
+@media (min-width: 64rem) {
+  .layout-reverse .content {
+    margin-left: 4rem;
+    margin-right: 22rem;
+  }
+}
+.MathJax_Display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 1rem 0;
+}
+.MathJax {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
