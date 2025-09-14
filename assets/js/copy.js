@@ -1,18 +1,8 @@
 function fallbackCopy(text, targetElement) {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.style.position = "fixed";
-  textArea.style.left = "-999999px";
-  document.body.appendChild(textArea);
-  textArea.select();
-  try {
-    document.execCommand("copy");
-    targetElement.classList.add("copied");
-    setTimeout(() => targetElement.classList.remove("copied"), 400);
-  } catch {
-    console.error("Copy failed");
-  }
-  document.body.removeChild(textArea);
+  navigator.clipboard.writeText(text).then(() => {
+    targetElement.classList.add("copied"); setTimeout(() => targetElement.classList.remove("copied"), 400);
+  }, (err) => { console.error("Copy failed", err); }
+  );
 }
 function initializeCodeCopy() {
   document.querySelectorAll("code, pre").forEach((element) => {

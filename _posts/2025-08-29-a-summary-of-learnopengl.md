@@ -529,8 +529,8 @@ AB =
 \begin{bmatrix}
 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 5 + 14 & 6 + 16 \\
 15 + 28 & 18 + 32
 \end{bmatrix} =
@@ -555,8 +555,8 @@ BA =
 \begin{bmatrix}
 5 \cdot 1 + 6 \cdot 3 & 5 \cdot 2 + 6 \cdot 4 \\
 7 \cdot 1 + 8 \cdot 3 & 7 \cdot 2 + 8 \cdot 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 5 + 18 & 10 + 24 \\
 7 + 24 & 14 + 32
 \end{bmatrix} =
@@ -597,8 +597,8 @@ B^TA^T =
 \begin{bmatrix}
 5 \cdot 1 + 7 \cdot 2 & 5 \cdot 3 + 7 \cdot 4 \\
 6 \cdot 1 + 8 \cdot 2 & 6 \cdot 3 + 8 \cdot 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 5 + 14 & 15 + 28 \\
 6 + 16 & 18 + 32
 \end{bmatrix} =
@@ -646,21 +646,17 @@ We can change the length (and direction) of a vector by scaling it. This is achi
 We would like to form a scale matrix ($S$) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
 
 $$
-\begin{align}
 x' = S_x \cdot x \\
 y' = S_y \cdot y \\
 z' = S_z \cdot z
-\end{align}
 $$
 
 Since there are $3$ equations, there should be $3$ rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a $3x1$ matrix, our matrix needs to have $3$ columns to be compatible. So, this will be a $3x3$ matrix. Let's rewrite the equations so that each one has $3$ coefficients (columns):
 
 $$
-\begin{align}
 x' = S_x \cdot x + 0 \cdot y + 0 \cdot z \\
 y' = 0 \cdot x + S_y \cdot y + 0 \cdot z \\
 z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
-\end{align}
 $$
 
 We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to $0$. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
@@ -688,11 +684,9 @@ $$
 We can move (translate) a vector by adding another vector to it. Similar to scaling, we would love to represent this too as a matrix multiplication, which will help us combine both matrices into one. Again, let's start by writing a set of equations that translate a vector:
 
 $$
-\begin{align}
-x' &= x + T_x \\
-y' &= y + T_y \\
-z' &= z + T_z
-\end{align}
+x' = x + T_x \\
+y' = y + T_y \\
+z' = z + T_z
 $$
 
 Wait... can we obtain $x+T_x$ through matrix multiplication? This seems impossible... and it is, in the same dimensional space. The reason is that matrix multiplication is a **linear transformation**; but, translation is an **affine transformation**.
@@ -718,11 +712,9 @@ $$
 There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be $0$. On the other hand, translation amounts must be preserved; hence, they are multiplied by $1$.
 
 $$
-\begin{align}
 x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1 \\
 y' = 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1 \\
 z' = 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
-\end{align}
 $$
 
 It looks like our vector is not $(x,y,z)$ anymore, but rather $(x,y,z,1)$. Similarly, each row appears to have one more coefficient that is the translation amount. Let's try to convert this to a matrix multiplication using the available information:
@@ -799,6 +791,7 @@ $$
 Now, let's try to apply scaling followed by translation. When using column vectors, this chain of operations is written left to right, but performed right to left. It follows the **nested functions** analogy: $f(g(h(x))) = (f \circ g \circ h)(x)$.
 
 $$
+TS\vec{v} =
 \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
@@ -816,8 +809,8 @@ x \\
 y \\
 z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
 0 & 0 & 1 & T_z \\
@@ -889,8 +882,8 @@ S_x & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 T_x & T_y & T_z & 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 x & y & z & 1
 \end{bmatrix}
 \begin{bmatrix}
@@ -1236,11 +1229,9 @@ This type of projection is an affine transformation — it preserves straight li
 > $x_e$ is the eye (view) space, $x_c$ is the clip space, and $x_n$ is the NDC space coordinate.
 
 $$
-\begin{align}
 \frac{x_c}{1-(-1)} = \frac{x_e-\frac{r+l}{2}}{r-l} \Rightarrow x_c = \frac{2x_e-(r+l)}{r-l} \\
 y_c = \frac{2y_e-(t+b)}{t-b} \\
 \frac{z_c}{1-(-1)} = -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
-\end{align}
 $$
 
 We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the $xy$-plane, i.e., $l$ and $b$ are equal to negative $r$ and $t$, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to $1$, and **near** maps to $-1$. Scale along the $z$-axis is negated, because larger (less negative) $z$ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
@@ -1294,19 +1285,16 @@ In orthographic projection, we projected each component of a point independently
 We can hypothetically project any point inside the frustum onto the near plane to have a better understanding of where each point will end up in the final image. In the process, we calculate the ratios between the $x_e$ and $y_e$ coordinates and their projections ($x_p$ and $y_p$) using the properties of similar triangles.
 
 $$
-\begin{align}
 \frac{x_p}{x_e} = \frac{n}{-z_e} \Rightarrow x_p = x_e\frac{n}{-z_e} \\
 \frac{y_p}{y_e} = \frac{n}{-z_e} \Rightarrow y_p = y_e\frac{n}{-z_e}
-\end{align}
 $$
 
 Once they're on the near plane, we can linearly map both $x_p$ and $y_p$ to NDC ($x_n$ and $y_n$) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in $w_c$. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with $z_e$ are just clip space coordinates.
 
 $$
-\begin{align}
-x_n = \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \Rightarrow -z_ex_n = \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
+x_n = \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
+\Rightarrow -z_ex_n = \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
 -z_ey_n = \frac{2ny_e}{t-b}+\frac{z_e(t+b)}{t-b} = y_c
-\end{align}
 $$
 
 Projecting $z_e$ onto the near plane would result in all having the same $-n$ value since they are along the same axis. So, there is not much information to gain from that. We know that $z_n$ does not depend on $x_e$ or $y_e$, so we can write it as a linear combination of $z_e$ and $w_e$. In eye space, $w$ is 1, so the equation can be written as follows:
@@ -1318,10 +1306,9 @@ $$
 We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, which gives us two equations to solve for $a$ and $b$.
 
 $$
-\begin{align}
--1 = \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \Rightarrow a = -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
+-1 = \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \\
+\Rightarrow a = -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
 z_c = -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
-\end{align}
 $$
 
 We now have all the elements needed to construct the perspective projection matrix. Notice that the clip space $w$ component is equal to eye space $z$ after the multiplication, which is the value used in perspective divide to normalize all components of the clip space vector. This final step is performed by the GPU, and the result is the NDC coordinates.
@@ -1413,7 +1400,9 @@ float vertices[] = {
 };
 ```
 
-Duplicates are fine since they do not inherently harm performance, as long as there is enough GPU memory. In fact, they are often necessary, e.g., when we need to encode per-face attributes such as surface normals. However, in this case, we only have position attributes, and there is a more elegant way of representing this data. OpenGL provides a variety of targets for a buffer to bind to. One such target is `GL_ELEMENT_ARRAY_BUFFER`, which indicates that the buffer contains indices. An index buffer is often referred to as an **Element Buffer Object (EBO)**. An EBO is VAO-specific, which means a VAO can only refer to one such buffer. During indexed rendering, the stored indices are used to access the elements in any vertex attribute buffer (VBO) that the bound VAO refers to (via attribute pointers).
+Duplicates are fine since they do not inherently harm performance, as long as there is enough GPU memory. In fact, they are often necessary, e.g., when we need to encode per-face attributes such as surface normals. However, in this case, we only have position attributes, and there is a more elegant way of representing this data.
+
+OpenGL provides a variety of targets for a buffer to bind to. One such target is `GL_ELEMENT_ARRAY_BUFFER`, which indicates that the buffer contains indices. An index buffer is often referred to as an **Element Buffer Object (EBO)**. An EBO is VAO-specific, which means a VAO can only refer to one such buffer. During indexed rendering, the stored indices are used to access the elements in any vertex attribute buffer (VBO) that the bound VAO refers to (via attribute pointers).
 
 > A VBO can be unbound before the VAO is, as long as the attribute pointers have already been configured. In contrast, unbinding an EBO while a VAO is bound will disassociate it from that VAO.
 
