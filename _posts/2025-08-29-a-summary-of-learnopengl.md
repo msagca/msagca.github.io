@@ -336,7 +336,7 @@ void main() {
 }
 ```
 
-Finally, we need to update the attribute pointers so that they point to the correct locations in the buffer. The second set of calls now has $1$ as the index argument, and the stride has been doubled since one set of attributes is now $6$ `float`s long ($3$ for position, $3$ for color). The offset value for the color attribute pointer must be $3$ `float`s to correctly skip the position attribute. Also, the `vertices` array, which is in CPU memory, has been updated to include color values; hence, we need to update the GPU memory by sending the new array via `glBufferData`.
+Finally, we need to update the attribute pointers so that they point to the correct locations in the buffer. The second set of calls now has 1 as the index argument, and the stride has been doubled since one set of attributes is now 6 `float`s long (3 for position, 3 for color). The offset value for the color attribute pointer must be 3 `float`s to correctly skip the position attribute. Also, the `vertices` array, which is in CPU memory, has been updated to include color values; hence, we need to update the GPU memory by sending the new array via `glBufferData`.
 
 ```cpp
 glBindVertexArray(vao);
@@ -364,7 +364,7 @@ In graphics applications, some calculations can be done more efficiently and are
 
 ## Vector Operations
 
-A **vector** ($\vec{v}$) is a 1D array of numerical components. It can be of size $n$, which is the number of components the vector has. In computer graphics, we usually use vectors of size up to $4$.
+A **vector** ($\vec{v}$) is a 1D array of numerical components. It can be of size $n$, which is the number of components the vector has. In computer graphics, we usually use vectors of size up to 4.
 
 $$
 \vec{a} =
@@ -399,7 +399,7 @@ $$
 \|\vec{a}\| = \sqrt{a_1^2+a_2^2+a_3^2}
 $$
 
-A vector can be **normalized** to obtain a **unit vector** (a vector with a length of $1$) by dividing its components by its length. Unit vectors are easy to work with when we only care about a vector's direction.
+A vector can be **normalized** to obtain a **unit vector** (a vector with a length of 1) by dividing its components by its length. Unit vectors are easy to work with when we only care about a vector's direction.
 
 > Normalizing does not change a vector's direction.
 
@@ -651,7 +651,7 @@ y' = S_y \cdot y \\
 z' = S_z \cdot z
 $$
 
-Since there are $3$ equations, there should be $3$ rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a $3x1$ matrix, our matrix needs to have $3$ columns to be compatible. So, this will be a $3x3$ matrix. Let's rewrite the equations so that each one has $3$ coefficients (columns):
+Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a $3x1$ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a $3x3$ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
 
 $$
 x' = S_x \cdot x + 0 \cdot y + 0 \cdot z \\
@@ -659,7 +659,7 @@ y' = 0 \cdot x + S_y \cdot y + 0 \cdot z \\
 z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
 $$
 
-We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to $0$. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
+We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to 0. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
 
 $$
 \begin{bmatrix}
@@ -709,7 +709,7 @@ $$
 A(\vec{u} + \vec{v}) = L(\vec{u} + \vec{v}) + \vec{c} \neq A(\vec{u}) + A(\vec{v}) = L(\vec{u}) + \vec{c} + L(\vec{v}) + \vec{c}
 $$
 
-There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be $0$. On the other hand, translation amounts must be preserved; hence, they are multiplied by $1$.
+There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be 0. On the other hand, translation amounts must be preserved; hence, they are multiplied by 1.
 
 $$
 x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1 \\
@@ -765,7 +765,7 @@ $$
 
 This seems to work, but we do not just perform one transformation on a vector and call it a day; it's often necessary to apply a series of transformations to the same vector. Let's say we intend to apply a translation next, can we do it? Notice that we no longer have a $4x1$ vector; we have lost the $w$ component, which makes it impossible to perform this operation. It's clear that we have to preserve the 4D representation while operating on the vector.
 
-What dimensions does the scale matrix need to have to produce a $4x1$ vector when multiplied by a $4x1$ vector? Yes, the answer is $4x4$. But, what values should we have in this new row? The $w$ component of the result must be $1$, which suggests $(0,0,0,1)$.
+What dimensions does the scale matrix need to have to produce a $4x1$ vector when multiplied by a $4x1$ vector? Yes, the answer is $4x4$. But, what values should we have in this new row? The $w$ component of the result must be 1, which suggests $(0,0,0,1)$.
 
 $$
 \begin{bmatrix}
@@ -920,13 +920,13 @@ R_z R_y R_x =
 \end{bmatrix}
 $$
 
-This representation is easy to understand and visualize, but it's not perfect. Before we point out the issues, let's make some observations. The first thing to notice is that a rotation around a certain axis preserves the coordinates on that axis (through multiplication by $1$), which is expected. Another thing to notice is that the order matters due to the non-commutative nature of matrix multiplication, but in what order should we apply these rotations?
+This representation is easy to understand and visualize, but it's not perfect. Before we point out the issues, let's make some observations. The first thing to notice is that a rotation around a certain axis preserves the coordinates on that axis (through multiplication by 1), which is expected. Another thing to notice is that the order matters due to the non-commutative nature of matrix multiplication, but in what order should we apply these rotations?
 
 An important thing to know is that there are two types of rotations: intrinsic and extrinsic. These describe the frame of reference you're rotating about, which completely changes how the same sequence of angles plays out. With **intrinsic rotations**, the object is rotated about its local frame, which means that each rotation causes the local coordinate axes to move; the next rotation in the sequence happens relative to the new orientation. On the other hand, **extrinsic rotations** are about a fixed frame, e.g., world frame, or the parent object's frame.
 
 > When we talk about rotations, we usually mean intrinsic rotations.
 
-The problems associated with the representation above is not clear at first glance. To give you a clue, the first axis (rightmost in the matrix multiplication, outermost in a three-gimbal mechanism) can spin freely as it's fixed in the world frame, the middle one is othogonal to both the first and the last by definition, but there is a chance for the first and last to align when the middle axis is at its extremes (e.g., at $90$ degrees). When two axes align, rotations around both will have the same effect; hence, we lose one degree of freedom, which is called **gimbal lock**. Changing the multiplication order does not prevent this from happening, it just changes the pair that gets aligned.
+The problems associated with the representation above is not clear at first glance. To give you a clue, the first axis (rightmost in the matrix multiplication, outermost in a three-gimbal mechanism) can spin freely as it's fixed in the world frame, the middle one is othogonal to both the first and the last by definition, but there is a chance for the first and last to align when the middle axis is at its extremes (e.g., at 90 degrees). When two axes align, rotations around both will have the same effect; hence, we lose one degree of freedom, which is called **gimbal lock**. Changing the multiplication order does not prevent this from happening, it just changes the pair that gets aligned.
 
 To avoid gimbal lock, we could limit the movement of the middle axis, and in some cases, we could get away with it. For example, in an FPS game, players rarely look up to the sky or down to the ground, and it won't bother them when the rotation hits its limitations as it would also be physically impossible for a human's head to move beyond those angles. However, this is not a fix, just a mitigation. To eliminate the possibility of a gimbal lock altogether, modern graphics applications represent rotations using [quaternions](https://en.wikipedia.org/wiki/Quaternion).
 
@@ -1148,7 +1148,7 @@ if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
   position -= right * speed;
 ```
 
-One thing to notice is that the final position after $1$ second depends on how many frames have been rendered, which is hardware-dependent. However, we usually want to have consistent results across different hardware. We can achieve this by scaling the increment amounts with the real time that passed to render the frame. Since we can't calculate the frame time before the current frame ends, we use the most recent value instead. The time between two consecutive frames is called the **delta time**, and it can be calculated by subtracting the last frame's time from the current time (at the beginning of the loop).
+One thing to notice is that the final position after 1 second depends on how many frames have been rendered, which is hardware-dependent. However, we usually want to have consistent results across different hardware. We can achieve this by scaling the increment amounts with the real time that passed to render the frame. Since we can't calculate the frame time before the current frame ends, we use the most recent value instead. The time between two consecutive frames is called the **delta time**, and it can be calculated by subtracting the last frame's time from the current time (at the beginning of the loop).
 
 ```cpp
 auto deltaTime = 0.0f;
@@ -1182,7 +1182,7 @@ up = glm::normalize(glm::cross(right, forward));
 
 Remember that we can register callbacks for input events with GLFW during initialization. We can move the update logic related to camera axes into the cursor position callback. We will assume that they are defined globally, and are accessible in this function. In a serious project, we would need to re-structure this code.
 
-In the following callback function, we calculate the difference in mouse position between calls, then scale it with a sensitivity term, and finally add the horizontal ($x$) difference to `yaw` and the vertical ($y$) difference to `pitch`. The $y$ difference is negated because screen coordinates range from top to bottom. Also, if you look at the calculation of the `forward` vector again, you'll see that at pitch angles close to $\pm90^\circ$, both $x$ and $z$ components approach $0$ while $y$ goes to $1$, resulting in the `forward` vector aligning with the `up` vector. Consequently, the cross product used to calculate the `right` vector becomes unstable, oscillating near $(0,0,0)$, which causes sudden $180^\circ$ flips (i.e., "up" becomes "down" and vice versa). Hence, it's advised to limit the pitch to some safe range like $[-89^\circ,89^\circ]$.
+In the following callback function, we calculate the difference in mouse position between calls, then scale it with a sensitivity term, and finally add the horizontal ($x$) difference to `yaw` and the vertical ($y$) difference to `pitch`. The $y$ difference is negated because screen coordinates range from top to bottom. Also, if you look at the calculation of the `forward` vector again, you'll see that at pitch angles close to $\pm90^\circ$, both $x$ and $z$ components approach 0 while $y$ goes to 1, resulting in the `forward` vector aligning with the `up` vector. Consequently, the cross product used to calculate the `right` vector becomes unstable, oscillating near $(0,0,0)$, which causes sudden $180^\circ$ flips (i.e., "up" becomes "down" and vice versa). Hence, it's advised to limit the pitch to some safe range like $[-89^\circ,89^\circ]$.
 
 > We change the cursor mode to `GLFW_CURSOR_DISABLED` during initialization so that the cursor becomes invisible and can't leave the window, while allowing for unlimited mouse movement (i.e., position is no longer clamped to screen edges).
 
@@ -1220,7 +1220,7 @@ int main() {
 
 ## Projection
 
-Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The $w$ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, $z$ already represents depth (distance from camera) in view space, why do we need to use the $w$ component? After applying the projection, $z$ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space $z$ value into $w$. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, $w$ remains $1$ throughout the pipeline. Now, let's explore these two types of projection.
+Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The $w$ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, $z$ already represents depth (distance from camera) in view space, why do we need to use the $w$ component? After applying the projection, $z$ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space $z$ value into $w$. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, $w$ remains 1 throughout the pipeline. Now, let's explore these two types of projection.
 
 ### Orthographic Projection
 
@@ -1234,7 +1234,7 @@ y_c = \frac{2y_e-(t+b)}{t-b} \\
 \frac{z_c}{1-(-1)} = -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
 $$
 
-We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the $xy$-plane, i.e., $l$ and $b$ are equal to negative $r$ and $t$, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to $1$, and **near** maps to $-1$. Scale along the $z$-axis is negated, because larger (less negative) $z$ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
+We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the $xy$-plane, i.e., $l$ and $b$ are equal to negative $r$ and $t$, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the $z$-axis is negated, because larger (less negative) $z$ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
 
 $$
 \begin{bmatrix}
@@ -1357,7 +1357,7 @@ while (!glfwWindowShouldClose(window)) {
 }
 ```
 
-Since we have enabled depth testing, we can correctly render more complex 3D shapes. Let's replace our triangle with a cube by specifying the positions of its $36$ vertices — a cube has six faces (quads), each of which is formed by two triangles (six vertices). Of the four vertices that define a quad (when connected), two are shared between the triangles that form the quad. Each corner of the cube is also shared by three faces. Depending on how we split the faces in half, the same vertex may appear three to six times in the `vertices` array.
+Since we have enabled depth testing, we can correctly render more complex 3D shapes. Let's replace our triangle with a cube by specifying the positions of its 36 vertices — a cube has six faces (quads), each of which is formed by two triangles (six vertices). Of the four vertices that define a quad (when connected), two are shared between the triangles that form the quad. Each corner of the cube is also shared by three faces. Depending on how we split the faces in half, the same vertex may appear three to six times in the `vertices` array.
 
 ```cpp
 float vertices[] = {
@@ -1406,7 +1406,7 @@ OpenGL provides a variety of targets for a buffer to bind to. One such target is
 
 > A VBO can be unbound before the VAO is, as long as the attribute pointers have already been configured. In contrast, unbinding an EBO while a VAO is bound will disassociate it from that VAO.
 
-We can reduce the size of the `vertices` array from $36$ positions to just $8$, one for each corner, by introducing an `indices` array that defines the triangles.
+We can reduce the size of the `vertices` array from 36 positions to just 8, one for each corner, by introducing an `indices` array that defines the triangles.
 
 ```cpp
 float vertices[] = {
@@ -1435,7 +1435,7 @@ unsigned int indices[] = {
 };
 ```
 
-Previously, we had to store $36\cdot 3\cdot 4=432$ bytes of data (a `float` is $4$ bytes in most systems); now, we only need a storage area of $8\cdot 3\cdot 4+12\cdot 3\cdot 4=240$ bytes, which is a $44\%$ reduction. If a `byte` or `short` is sufficient to store the indices, and vertex reuse is high in the mesh, memory savings can be even more. However, GPUs today have huge amounts of memory, which makes it pointless to look for small optimizations like this. Now, let's see how we would use the `indices` buffer to draw a cube.
+Previously, we had to store $36\cdot 3\cdot 4=432$ bytes of data (a `float` is 4 bytes in most systems); now, we only need a storage area of $8\cdot 3\cdot 4+12\cdot 3\cdot 4=240$ bytes, which is a $44\%$ reduction. If a `byte` or `short` is sufficient to store the indices, and vertex reuse is high in the mesh, memory savings can be even more. However, GPUs today have huge amounts of memory, which makes it pointless to look for small optimizations like this. Now, let's see how we would use the `indices` buffer to draw a cube.
 
 ```cpp
 GLuint ebo;

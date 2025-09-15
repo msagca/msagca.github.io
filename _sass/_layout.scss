@@ -1,0 +1,41 @@
+@use "variables";
+@use "custom";
+@media (min-width: 30rem) {
+  .pagination {
+    margin: var(--spacing-md) 0;
+  }
+  .pagination-item {
+    float: left;
+    width: 50%;
+  }
+  .pagination-item:first-child {
+    margin-bottom: 0;
+  }
+  .pagination-item:last-child {
+    margin-left: 0;
+  }
+}
+@media (min-width: 48rem) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--width-sidebar);
+    text-align: left;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--spacing-md);
+  }
+  .sidebar-sticky {
+    position: static;
+  }
+  .sidebar-social {
+    justify-content: left;
+  }
+  .content {
+    margin-left: var(--width-sidebar);
+  }
+}

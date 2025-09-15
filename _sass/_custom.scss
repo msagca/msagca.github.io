@@ -1,0 +1,78 @@
+@use "variables";
+.lead {
+  font-family: var(--font-quote);
+}
+.content, .container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+.sidebar {
+  text-align: center;
+  color: var(--color-text-dark);
+  background-color: var(--color-background-dark);
+  position: relative;
+  width: 100%;
+}
+.sidebar a {
+  color: var(--color-text-dark);
+}
+.sidebar-about h1 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--font-size-title);
+}
+.sidebar-social {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: var(--font-size-social);
+}
+.sidebar-social .social-link {
+  display: flex;
+  text-decoration: none;
+}
+.sidebar-social .social-link:hover {
+  color: var(--color-text-washed);
+}
+.related-posts li a:hover {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+.related-posts li a:hover small {
+  color: inherit;
+}
+.page-title,
+.post-title {
+  margin: 0;
+  a {
+    color: var(--color-text-light);
+  }
+}
+.post-date {
+  display: block;
+  color: var(--color-text-muted);
+}
+.related-posts {
+  list-style: none;
+}
+.related-posts li small {
+  color: var(--color-text-muted);
+}
+.related-posts li a:hover small {
+  color: inherit;
+}
+.pagination {
+  overflow: hidden;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.pagination-item {
+  display: block;
+}
+.MathJax_Display,
+.MathJax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}

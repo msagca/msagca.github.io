@@ -12,5 +12,6 @@ markdown: kramdown
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
-plugins: [jekyll-paginate]
-paginate: 5
+plugins:
+  - jekyll-paginate
+paginate: 3

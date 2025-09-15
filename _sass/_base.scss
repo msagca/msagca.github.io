@@ -1,0 +1,95 @@
+@use "variables";
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+body {
+  color: var(--color-text-light);
+  background-color: var(--color-background-light);
+}
+p {
+  margin: var(--spacing-md) auto;
+}
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+a strong {
+  color: inherit;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+code,
+pre {
+  font-family: var(--font-mono);
+}
+code {
+  color: var(--color-text-code);
+}
+pre {
+  display: block;
+  margin: var(--spacing-md) auto;
+  padding: var(--spacing-sm);
+  line-height: var(--line-height-code);
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+pre code {
+  color: inherit;
+  background: none;
+}
+pre:hover {
+  box-shadow: var(--width-border) var(--width-border) var(--color-text-code);
+}
+pre.copied {
+  box-shadow: var(--width-border) var(--width-border) var(--color-text-link);
+}
+blockquote {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin: 0 auto;
+  color: var(--color-text-muted);
+  font-family: var(--font-quote);
+  position: relative;
+}
+blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--font-size-social);
+}
+hr {
+  border: none;
+  border-top: var(--width-border) dashed var(--color-text-muted);
+}
+ul, ol {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+}
+img, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+figure {
+  text-align: center;
+}
+figcaption {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-caption);
+}
