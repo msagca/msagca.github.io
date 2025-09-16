@@ -120,7 +120,7 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 ## Rendering Pipeline
 
-The sequence of steps that OpenGL takes to transform **3D** shapes into **2D** images is called the rendering pipeline. This pipeline is designed as a streaming architecture and consists of several stages, each one requiring the output of the previous one as its input. These stages are highly specialized and can be executed in parallel on thousands of GPU cores today.
+The sequence of steps that OpenGL takes to transform **3D** shapes into **2D** images is called the **rendering pipeline**. This pipeline is designed as a streaming architecture and consists of several stages, each one requiring the output of the previous one as its input. These stages are highly specialized and can be executed in parallel on thousands of GPU cores today.
 
 > Running in parallel means that while _stage-A_ processes its new input, _stage-B_ works on A's previous output, and so on.
 
@@ -260,7 +260,7 @@ A **fragment** contains all the data that is needed to shade a pixel. A **fragme
 #version 330 core
 out vec4 o_color;
 void main() {
- o_color = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+  o_color = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }
 ```
 

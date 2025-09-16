@@ -22,7 +22,8 @@
 .highlight .cp {
   color: var(--syntax-preprocessor);
 }
-.highlight .c1, .highlight .cs {
+.highlight .c1,
+.highlight .cs {
   color: var(--syntax-comment);
 }
 .highlight .gd {
@@ -54,22 +55,36 @@
 .highlight .gt {
   color: var(--syntax-generic-traceback);
 }
-.highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr {
   color: var(--syntax-keyword);
 }
 .highlight .kt {
   color: var(--syntax-keyword-type);
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo {
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo {
   color: var(--syntax-number);
 }
-.highlight .s, .highlight .s2, .highlight .se, .highlight .sh, .highlight .sx, .highlight .s1 {
+.highlight .s,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .sx,
+.highlight .s1 {
   color: var(--syntax-string);
 }
 .highlight .na {
   color: var(--syntax-name-attribute);
 }
-.highlight .nb, .highlight .bp {
+.highlight .nb,
+.highlight .bp {
   color: var(--syntax-name-builtin);
 }
 .highlight .nc {
@@ -78,10 +93,12 @@
 .highlight .no {
   color: var(--syntax-name-constant);
 }
-.highlight .nd, .highlight .nl {
+.highlight .nd,
+.highlight .nl {
   color: var(--syntax-name-decorator);
 }
-.highlight .ni, .highlight .w {
+.highlight .ni,
+.highlight .w {
   color: var(--syntax-whitespace);
 }
 .highlight .ne {
@@ -96,13 +113,18 @@
 .highlight .nt {
   color: var(--syntax-name-tag);
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi {
   color: var(--syntax-name-variable);
 }
 .highlight .ow {
   color: var(--syntax-operator-word);
 }
-.highlight .sb, .highlight .sc, .highlight .sd {
+.highlight .sb,
+.highlight .sc,
+.highlight .sd {
   color: var(--syntax-string-doc);
   font-style: italic;
 }
@@ -118,6 +140,9 @@
 .highlight .il {
   color: var(--syntax-literal);
 }
-.css .o, .css .o+.nt, .css .nt+.nt {
+.css .o,
+.css .o + .nt,
+.css .nt + .nt {
   color: var(--syntax-operator);
 }
+

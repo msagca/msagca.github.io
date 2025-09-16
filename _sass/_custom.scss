@@ -2,7 +2,8 @@
 .lead {
   font-family: var(--font-quote);
 }
-.content, .container {
+.content,
+.container {
   max-width: 100%;
   margin: 0 auto;
   padding: var(--spacing-md);
@@ -35,12 +36,14 @@
 .sidebar-social .social-link:hover {
   color: var(--color-text-washed);
 }
+.related-posts {
+  list-style: none;
+}
+.related-posts li a {
+  color: var(--color-text-light);
+}
 .related-posts li a:hover {
   color: var(--color-text-link);
-  text-decoration: none;
-}
-.related-posts li a:hover small {
-  color: inherit;
 }
 .page-title,
 .post-title {
@@ -52,15 +55,6 @@
 .post-date {
   display: block;
   color: var(--color-text-muted);
-}
-.related-posts {
-  list-style: none;
-}
-.related-posts li small {
-  color: var(--color-text-muted);
-}
-.related-posts li a:hover small {
-  color: inherit;
 }
 .pagination {
   overflow: hidden;

@@ -42,7 +42,7 @@
   --color-text-light: #333333;
   --color-text-link: var(--syntax-string-regex);
   --color-text-muted: #444444;
-  --color-text-washed: #888888;
+  --color-text-washed: #eeeeee;
   --font-sans: "Ubuntu Sans", sans-serif;
   --font-mono: "Ubuntu Sans Mono", monospace;
   --font-title: "Monomakh", serif;
@@ -105,10 +105,11 @@
     --color-background-dark: #111111;
     --color-background-light: #222222;
     --color-text-code: var(--syntax-string);
-    --color-text-dark: #bbbbbb;
-    --color-text-light: #cccccc;
+    --color-text-dark: #cccccc;
+    --color-text-light: #dddddd;
     --color-text-link: var(--syntax-string-regex);
-    --color-text-muted: #aaaaaa;
-    --color-text-washed: #dddddd;
+    --color-text-muted: #bbbbbb;
+    --color-text-washed: #eeeeee;
   }
 }
+

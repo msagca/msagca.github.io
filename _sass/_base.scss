@@ -80,12 +80,17 @@ hr {
   border: none;
   border-top: var(--width-border) dashed var(--color-text-muted);
 }
-ul, ol {
+ul,
+ol {
   padding-left: 0;
   margin-left: 0;
   list-style-position: inside;
 }
-img, video {
+small {
+  color: var(--color-text-muted);
+}
+img,
+video {
   display: block;
   max-width: 100%;
   height: auto;
