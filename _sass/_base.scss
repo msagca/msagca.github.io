@@ -15,6 +15,10 @@ html {
 body {
   color: var(--color-text-light);
   background-color: var(--color-background-light);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 p {
   margin: var(--spacing-md) auto;
@@ -33,6 +37,9 @@ a:focus {
 code,
 pre {
   font-family: var(--font-mono);
+  overflow-wrap: normal;
+  overflow-x: auto;
+  hyphens: none;
 }
 code {
   color: var(--color-text-code);
@@ -43,8 +50,6 @@ pre {
   padding: var(--spacing-sm);
   line-height: var(--line-height-code);
   white-space: pre-wrap;
-  word-break: break-all;
-  word-wrap: break-word;
   cursor: pointer;
 }
 pre code {
