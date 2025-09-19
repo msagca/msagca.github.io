@@ -20,7 +20,7 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC OpenGL::GL)
 
 ## GLFW
 
-A graphics application requires a window to render graphics, but creating a window is OS-specific. [GLFW](https://www.glfw.org/) is a cross-platform library that abstracts away the details and provides a simple API for creating native windows (and more).
+A graphics application requires a window to draw to, but creating a window is OS-specific. [GLFW](https://www.glfw.org/) is a cross-platform library that abstracts away the details and provides a simple API for creating native windows (and more).
 
 The GLFW source code can be included in a [Git](https://git-scm.com/) repository as a submodule.
 
@@ -218,7 +218,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 The VBO only stores raw vertex data, and it doesn't remember the attribute settings we just made. So, all of these steps must be repeated whenever we want to draw an object. For this reason, there are [Vertex Array Objects](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Array_Object), which can store all the state needed to supply vertex data. In the following code, VAO remembers every state change that was done while it was bound.
 
-> There is no need to re-send the buffer data, it's already associated with the VBO.
+> There is no need to re-send the buffer data, it's already in GPU memory — binding the VBO is enough.
 
 ```cpp
 GLuint vao;
