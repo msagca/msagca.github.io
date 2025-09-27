@@ -133,13 +133,13 @@ bool Frustum::InFrustum(const BoundingBox& bounds) const {
 }
 ```
 
-The implementation is then straightforward: get a reference to the active `Camera` object and call `InFrustum` for each entity that has a `MeshFilter` (container for `Mesh`) component, then initiate draw calls for the ones that pass the test. There are obviously ways to optimize this process. Instead of individual draw calls, we could group entities that share the same mesh and material settings, and do instanced rendering. I won't get into this in this post, but I would like to talk about another technique that could significantly reduce the number of tests performed.
+The implementation is then straightforward: get a reference to the active `Camera` object and call `InFrustum` for each entity that has a `MeshFilter` (container for `Mesh`) component, then initiate draw calls for the ones that pass the test. There are obviously ways to optimize this process. Instead of individual draw calls, we could group entities that share the same mesh and material settings, and do instanced rendering. I won't get into that in this post, but I would like to talk about another technique that could significantly reduce the number of tests performed.
 
 ## Spatial Partitioning
 
 If a scene contains $n$ entities, we have to perform $n$ tests to obtain a set of visible entities. This has $O(n)$ time complexity, but we could do better. If you have ever attempted to solve a [LeetCode](https://leetcode.com/) problem and your $O(n)$ solution timed out for a large input, then you know that the next best thing you can do is $O(\log{n})$. To achieve that, we have to employ a divide-and-conquer technique. Currently, we have $n$ (invisible) bounding boxes in the scene, each containing an entire object. What if these boxes too were contained inside bigger boxes, and those inside even bigger ones, stacked like [Matryoshka dolls](https://en.wikipedia.org/wiki/Matryoshka_doll), up to a single huge box that contains the entire scene?
 
-An [octree](https://www.open3d.org/docs/release/tutorial/geometry/octree.html) is a data structure where each node has exactly eight children. It can be used to partition 3D space such that each axis is split in half at the origin to create eight subdivisions (octants). Each node can be further (recursively) subdivided as needed. In practice, we work with a bounded volume instead of the entire space that is large enough to contain the entire scene or the part we're interested in.
+An [octree](https://www.open3d.org/docs/release/tutorial/geometry/octree.html) is a data structure where each node has exactly eight children. It can be used to partition 3D space such that each axis is split in half at the origin to create eight subdivisions (octants). Each node can be further (recursively) subdivided as needed. In practice, we work with a bounded volume that is large enough to contain the entire scene or the part we're interested in.
 
 Initially, every object is inside the root node that is a cubic volume centered around the origin. A node stores a list of items (entities) whose bounding boxes either intersect or are fully contained by the node's volume, which is a bigger box. If the number of items in a node exceeds a certain limit, the node subdivides and distributes its items to its children. This can be implemented in various ways; for example, if no child fully contains the item it remains associated with the parent. If items are being removed, the opposite happens, that is, the child nodes collapse (merge) by giving their items back to their parent node. But, how does this help with frustum culling?
 
@@ -150,5 +150,5 @@ Without partitioning, we have to check every bounding box for intersection with 
 The following is a demonstration of frustum culling applied to a scene represented by an octree.
 
 <div class="youtube-video">
-  <iframe src="https://www.youtube.com/embed/QO2msArorrg" frameborder="0" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/QO2msArorrg" allowfullscreen></iframe>
 </div>

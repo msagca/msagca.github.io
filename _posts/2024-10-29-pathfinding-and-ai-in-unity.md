@@ -229,9 +229,8 @@ The pairings are stored in a [HashSet](https://learn.microsoft.com/en-us/dotnet/
 The agents in the scene are rendered via [DrawMeshInstanced](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Graphics.DrawMeshInstanced.html) calls, similar to how I render the trees. I will skip this part since I explained the process in my previous post. To demonstrate the things I covered in this blog post, I spawned 48 agents at random positions and let them perform the actions defined by their behaviour trees. I rendered their active paths via [Gizmos](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Gizmos.html) for better visualization. To make the scene prettier, I used tree models from the [Low Poly Tree Pack](https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-tree-pack-57866) package. The following is the recording of the legendary battles that took place in my procedurally generated map.
 
 <figure>
-    <video width="100%" preload="auto" autoplay controls loop muted>
+    <video preload="auto" autoplay controls loop muted>
         <source src="/assets/vid/battleground.webm" type="video/webm">
-        Your browser does not support the video tag.
     </video>
     <figcaption>Agents battling it out until only one remains standing</figcaption>
 </figure>

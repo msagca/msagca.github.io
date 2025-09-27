@@ -14,10 +14,10 @@ title: Home
     <span class="post-date">{{ post.date | date_to_string }}</span>
     <hr>
     {{ post.content }}
+    <hr class="solid">
   </div>
   {% endfor %}
 </div>
-<hr>
 <div class="pagination">
   {% if paginator.next_page %}
   <a class="pagination-item older" href="{{ '/' | relative_url }}page{{ paginator.next_page }}">Previous</a>

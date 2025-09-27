@@ -122,7 +122,7 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 The sequence of steps that OpenGL takes to transform **3D** shapes into **2D** images is called the **rendering pipeline**. This pipeline is designed as a streaming architecture and consists of several stages, each one requiring the output of the previous one as its input. These stages are highly specialized and can be executed in parallel on thousands of GPU cores today.
 
-> Running in parallel means that while _stage-A_ processes its new input, _stage-B_ works on A's previous output, and so on.
+> Running in parallel means that while stage-A processes its new input, stage-B works on A's previous output, and so on.
 
 ## Shaders
 
@@ -193,7 +193,7 @@ The **vertex shader** is a programmable stage in the pipeline that handles the p
 
 Vertex data we stored in the previous section will be consumed by the vertex shader. For this purpose, we need to define a vertex input for each attribute in the buffer. Since we only have one attribute, that is the position, we define one `vec3` input. It's advised to assign a location to each attribute manually (as opposed to letting OpenGL do it) so that we don't have to query the locations later. The following is a simple vertex shader that directly outputs the input position without doing any transformations.
 
-> You must specify the shader version at the top of the shader using the version directive.
+> You must specify the shader version at the top of the shader using the `#version` directive.
 
 ```glsl
 #version 330 core
@@ -1578,7 +1578,3 @@ void DebugMessageCallback(unsigned int source, unsigned int type, unsigned int i
 ```
 
 These debug messages may help you identify common issues such as buffer-target mismatches; however, there are more nuanced issues that do not necessarily generate error messages, but can only be identified visually while the application is running. Tools like [RenderDoc](https://renderdoc.org/) allow you to capture frames, step through every draw call, view GPU resources (e.g., textures), inspect pipeline stages, and visually debug meshes and vertex attributes.
-
----
-
-_To be continued..._

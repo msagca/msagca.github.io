@@ -1,23 +1,20 @@
 :root {
   --syntax-bg-highlight: #ffffcc;
-  --syntax-comment: #6c6f85;
-  --syntax-error: #d20f39;
-  --syntax-error-bg: #fce7e7;
-  --syntax-keyword: #8839ef;
-  --syntax-operator: #04a5e5;
   --syntax-comment-multiline: #179299;
-  --syntax-preprocessor: #40a02b;
-  --syntax-deleted: #d20f39;
+  --syntax-comment: #6c6f85;
   --syntax-deleted-bg: #fce7e7;
-  --syntax-inserted: #40a02b;
-  --syntax-inserted-bg: #e8f5e8;
+  --syntax-deleted: #d20f39;
+  --syntax-error-bg: #fce7e7;
+  --syntax-error: #d20f39;
+  --syntax-generic-heading: #1e66f5;
   --syntax-generic-output: #6c6f85;
   --syntax-generic-prompt: #8839ef;
-  --syntax-generic-heading: #1e66f5;
   --syntax-generic-traceback: #40a02b;
+  --syntax-inserted-bg: #e8f5e8;
+  --syntax-inserted: #40a02b;
   --syntax-keyword-type: #df8e1d;
-  --syntax-number: #fe640b;
-  --syntax-string: #d20f39;
+  --syntax-keyword: #8839ef;
+  --syntax-literal: #fe640b;
   --syntax-name-attribute: #1e66f5;
   --syntax-name-builtin: #179299;
   --syntax-name-class: #40a02b;
@@ -28,36 +25,39 @@
   --syntax-name-namespace: #179299;
   --syntax-name-tag: #1e66f5;
   --syntax-name-variable: #8839ef;
+  --syntax-number: #fe640b;
   --syntax-operator-word: #8839ef;
+  --syntax-operator: #04a5e5;
+  --syntax-preprocessor: #40a02b;
   --syntax-string-doc: #d20f39;
   --syntax-string-interpol: #d20f39;
   --syntax-string-regex: #179299;
   --syntax-string-symbol: #df8e1d;
-  --syntax-literal: #fe640b;
+  --syntax-string: #d20f39;
   --syntax-whitespace: #9ca0b0;
   --color-background-dark: #222222;
-  --color-background-light: #eeeeee;
+  --color-background-light: #ffffff;
   --color-text-code: var(--syntax-string);
   --color-text-dark: #dddddd;
   --color-text-light: #333333;
   --color-text-link: var(--syntax-string-regex);
   --color-text-muted: #444444;
   --color-text-washed: #eeeeee;
-  --font-sans: "Ubuntu Sans", sans-serif;
   --font-mono: "Ubuntu Sans Mono", monospace;
-  --font-title: "Monomakh", serif;
   --font-quote: "Fuzzy Bubbles", cursive;
-  --font-size-caption: 0.8rem;
+  --font-sans: "Ubuntu Sans", sans-serif;
+  --font-title: "Monomakh", serif;
   --font-size-base: 1rem;
+  --font-size-caption: 0.8rem;
   --font-size-social: 2rem;
   --font-size-title: 3rem;
-  --line-height-code: 1.4;
   --line-height-base: 1.5;
+  --line-height-code: 1.4;
   --spacing-xs: 0.1rem;
   --spacing-sm: 0.25rem;
   --spacing-md: 0.5rem;
   --spacing-lg: 1rem;
-  --width-border: 0.1rem;
+  --width-border: var(--spacing-xs);
   --width-sidebar: 16rem;
 }
 @media (min-width: 48rem) {
@@ -68,24 +68,21 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --syntax-bg-highlight: #45475a;
-    --syntax-comment: #6c7086;
-    --syntax-error: #f38ba8;
-    --syntax-error-bg: #302d41;
-    --syntax-keyword: #cba6f7;
-    --syntax-operator: #89dceb;
     --syntax-comment-multiline: #94e2d5;
-    --syntax-preprocessor: #a6e3a1;
-    --syntax-deleted: #f38ba8;
+    --syntax-comment: #6c7086;
     --syntax-deleted-bg: #302d41;
-    --syntax-inserted: #a6e3a1;
-    --syntax-inserted-bg: #1e2d3d;
+    --syntax-deleted: #f38ba8;
+    --syntax-error-bg: #302d41;
+    --syntax-error: #f38ba8;
+    --syntax-generic-heading: #89b4fa;
     --syntax-generic-output: #6c7086;
     --syntax-generic-prompt: #cba6f7;
-    --syntax-generic-heading: #89b4fa;
     --syntax-generic-traceback: #a6e3a1;
+    --syntax-inserted-bg: #1e2d3d;
+    --syntax-inserted: #a6e3a1;
     --syntax-keyword-type: #f9e2af;
-    --syntax-number: #fab387;
-    --syntax-string: #f38ba8;
+    --syntax-keyword: #cba6f7;
+    --syntax-literal: #fab387;
     --syntax-name-attribute: #89b4fa;
     --syntax-name-builtin: #94e2d5;
     --syntax-name-class: #a6e3a1;
@@ -96,12 +93,15 @@
     --syntax-name-namespace: #94e2d5;
     --syntax-name-tag: #89b4fa;
     --syntax-name-variable: #cba6f7;
+    --syntax-number: #fab387;
     --syntax-operator-word: #cba6f7;
+    --syntax-operator: #89dceb;
+    --syntax-preprocessor: #a6e3a1;
     --syntax-string-doc: #f38ba8;
     --syntax-string-interpol: #f38ba8;
     --syntax-string-regex: #94e2d5;
     --syntax-string-symbol: #f9e2af;
-    --syntax-literal: #fab387;
+    --syntax-string: #f38ba8;
     --syntax-whitespace: #585b70;
     --color-background-dark: #111111;
     --color-background-light: #222222;
@@ -113,3 +113,4 @@
     --color-text-washed: #eeeeee;
   }
 }
+

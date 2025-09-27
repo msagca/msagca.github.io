@@ -17,17 +17,17 @@
 }
 @media (min-width: 48rem) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     bottom: 0;
-    width: var(--width-sidebar);
-    text-align: left;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    left: 0;
     padding: var(--spacing-md);
+    position: fixed;
+    text-align: left;
+    top: 0;
+    width: var(--width-sidebar);
+    z-index: 1000;
   }
   .sidebar-sticky {
     position: static;
@@ -40,3 +40,4 @@
     padding: var(--spacing-md) var(--spacing-lg);
   }
 }
+

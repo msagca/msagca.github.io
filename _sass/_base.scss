@@ -13,12 +13,12 @@ html {
   line-height: var(--line-height-base);
 }
 body {
-  color: var(--color-text-light);
   background-color: var(--color-background-light);
-  word-wrap: break-word;
+  color: var(--color-text-light);
+  hyphens: auto;
   overflow-wrap: break-word;
   word-break: break-word;
-  hyphens: auto;
+  word-wrap: break-word;
 }
 p {
   margin: var(--spacing-md) auto;
@@ -37,24 +37,24 @@ a:focus {
 code,
 pre {
   font-family: var(--font-mono);
+  hyphens: none;
   overflow-wrap: normal;
   overflow-x: auto;
-  hyphens: none;
 }
 code {
   color: var(--color-text-code);
 }
 pre {
+  cursor: pointer;
   display: block;
+  line-height: var(--line-height-code);
   margin: var(--spacing-md) auto;
   padding: var(--spacing-sm);
-  line-height: var(--line-height-code);
   white-space: pre-wrap;
-  cursor: pointer;
 }
 pre code {
-  color: inherit;
   background: none;
+  color: inherit;
 }
 pre:hover {
   box-shadow: var(--width-border) var(--width-border) var(--color-text-code);
@@ -63,41 +63,52 @@ pre.copied {
   box-shadow: var(--width-border) var(--width-border) var(--color-text-link);
 }
 blockquote {
-  padding: var(--spacing-xs) var(--spacing-lg);
-  margin: 0 auto;
   color: var(--color-text-muted);
   font-family: var(--font-quote);
+  margin: 0 auto;
+  padding: var(--spacing-xs) var(--spacing-lg);
   position: relative;
 }
 blockquote::before {
   content: '"';
-  position: absolute;
-  left: 0;
-  top: 0;
   font-size: var(--font-size-social);
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 hr {
   border: none;
   border-top: var(--width-border) dashed var(--color-text-muted);
 }
+hr.solid {
+  border-top-style: solid;
+}
 ul,
 ol {
-  padding-left: 0;
-  margin-left: 0;
   list-style-position: inside;
+  margin-left: 0;
+  padding-left: 0;
 }
 small {
   color: var(--color-text-muted);
 }
 img,
-video {
+video,
+iframe {
+  border: none;
   display: block;
-  max-width: 100%;
   height: auto;
   margin: 0 auto;
+  max-width: 100%;
 }
 figure {
+  margin: var(--spacing-md) auto;
   text-align: center;
+}
+figure video {
+  height: auto;
+  margin: 0;
+  width: 100%;
 }
 figcaption {
   color: var(--color-text-muted);
