@@ -50,7 +50,7 @@ pre {
   line-height: var(--line-height-code);
   margin: var(--spacing-md) auto;
   padding: var(--spacing-sm);
-  white-space: pre-wrap;
+  white-space: pre;
 }
 pre code {
   background: none;

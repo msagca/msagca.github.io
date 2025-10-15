@@ -1132,7 +1132,7 @@ auto forward = glm::vector3(0.0f, 0.0f, -1.0f);
 auto view = glm::lookAt(position, position + forward, up);
 ```
 
-It would be nice if we could move the camera with key presses. Remember that GLFW can also receive input events — we can read the WASD keys to update the camera position. `glfwGetKey` is the function we call to read key status, which takes two inputs: the `window` pointer, and a key ID. The return value is compared against a predefined action, e.g., `GLFW_PRESS`, for confirmation.
+It would be nice if we could move the camera with key presses. Remember that GLFW can also receive input events — we can read the WASD keys to update the camera position. `glfwGetKey` is the function we call to read key state, which takes two inputs: the `window` pointer, and a key ID. The return value is compared against a predefined action, e.g., `GLFW_PRESS`, for confirmation.
 
 > Despite not being shown explicitly in some code blocks, if something has to be done every frame, e.g., reading inputs, it goes in the render loop.
 
