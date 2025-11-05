@@ -1,7 +1,12 @@
 function fallbackCopy(text, targetElement) {
-  navigator.clipboard.writeText(text).then(() => {
-    targetElement.classList.add("copied"); setTimeout(() => targetElement.classList.remove("copied"), 400);
-  }, (err) => { console.error("Copy failed", err); }
+  navigator.clipboard.writeText(text).then(
+    () => {
+      targetElement.classList.add("copied");
+      setTimeout(() => targetElement.classList.remove("copied"), 400);
+    },
+    (err) => {
+      console.error("Copy failed", err);
+    },
   );
 }
 function initializeCodeCopy() {
@@ -37,3 +42,4 @@ if (document.readyState === "loading") {
 } else {
   initializeCodeCopy();
 }
+

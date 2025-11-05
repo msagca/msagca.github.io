@@ -141,7 +141,8 @@
   color: var(--syntax-literal);
 }
 .css .o,
-.css .o+.nt,
-.css .nt+.nt {
+.css .o + .nt,
+.css .nt + .nt {
   color: var(--syntax-operator);
 }
+

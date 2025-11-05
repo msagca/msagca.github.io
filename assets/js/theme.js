@@ -9,3 +9,4 @@
   mq.addEventListener("change", applyTheme);
   applyTheme();
 })();
+

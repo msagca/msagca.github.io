@@ -226,11 +226,8 @@ IEnumerator Fight (TransformPair pair) {
 
 The pairings are stored in a [HashSet](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=net-8.0) called `battles` to avoid duplicates. However, representing the fighting pairs as a [Tuple](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples) would result in `(a, b)` and `(b, a)` being treated as different battles, where `a` and `b` are `Transform` instances. To prevent this, I defined a new type called `TransformPair` that produces the same hash code for the same pair regardless of the order. Once the loser is decided, its entry is removed from the dictionary `agents`, then it can be destroyed or returned to its pool if object pooling is employed (e.g., if there is re-spawn mechanic).
 
-The agents in the scene are rendered via [DrawMeshInstanced](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Graphics.DrawMeshInstanced.html) calls, similar to how I render the trees. I will skip this part since I explained the process in my previous post. To demonstrate the things I covered in this blog post, I spawned 48 agents at random positions and let them perform the actions defined by their behaviour trees. I rendered their active paths via [Gizmos](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Gizmos.html) for better visualization. To make the scene prettier, I used tree models from the [Low Poly Tree Pack](https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-tree-pack-57866) package. The following is the recording of the legendary battles that took place in my procedurally generated map.
+To demonstrate the things I covered in this blog post, I spawned 48 agents at random positions and let them perform the actions defined by their behaviour trees. To make the scene prettier, I used tree models from the [Low Poly Tree Pack](https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-tree-pack-57866) package. The agents in the following scene are rendered via [DrawMeshInstanced](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Graphics.DrawMeshInstanced.html) calls, similar to how I render the trees.
 
-<figure>
-    <video preload="auto" autoplay controls loop muted>
-        <source src="/assets/vid/battleground.webm" type="video/webm">
-    </video>
-    <figcaption>Agents battling it out until only one remains standing</figcaption>
-</figure>
+<div class="youtube-video">
+  <iframe src="https://www.youtube.com/embed/or_LEhPBYHE" allowfullscreen></iframe>
+</div>
