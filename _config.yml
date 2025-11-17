@@ -1,8 +1,10 @@
 author:
   name: "Mustafa Said Ağca"
   social:
-    github: "github.com/msagca"
-    linkedin: "linkedin.com/in/msagca"
+    github: "https://github.com/msagca"
+    itch-io: "https://msagca.itch.io"
+    linkedin: "https://linkedin.com/in/msagca"
+    unity: "https://discussions.unity.com/u/msagca"
 title: "msagca"
 description: "A blog about programming and game development"
 url: "https://msagca.github.io"

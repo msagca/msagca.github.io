@@ -52,18 +52,12 @@
   --font-size-social: 2rem;
   --font-size-title: 3rem;
   --line-height-base: 1.5;
-  --line-height-code: 1.4;
   --spacing-xs: 0.1rem;
   --spacing-sm: 0.25rem;
   --spacing-md: 0.5rem;
   --spacing-lg: 1rem;
   --width-border: var(--spacing-xs);
   --width-sidebar: 16rem;
-}
-@media (min-width: 48rem) {
-  :root {
-    --font-size-base: 1.15rem;
-  }
 }
 @media (prefers-color-scheme: dark) {
   :root {

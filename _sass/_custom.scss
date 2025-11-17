@@ -1,53 +1,53 @@
 @use "variables";
-.lead {
-  font-family: var(--font-quote);
+.layout {
+  display: flex;
+  flex-direction: column;
 }
-.content,
-.container {
-  margin: 0 auto;
-  max-width: 100%;
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   padding: var(--spacing-md);
 }
 .sidebar {
+  align-items: center;
   background-color: var(--color-background-dark);
   color: var(--color-text-dark);
-  position: relative;
-  text-align: center;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  justify-content: space-between;
+  padding: var(--spacing-md);
 }
 .sidebar a {
   color: var(--color-text-dark);
 }
-.sidebar-about h1 {
+.sidebar h1 {
   font-family: var(--font-title);
   font-size: var(--font-size-title);
-  margin: 0;
 }
 .sidebar-social {
   display: flex;
   flex-direction: row;
   font-size: var(--font-size-social);
-  justify-content: center;
 }
-.sidebar-social .social-link {
-  display: flex;
+.social-link {
   text-decoration: none;
 }
-.sidebar-social .social-link:hover {
+.social-link:hover {
   color: var(--color-text-washed);
 }
 .related-posts {
   list-style: none;
 }
-.related-posts li a {
-  color: var(--color-text-light);
+.post {
+  display: flex;
+  flex-direction: column;
 }
-.related-posts li a:hover {
-  color: var(--color-text-link);
-}
-.page-title,
-.post-title {
-  margin: 0;
+.post-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .page-title a,
 .post-title a {
@@ -55,27 +55,20 @@
 }
 .post-date {
   color: var(--color-text-muted);
-  display: block;
 }
 .pagination {
   color: var(--color-text-muted);
-  overflow: hidden;
-  text-align: center;
-}
-.pagination-item {
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .youtube-video {
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 1.5rem auto;
+  width: 100%;
 }
 .youtube-video iframe {
   height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
   width: 100%;
 }
 .MathJax_Display,
@@ -83,4 +76,29 @@
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+}
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+  }
+  .sidebar {
+    flex-direction: column;
+    height: 100vh;
+    justify-content: flex-end;
+    padding: var(--spacing-lg);
+    position: sticky;
+    top: 0;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  .sidebar h1 {
+    width: 100%;
+  }
+  .sidebar-social {
+    width: 100%;
+  }
+  .content {
+    flex: 1;
+    padding: var(--spacing-lg);
+  }
 }

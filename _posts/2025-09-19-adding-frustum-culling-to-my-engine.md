@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Frustum Culling in My Engine
+title: Adding Frustum Culling to My Engine
 ---
 
 Even though not every object in a 3D scene appears on the screen, their data is still sent to the GPU for processing, only to be discarded later in the rendering pipeline. This increases the number of draw calls needed to render the scene, which adds extra latency and processing costs. However, we could just pick the objects that lie inside the viewing volume of the camera and send only the data associated with this subset of entities to the GPU. This is what **Frustum Culling** does, and it can dramatically improve the performance in many applications.
@@ -11,7 +11,7 @@ Frustum culling operates by iterating over a list of objects (entities) in the a
 
 ## Bounding Box
 
-A bounding box is a 3D volume that contains all the vertices of a mesh. Ideally, it should tightly contain the mesh so it could be accurately determined if the object intersects the frustum. An axis aligned bounding box (AABB), where each face is parallel to either one of the $xz$, $xy$ or $yz$ plane, is good enough in many cases. Though, there could be cases such as a model of the [Leaning Tower of Pisa](https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa) that might require special handling. In my AABB implementation, I use two points that are the corners with the minimum and maximum coordinate values. These points are given in model space and are valid for the original scale.
+A bounding box is a 3D volume that contains all the vertices of a mesh. Ideally, it should tightly contain the mesh so it could be accurately determined if the object intersects the frustum. An axis aligned bounding box (AABB), where each face is parallel to either one of the _xz_, _xy_ or _yz_ plane, is good enough in many cases. Though, there could be cases such as a model of the [Leaning Tower of Pisa](https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa) that might require special handling. In my AABB implementation, I use two points that are the corners with the minimum and maximum coordinate values. These points are given in model space and are valid for the original scale.
 
 > In the following code, the definitions should either be marked `inline` or put in a separate (source) file to prevent multiple definition errors.
 
@@ -121,7 +121,7 @@ bool Plane::OnPositiveSide(const BoundingBox& bounds) const {
 }
 ```
 
-Being on the positive side of one plane is not enough for a point to be considered inside the frustum. For example, if a point has a large $z$ coordinate, it may be on the positive side of the near plane, but it might end up in the negative side of the far plane, whose normal is towards the origin. It's clear that a point must be on the positive side of each plane to be in the camera's view volume. Hence, the `InFrustum` method will return `false` if any one of those 6 checks fails.
+Being on the positive side of one plane is not enough for a point to be considered inside the frustum. For example, if a point has a large _z_ coordinate, it may be on the positive side of the near plane, but it might end up in the negative side of the far plane, whose normal is towards the origin. It's clear that a point must be on the positive side of each plane to be in the camera's view volume. Hence, the `InFrustum` method will return `false` if any one of those 6 checks fails.
 
 ```cpp
 bool Frustum::InFrustum(const BoundingBox& bounds) const {
@@ -137,13 +137,13 @@ The implementation is then straightforward: get a reference to the active `Camer
 
 ## Spatial Partitioning
 
-If a scene contains $n$ entities, we have to perform $n$ tests to obtain a set of visible entities. This has $O(n)$ time complexity, but we could do better. If you have ever attempted to solve a [LeetCode](https://leetcode.com/) problem and your $O(n)$ solution timed out for a large input, then you know that the next best thing you can do is $O(\log{n})$. To achieve that, we have to employ a divide-and-conquer technique. Currently, we have $n$ (invisible) bounding boxes in the scene, each containing an entire object. What if these boxes too were contained inside bigger boxes, and those inside even bigger ones, stacked like [Matryoshka dolls](https://en.wikipedia.org/wiki/Matryoshka_doll), up to a single huge box that contains the entire scene?
+If a scene contains _n_ entities, we have to perform _n_ tests to obtain a set of visible entities. This has $O(n)$ time complexity, but we could do better. If you have ever attempted to solve a [LeetCode](https://leetcode.com/) problem and your $O(n)$ solution timed out for a large input, then you know that the next best thing you can do is $O(\log{n})$. To achieve that, we have to employ a divide-and-conquer technique. Currently, we have _n_ (invisible) bounding boxes in the scene, each containing an entire object. What if these boxes too were contained inside bigger boxes, and those inside even bigger ones, stacked like [Matryoshka dolls](https://en.wikipedia.org/wiki/Matryoshka_doll), up to a single huge box that contains the entire scene?
 
 An [octree](https://www.open3d.org/docs/release/tutorial/geometry/octree.html) is a data structure where each node has exactly eight children. It can be used to partition 3D space such that each axis is split in half at the origin to create eight subdivisions (octants). Each node can be further (recursively) subdivided as needed. In practice, we work with a bounded volume that is large enough to contain the entire scene or the part we're interested in.
 
 Initially, every object is inside the root node that is a cubic volume centered around the origin. A node stores a list of items (entities) whose bounding boxes either intersect or are fully contained by the node's volume, which is a bigger box. If the number of items in a node exceeds a certain limit, the node subdivides and distributes its items to its children. This can be implemented in various ways; for example, if no child fully contains the item it remains associated with the parent. If items are being removed, the opposite happens, that is, the child nodes collapse (merge) by giving their items back to their parent node. But, how does this help with frustum culling?
 
-> The upper limit for subdivision should be set proportional to the node volume — child nodes shall have lower limits, e.g., $1/8$ of those of the parent node.
+> The upper limit for subdivision should be set proportional to the node volume — child nodes shall have lower limits, e.g., 1/8 of those of the parent node.
 
 Without partitioning, we have to check every bounding box for intersection with the frustum to determine the objects to be culled. However, after just one subdivision, we put those objects into 8 separate boxes (9 including the root node). If any one of these big boxes does not intersect with the camera, then this means that the objects inside it are out of the view, and there is no need to individually test them. With deeper hierarchies, and optimal limits, the search space can be reduced even further.
 

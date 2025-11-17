@@ -148,7 +148,7 @@ The pipeline structure is defined by standards bodies, e.g., Khronos Group, and 
 
 A **vertex** is a collection of attributes associated with a point in space. These attributes can include position, normal direction, texture coordinates, tangent vector, color, etc.
 
-Since this is the first stage in the pipeline, vertex data must be provided by the application. The vertex data can be as simple as an array of positions where each element is a `float` corresponding to a value on one of three axes $(x,y,z)$. For example, a triangle formed by vertices $A$, $B$, and $C$ can be defined as follows:
+Since this is the first stage in the pipeline, vertex data must be provided by the application. The vertex data can be as simple as an array of positions where each element is a `float` corresponding to a value on one of three axes $(x,y,z)$. For example, a triangle formed by vertices _A_, _B_, and _C_ can be defined as follows:
 
 ```cpp
 float vertices[] = {
@@ -159,7 +159,7 @@ float vertices[] = {
 };
 ```
 
-> How will OpenGL know this array represents a triangle and not two lines ($AB$, $BC$, and no $CA$)? We will tell OpenGL how to connect these points when initiating draw calls.
+> How will OpenGL know this array represents a triangle and not two lines (_AB_, _BC_, and no _CA_)? We will tell OpenGL how to connect these points when initiating draw calls.
 
 Sending data from CPU to GPU memory is relatively slow, so we want to send the data once and keep it in GPU memory for as long as we need it. We can store large amounts of vertex data in memory via [Vertex Buffer Objects (VBO)](https://www.khronos.org/opengl/wiki/Vertex_Specification#Vertex_Buffer_Object). We can create such a buffer by calling `glGenBuffers` which assigns an ID to this buffer so we can refer to it later.
 
@@ -364,7 +364,7 @@ In graphics applications, some calculations can be done more efficiently and are
 
 ## Vector Operations
 
-A **vector** ($\vec{v}$) is a 1D array of numerical components. It can be of size $n$, which is the number of components the vector has. In computer graphics, we usually use vectors of size up to 4.
+A **vector** ($\vec{v}$) is a 1D array of numerical components. It can be of size _n_, which is the number of components the vector has. In computer graphics, we usually use vectors of size up to 4.
 
 $$
 \vec{a} =
@@ -375,9 +375,9 @@ a_3
 \end{bmatrix}
 $$
 
-A **vector space** ($V$) defines a set of axioms (e.g., commutativity, associativity, etc.), and a set of vector operations (e.g., addition, multiplication, etc.) over a field (e.g., real numbers ($\mathbb{R}$)) in algebraic terms. A Euclidean space satisfies all the axioms of a vector space over the real numbers.
+A **vector space** (_V_) defines a set of axioms (e.g., commutativity, associativity, etc.), and a set of vector operations (e.g., addition, multiplication, etc.) over a field (e.g., real numbers ($\mathbb{R}$)) in algebraic terms. A Euclidean space satisfies all the axioms of a vector space over the real numbers.
 
-We can add or subtract a scalar ($c$) to or from a vector, or multiply or divide a vector by a scalar by simply applying this operation to each component of the vector.
+We can add or subtract a scalar (_c_) to or from a vector, or multiply or divide a vector by a scalar by simply applying this operation to each component of the vector.
 
 $$
 c\vec{a} = c
@@ -488,7 +488,7 @@ $$
 
 ## Matrix Operations
 
-A **matrix** ($M$) is a 2D array of elements, where each element is identified by its row and column indices. If a matrix has $m$ rows and $n$ columns, it's an $mxn$ matrix, and these are called the matrix dimensions. Matrices can be used to solve systems of linear equations; for example, one matrix can store the coefficients while another stores the variables.
+A **matrix** (_M_) is a 2D array of elements, where each element is identified by its row and column indices. If a matrix has _m_ rows and _n_ columns, it's an _mxn_ matrix, and these are called the matrix dimensions. Matrices can be used to solve systems of linear equations; for example, one matrix can store the coefficients while another stores the variables.
 
 > If both dimensions are the same, then the matrix is called a **square matrix**.
 
@@ -514,7 +514,7 @@ A + B =
 \end{bmatrix}
 $$
 
-Two matrices, $A$ and $B$, can be multiplied (in this order) if the number of columns in $A$ is equal to the number of rows in $B$. Every element in a row of $A$ is multiplied by the corresponding element in a column of $B$. Then, these products are summed up to obtain one element in the resulting matrix $C$. The result obtained from processing row $i$ of $A$ and column $j$ of $B$ will end up in the $i^{th}$ row and $j^{th}$ column of $C$. This implies that the resulting matrix has the same number of rows as $A$ and the same number of columns as $B$.
+Two matrices, _A_ and _B_, can be multiplied (in this order) if the number of columns in _A_ is equal to the number of rows in _B_. Every element in a row of _A_ is multiplied by the corresponding element in a column of _B_. Then, these products are summed up to obtain one element in the resulting matrix _C_. The result obtained from processing row _i_ of _A_ and column _j_ of _B_ will end up in the $i^{th}$ row and $j^{th}$ column of _C_. This implies that the resulting matrix has the same number of rows as _A_ and the same number of columns as _B_.
 
 $$
 AB =
@@ -540,7 +540,7 @@ AB =
 \end{bmatrix}
 $$
 
-> Matrix multiplication is not commutative, that is, $AB$ is not the same as $BA$.
+> Matrix multiplication is not commutative, that is, _AB_ is not the same as _BA_.
 
 $$
 BA =
@@ -566,7 +566,7 @@ BA =
 \end{bmatrix}
 $$
 
-When a matrix is **transposed**, its rows become its columns and vice versa. If $M$ has the dimensions $mxn$, $M^T$ (transpose of $M$) has a dimension of $nxm$.
+When a matrix is **transposed**, its rows become its columns and vice versa. If _M_ has the dimensions _mxn_, $M^T$ (transpose of _M_) has a dimension of _nxm_.
 
 $$
 A^T =
@@ -610,11 +610,11 @@ $$
 
 ## Transformations
 
-A vector is basically an $nx1$ matrix, if represented as a **column vector** (i.e., components appear in the same column); hence, it can be multiplied by an $mxn$ matrix ($M\vec{v}$). Through matrix multiplication, a vector can be transformed into another vector. We use matrices for transforming vectors, because they allow us to combine multiple transformations into a single matrix, which we'll see later on.
+A vector is basically an _nx1_ matrix, if represented as a **column vector** (i.e., components appear in the same column); hence, it can be multiplied by an _mxn_ matrix ($M\vec{v}$). Through matrix multiplication, a vector can be transformed into another vector. We use matrices for transforming vectors, because they allow us to combine multiple transformations into a single matrix, which we'll see later on.
 
 > GPUs are very good at multiplying thousands of matrices in parallel.
 
-An **identity matrix** is an $nxn$ matrix that has $1s$ on its **main diagonal** (from top-left to bottom-right) and $0s$ elsewhere. When you multiply any compatible matrix or vector with it, you get the original matrix or vector back. So, it's essentially a **no transform**.
+An **identity matrix** is an _nxn_ matrix that has _1s_ on its **main diagonal** (from top-left to bottom-right) and _0s_ elsewhere. When you multiply any compatible matrix or vector with it, you get the original matrix or vector back. So, it's essentially a **no transform**.
 
 $$
 IA = \begin{bmatrix}
@@ -643,7 +643,7 @@ We can change the length (and direction) of a vector by scaling it. This is achi
 
 > A positive uniform scale operation does not change a vector's direction. If it's negative, then the vector points the opposite way.
 
-We would like to form a scale matrix ($S$) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
+We would like to form a scale matrix (_S_) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
 
 $$
 x' = S_x \cdot x \\
@@ -651,7 +651,7 @@ y' = S_y \cdot y \\
 z' = S_z \cdot z
 $$
 
-Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a $3x1$ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a $3x3$ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
+Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a _3x1_ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a _3x3_ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
 
 $$
 x' = S_x \cdot x + 0 \cdot y + 0 \cdot z \\
@@ -691,13 +691,13 @@ $$
 
 Wait... can we obtain $x+T_x$ through matrix multiplication? This seems impossible... and it is, in the same dimensional space. The reason is that matrix multiplication is a **linear transformation**; but, translation is an **affine transformation**.
 
-A transformation ($L$) is **linear** if it satisfies the following condition, where $a$ and $b$ are scalars:
+A transformation (_L_) is **linear** if it satisfies the following condition, where _a_ and _b_ are scalars:
 
 $$
 L(a\vec{u} + b\vec{v}) = aL(\vec{u}) + bL(\vec{v})
 $$
 
-An **affine** transformation ($A$) has the following form, where $L$ is the linear part, and $\vec{c}$ is a constant vector (e.g., translation vector):
+An **affine** transformation (_A_) has the following form, where _L_ is the linear part, and $\vec{c}$ is a constant vector (e.g., translation vector):
 
 $$
 A(\vec{u}) = L\vec{u} + \vec{c}
@@ -738,11 +738,11 @@ z \\
 \end{bmatrix}
 $$
 
-This operation is valid because the translation matrix ($T$) has a dimension of $3x4$ and it is multiplied by a $4x1$ vector, and the resulting vector is of size $3x1$. More importantly, it gives the correct result. So, we've finally obtained a translation matrix by introducing a new dimension.
+This operation is valid because the translation matrix (_T_) has a dimension of _3x4_ and it is multiplied by a _4x1_ vector, and the resulting vector is of size _3x1_. More importantly, it gives the correct result. So, we've finally obtained a translation matrix by introducing a new dimension.
 
 > When a 3D point is represented in a 4D projective space, the new coordinate system is referred to as **homogenous coordinates**.
 
-There is a problem though. The $w$ component we added to our original vector makes it impossible to perform multiplications with our scale matrix since the dimensions $3x3$ and $4x1$ are not compatible ($3\neq 4$). As a workaround, we could add one extra column of $0s$ to our scale matrix:
+There is a problem though. The _w_ component we added to our original vector makes it impossible to perform multiplications with our scale matrix since the dimensions _3x3_ and _4x1_ are not compatible ($3\neq 4$). As a workaround, we could add one extra column of _0s_ to our scale matrix:
 
 $$
 \begin{bmatrix}
@@ -763,9 +763,9 @@ S_z \cdot z
 \end{bmatrix}
 $$
 
-This seems to work, but we do not just perform one transformation on a vector and call it a day; it's often necessary to apply a series of transformations to the same vector. Let's say we intend to apply a translation next, can we do it? Notice that we no longer have a $4x1$ vector; we have lost the $w$ component, which makes it impossible to perform this operation. It's clear that we have to preserve the 4D representation while operating on the vector.
+This seems to work, but we do not just perform one transformation on a vector and call it a day; it's often necessary to apply a series of transformations to the same vector. Let's say we intend to apply a translation next, can we do it? Notice that we no longer have a _4x1_ vector; we have lost the _w_ component, which makes it impossible to perform this operation. It's clear that we have to preserve the 4D representation while operating on the vector.
 
-What dimensions does the scale matrix need to have to produce a $4x1$ vector when multiplied by a $4x1$ vector? Yes, the answer is $4x4$. But, what values should we have in this new row? The $w$ component of the result must be 1, which suggests $(0,0,0,1)$.
+What dimensions does the scale matrix need to have to produce a _4x1_ vector when multiplied by a _4x1_ vector? Yes, the answer is _4x4_. But, what values should we have in this new row? The _w_ component of the result must be 1, which suggests $(0,0,0,1)$.
 
 $$
 \begin{bmatrix}
@@ -865,7 +865,7 @@ z \\
 \end{bmatrix}
 $$
 
-It the vector was represented as a row vector, then the multiplication would be done left to right in reverse order, i.e., we would take the transpose of the transformation chain: $(TS\vec{v})^T=\vec{v}^TS^TT^T$. Notice that the vector dimensions become $1x4$, and the transform matrices are of size $4x4$, which explains the need to reverse the order to make them compatible for multiplication.
+It the vector was represented as a row vector, then the multiplication would be done left to right in reverse order, i.e., we would take the transpose of the transformation chain: $(TS\vec{v})^T=\vec{v}^TS^TT^T$. Notice that the vector dimensions become _1x4_, and the transform matrices are of size _4x4_, which explains the need to reverse the order to make them compatible for multiplication.
 
 $$
 \begin{bmatrix}
@@ -896,7 +896,7 @@ $$
 
 ### Rotation
 
-One way to represent rotations is by using three separate rotations around coordinate axes, applied in a specific sequence. For example, we first rotate around $x$ by $\alpha$, then around $y$ by $\beta$, and finally around $z$ by $\gamma$. These are called **Euler angles**. In different industries, these rotations might have different names; for example, in avionics, rotations around $x$, $y$ and $z$ are called **pitch**, **yaw** and **roll**, respectively, given that $y$ is up. The following are the most common rotation matrices, derived for the right-handed basis [orientation](<https://en.wikipedia.org/wiki/Orientation_(vector_space)>).
+One way to represent rotations is by using three separate rotations around coordinate axes, applied in a specific sequence. For example, we first rotate around _x_ by $\alpha$, then around _y_ by $\beta$, and finally around _z_ by $\gamma$. These are called **Euler angles**. In different industries, these rotations might have different names; for example, in avionics, rotations around _x_, _y_ and _z_ are called **pitch**, **yaw** and **roll**, respectively, given that _y_ is up. The following are the most common rotation matrices, derived for the right-handed basis [orientation](<https://en.wikipedia.org/wiki/Orientation_(vector_space)>).
 
 $$
 R_z R_y R_x =
@@ -932,7 +932,7 @@ To avoid gimbal lock, we could limit the movement of the middle axis, and in som
 
 #### Algebraic Explanation of Gimbal Lock
 
-Let's say we have rotated around the $y$-axis by ${90^\circ}$, then the transformation becomes:
+Let's say we have rotated around the _y_-axis by ${90^\circ}$, then the transformation becomes:
 
 $$
 \begin{bmatrix}
@@ -1070,7 +1070,7 @@ A transformation is typically defined per object — it applies to all vertices 
 
 > Uniform variables are global to the program object; if both vertex and fragment shaders define the same uniform, the linker treats them as referring to the same data.
 
-In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we represent the position in homogenous coordinates so that it's compatible with the matrix, and the $w$ component is `1.0` since this is a position vector.
+In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we represent the position in homogenous coordinates so that it's compatible with the matrix, and the _w_ component is `1.0` since this is a position vector.
 
 ```glsl
 #version 330 core
@@ -1095,11 +1095,11 @@ In most 3D applications, we define a few different coordinate spaces (or frames)
 
 The use of multiple spaces requires us to apply a sequence of transformations to obtain the final (screen) position. However, they make it easier to selectively update any of the transform matrices. For example, if a 3D scene contains multiple cameras, and we want to give the user the ability to switch between them, then we only need to update the view matrix and can keep the rest.
 
-The matrix that transforms a point defined in an object's local frame to a point in the world frame is called the **model** matrix, and it's obtained the same way we constructed the `transform` matrix in the previous chapter. The matrix that moves points in the world frame to the camera's local frame is called the **view** matrix. The process to construct a view matrix is a bit different because of how we represent a camera in computer graphics. Unlike object, world and view spaces, clip space does not define a coordinate frame — it defines a bounded volume. The coordinates in the clip space are only meaningful relative to the $w$ component, and their values are bounded by it. The matrix that transforms view space to clip space is called the **projection** matrix. Once everything is in clip space, an operation called **perspective division** maps clip space to NDC space.
+The matrix that transforms a point defined in an object's local frame to a point in the world frame is called the **model** matrix, and it's obtained the same way we constructed the `transform` matrix in the previous chapter. The matrix that moves points in the world frame to the camera's local frame is called the **view** matrix. The process to construct a view matrix is a bit different because of how we represent a camera in computer graphics. Unlike object, world and view spaces, clip space does not define a coordinate frame — it defines a bounded volume. The coordinates in the clip space are only meaningful relative to the _w_ component, and their values are bounded by it. The matrix that transforms view space to clip space is called the **projection** matrix. Once everything is in clip space, an operation called **perspective division** maps clip space to NDC space.
 
 ## Camera
 
-View space can be defined as the camera's coordinate frame. GLM provides `glm::lookAt` to calculate the view matrix, which accepts three inputs: `eye` (camera position in world space), `center` (target position in world space), and `up` (positive $y$ direction in world space). GLM internally calculates a **forward** ($z$) vector by subtracting the camera position from the target position. Then, it obtains a **right** ($x$) vector by taking the cross product of the forward and up vectors. Because the provided up vector might not be orthogonal to both the forward and right vectors, GLM calculates a local **up** ($y$) vector by taking the cross product of these two vectors. The final three direction vectors with the camera at the origin constitute a new coordinate frame.
+View space can be defined as the camera's coordinate frame. GLM provides `glm::lookAt` to calculate the view matrix, which accepts three inputs: `eye` (camera position in world space), `center` (target position in world space), and `up` (positive _y_ direction in world space). GLM internally calculates a **forward** (_z_) vector by subtracting the camera position from the target position. Then, it obtains a **right** (_x_) vector by taking the cross product of the forward and up vectors. Because the provided up vector might not be orthogonal to both the forward and right vectors, GLM calculates a local **up** (_y_) vector by taking the cross product of these two vectors. The final three direction vectors with the camera at the origin constitute a new coordinate frame.
 
 ```cpp
 static constexpr glm::vec3 WORLD_UP = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -1121,7 +1121,7 @@ auto translate = glm::translate(glm::mat4(1.0f), -position);
 auto view = rotate * translate;
 ```
 
-To make the camera the origin point of this new coordinate frame, we apply a translation that is equal to the negative of the `position` vector — their sum is $(0,0,0)$. OpenGL uses the right-handed coordinate system, and expects the camera to look along the negative $z$-axis in view space, i.e., objects in front of the camera should have negative $z$ coordinates. As a result, what's considered "forward" in world space should map to negative $z$ in view space. To achieve this, we negate the `forward` vector when constructing the rotation matrix, regardless of its world space direction. Also, notice that translation is applied first, then rotation. This is because we want to rotate objects around the camera, not the world origin.
+To make the camera the origin point of this new coordinate frame, we apply a translation that is equal to the negative of the `position` vector — their sum is $(0,0,0)$. OpenGL uses the right-handed coordinate system, and expects the camera to look along the negative _z_-axis in view space, i.e., objects in front of the camera should have negative _z_ coordinates. As a result, what's considered "forward" in world space should map to negative _z_ in view space. To achieve this, we negate the `forward` vector when constructing the rotation matrix, regardless of its world space direction. Also, notice that translation is applied first, then rotation. This is because we want to rotate objects around the camera, not the world origin.
 
 ### Camera Movement
 
@@ -1163,9 +1163,9 @@ while (!glfwWindowShouldClose(window)) {
 }
 ```
 
-Even though we can move on the $xz$-plane, we are currently stuck with the same camera orientation — basis vectors do not change. To turn around, we would need to update the forward vector, and the others accordingly. Since we are talking about rotations, we could use Euler angles to represent them. We can use the avionics terms to describe the rotations: pitch, yaw, and roll. We will bind these to mouse movements. However, a mouse moves on a plane, so a roll movement is not possible. Front-back movement can represent pitch, and left-right movement can be interpreted as yaw. We can achieve $360^\circ$ coverage with combinations of pitch and yaw values.
+Even though we can move on the _xz_-plane, we are currently stuck with the same camera orientation — basis vectors do not change. To turn around, we would need to update the forward vector, and the others accordingly. Since we are talking about rotations, we could use Euler angles to represent them. We can use the avionics terms to describe the rotations: pitch, yaw, and roll. We will bind these to mouse movements. However, a mouse moves on a plane, so a roll movement is not possible. Front-back movement can represent pitch, and left-right movement can be interpreted as yaw. We can achieve $360^\circ$ coverage with combinations of pitch and yaw values.
 
-Counter-clockwise rotations are considered positive in OpenGL. We usually represent rotations in radians, which is the format expected by GLM. A rotation that makes an angle $\beta$ (`yaw`) around the $y$-axis has a projection along the $x$-axis with length $\cos{\beta}$, and along the $z$-axis with length $\sin{\beta}$. Similarly, a rotation by an angle $\alpha$ (`pitch`) around the $x$-axis has a projection on the $xz$-plane with length $\cos{\alpha}$, and along the $y$-axis with length $\sin{\alpha}$. If we combine these, we obtain the following equations for the components of the `forward` vector.
+Counter-clockwise rotations are considered positive in OpenGL. We usually represent rotations in radians, which is the format expected by GLM. A rotation that makes an angle $\beta$ (`yaw`) around the _y_-axis has a projection along the _x_-axis with length $\cos{\beta}$, and along the _z_-axis with length $\sin{\beta}$. Similarly, a rotation by an angle $\alpha$ (`pitch`) around the _x_-axis has a projection on the _xz_-plane with length $\cos{\alpha}$, and along the _y_-axis with length $\sin{\alpha}$. If we combine these, we obtain the following equations for the components of the `forward` vector.
 
 ```cpp
 forward.x = cos(yaw) * cos(pitch);
@@ -1182,7 +1182,7 @@ up = glm::normalize(glm::cross(right, forward));
 
 Remember that we can register callbacks for input events with GLFW during initialization. We can move the update logic related to camera axes into the cursor position callback. We will assume that they are defined globally, and are accessible in this function. In a serious project, we would need to re-structure this code.
 
-In the following callback function, we calculate the difference in mouse position between calls, then scale it with a sensitivity term, and finally add the horizontal ($x$) difference to `yaw` and the vertical ($y$) difference to `pitch`. The $y$ difference is negated because screen coordinates range from top to bottom. Also, if you look at the calculation of the `forward` vector again, you'll see that at pitch angles close to $\pm90^\circ$, both $x$ and $z$ components approach 0 while $y$ goes to 1, resulting in the `forward` vector aligning with the `up` vector. Consequently, the cross product used to calculate the `right` vector becomes unstable, oscillating near $(0,0,0)$, which causes sudden $180^\circ$ flips (i.e., "up" becomes "down" and vice versa). Hence, it's advised to limit the pitch to some safe range like $[-89^\circ,89^\circ]$.
+In the following callback function, we calculate the difference in mouse position between calls, then scale it with a sensitivity term, and finally add the horizontal (_x_) difference to `yaw` and the vertical (_y_) difference to `pitch`. The _y_ difference is negated because screen coordinates range from top to bottom. Also, if you look at the calculation of the `forward` vector again, you'll see that at pitch angles close to $\pm90^\circ$, both _x_ and _z_ components approach 0 while _y_ goes to 1, resulting in the `forward` vector aligning with the `up` vector. Consequently, the cross product used to calculate the `right` vector becomes unstable, oscillating near $(0,0,0)$, which causes sudden $180^\circ$ flips (i.e., "up" becomes "down" and vice versa). Hence, it's advised to limit the pitch to some safe range like $[-89^\circ,89^\circ]$.
 
 > We change the cursor mode to `GLFW_CURSOR_DISABLED` during initialization so that the cursor becomes invisible and can't leave the window, while allowing for unlimited mouse movement (i.e., position is no longer clamped to screen edges).
 
@@ -1220,13 +1220,13 @@ int main() {
 
 ## Projection
 
-Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The $w$ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, $z$ already represents depth (distance from camera) in view space, why do we need to use the $w$ component? After applying the projection, $z$ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space $z$ value into $w$. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, $w$ remains 1 throughout the pipeline. Now, let's explore these two types of projection.
+Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The _w_ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, _z_ already represents depth (distance from camera) in view space, why do we need to use the _w_ component? After applying the projection, _z_ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space _z_ value into _w_. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, _w_ remains 1 throughout the pipeline. Now, let's explore these two types of projection.
 
 ### Orthographic Projection
 
-This type of projection is an affine transformation — it preserves straight lines, and ratios along a line (e.g., midpoints stay midpoints). It can be expressed as a combination of a linear transformation and a translation in Cartesian coordinates. To create an orthographic projection matrix, we first define a cubic viewing volume (a **cuboid**) bounded by six axis-aligned planes: near ($n$), far ($f$), left ($l$), right ($r$), bottom ($b$), and top ($t$). Then, we calculate the scaling factors and translation amounts that map each point in this volume to clip space ($[l, r][b, t][n, f] \rightarrow [-1,1]^3$), which is equal to NDC when using orthographic projection.
+This type of projection is an affine transformation — it preserves straight lines, and ratios along a line (e.g., midpoints stay midpoints). It can be expressed as a combination of a linear transformation and a translation in Cartesian coordinates. To create an orthographic projection matrix, we first define a cubic viewing volume (a **cuboid**) bounded by six axis-aligned planes: near (_n_), far (_f_), left (_l_), right (_r_), bottom (_b_), and top (_t_). Then, we calculate the scaling factors and translation amounts that map each point in this volume to clip space ($[l, r][b, t][n, f] \rightarrow [-1,1]^3$), which is equal to NDC when using orthographic projection.
 
-> $x_e$ is the eye (view) space, $x_c$ is the clip space, and $x_n$ is the NDC space coordinate.
+> _x_e_ is the eye (view) space, _x_c_ is the clip space, and _x_n_ is the NDC space coordinate.
 
 $$
 \frac{x_c}{1-(-1)} = \frac{x_e-\frac{r+l}{2}}{r-l} \Rightarrow x_c = \frac{2x_e-(r+l)}{r-l} \\
@@ -1234,7 +1234,7 @@ y_c = \frac{2y_e-(t+b)}{t-b} \\
 \frac{z_c}{1-(-1)} = -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
 $$
 
-We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the $xy$-plane, i.e., $l$ and $b$ are equal to negative $r$ and $t$, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the $z$-axis is negated, because larger (less negative) $z$ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
+We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the _xy_-plane, i.e., _l_ and _b_ are equal to negative _r_ and _t_, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the _z_-axis is negated, because larger (less negative) _z_ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
 
 $$
 \begin{bmatrix}
@@ -1264,7 +1264,7 @@ w_e
 \end{bmatrix}
 $$
 
-This matrix can be created by calling `glm::ortho` with the plane coordinates as inputs. To prevent stretching or squashing due to a mismatch in aspect ratio between the viewport and the viewing volume, we multiply the width (length along the $x$-axis) of the cuboid with the aspect ratio ($width/height$).
+This matrix can be created by calling `glm::ortho` with the plane coordinates as inputs. To prevent stretching or squashing due to a mismatch in aspect ratio between the viewport and the viewing volume, we multiply the width (length along the _x_-axis) of the cuboid with the aspect ratio ($width/height$).
 
 ```cpp
 auto size = 2.0f;
@@ -1280,16 +1280,16 @@ glm::mat4 projection = glm::ortho(left, -left, bottom, -bottom, near, far);
 
 Orthographic projection has its uses in many engineering applications since it preserves relative sizes of objects, i.e., there is no sense of depth. However, in many other 3D applications, we want to see realistic results. In the context of projection, realism can be achieved by simulating the natural phenomenon of perspective foreshortening — objects appear smaller when they are moved farther away from the eye (camera). For example, a human that is close to the camera may appear the same height as a mountain that is miles away. It's clear that a cuboid cannot represent this viewing volume — if it barely covers a human close to the near frame, it will cover only a fraction of the mountain at the other end, due to both faces having the same area. A more appropriate volume would have a pyramid-like shape, which extends in cross-sectional area with increasing distance. However, its top will be cut off due to near plane being slightly larger than zero (for various reasons). This unique shape is called a **frustum**.
 
-In orthographic projection, we projected each component of a point independently through linear transformations (scale + translate). In perspective projection, we have to map points on both near and far planes (and those in between) to the same $[-1,1]$ range, which implies that the larger plane must be "squeezed" more, and the scale amount is proportional to the depth. Scaling by $z$ (depth) is not a linear transformation — it's division by a component of the input vector. This cannot be represented as matrix multiplication; hence, it has to happen in a separate step called **perspective division**, after the projection matrix has been applied. Since we will lose the original $z_e$ value when we move from view space to clip space, we will store it in the $w_c$ component.
+In orthographic projection, we projected each component of a point independently through linear transformations (scale + translate). In perspective projection, we have to map points on both near and far planes (and those in between) to the same $[-1,1]$ range, which implies that the larger plane must be "squeezed" more, and the scale amount is proportional to the depth. Scaling by _z_ (depth) is not a linear transformation — it's division by a component of the input vector. This cannot be represented as matrix multiplication; hence, it has to happen in a separate step called **perspective division**, after the projection matrix has been applied. Since we will lose the original _z_e_ value when we move from view space to clip space, we will store it in the _w_c_ component.
 
-We can hypothetically project any point inside the frustum onto the near plane to have a better understanding of where each point will end up in the final image. In the process, we calculate the ratios between the $x_e$ and $y_e$ coordinates and their projections ($x_p$ and $y_p$) using the properties of similar triangles.
+We can hypothetically project any point inside the frustum onto the near plane to have a better understanding of where each point will end up in the final image. In the process, we calculate the ratios between the _x_e_ and _y_e_ coordinates and their projections (_x_p_ and _y_p_) using the properties of similar triangles.
 
 $$
 \frac{x_p}{x_e} = \frac{n}{-z_e} \Rightarrow x_p = x_e\frac{n}{-z_e} \\
 \frac{y_p}{y_e} = \frac{n}{-z_e} \Rightarrow y_p = y_e\frac{n}{-z_e}
 $$
 
-Once they're on the near plane, we can linearly map both $x_p$ and $y_p$ to NDC ($x_n$ and $y_n$) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in $w_c$. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with $z_e$ are just clip space coordinates.
+Once they're on the near plane, we can linearly map both _x_p_ and _y_p_ to NDC (_x_n_ and _y_n_) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in _w_c_. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with _z_e_ are just clip space coordinates.
 
 $$
 x_n = \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
@@ -1297,13 +1297,13 @@ x_n = \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}
 -z_ey_n = \frac{2ny_e}{t-b}+\frac{z_e(t+b)}{t-b} = y_c
 $$
 
-Projecting $z_e$ onto the near plane would result in all having the same $-n$ value since they are along the same axis. So, there is not much information to gain from that. We know that $z_n$ does not depend on $x_e$ or $y_e$, so we can write it as a linear combination of $z_e$ and $w_e$. In eye space, $w$ is 1, so the equation can be written as follows:
+Projecting _z_e_ onto the near plane would result in all having the same $-n$ value since they are along the same axis. So, there is not much information to gain from that. We know that _z_n_ does not depend on _x_e_ or _y_e_, so we can write it as a linear combination of _z_e_ and _w_e_. In eye space, _w_ is 1, so the equation can be written as follows:
 
 $$
 z_n = \frac{z_c}{w_c} = \frac{az_e+bw_e}{-z_e} = \frac{az_e+b}{-z_e}
 $$
 
-We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, which gives us two equations to solve for $a$ and $b$.
+We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, which gives us two equations to solve for _a_ and _b_.
 
 $$
 -1 = \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \\
@@ -1311,7 +1311,7 @@ $$
 z_c = -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
 $$
 
-We now have all the elements needed to construct the perspective projection matrix. Notice that the clip space $w$ component is equal to eye space $z$ after the multiplication, which is the value used in perspective divide to normalize all components of the clip space vector. This final step is performed by the GPU, and the result is the NDC coordinates.
+We now have all the elements needed to construct the perspective projection matrix. Notice that the clip space _w_ component is equal to eye space _z_ after the multiplication, which is the value used in perspective divide to normalize all components of the clip space vector. This final step is performed by the GPU, and the result is the NDC coordinates.
 
 $$
 \begin{bmatrix}
@@ -1345,9 +1345,9 @@ glm::mat4 projection = glm::perspective(fov, aspect, near, far);
 
 ## Depth Buffer
 
-Perspective projection remaps $z$ into a normalized range $[-1,1]$ in NDC; however, unlike orthographic projection, this mapping is nonlinear (by design), which gives higher precision to depths closer to the near plane. For example, a point halfway between the near and far planes of the frustum will end up closer to the near side of the cube. This mimics how we see in real world — our eyes are more sensitive to depth changes nearby. On the other hand, it has side effects like **depth fighting** in distant geometry, i.e., there is not enough precision to reliably determine which vertex is in front of the other, and this leads to flickering, tearing or shimmering.
+Perspective projection remaps _z_ into a normalized range $[-1,1]$ in NDC; however, unlike orthographic projection, this mapping is nonlinear (by design), which gives higher precision to depths closer to the near plane. For example, a point halfway between the near and far planes of the frustum will end up closer to the near side of the cube. This mimics how we see in real world — our eyes are more sensitive to depth changes nearby. On the other hand, it has side effects like **depth fighting** in distant geometry, i.e., there is not enough precision to reliably determine which vertex is in front of the other, and this leads to flickering, tearing or shimmering.
 
-OpenGL stores a per-fragment depth information in a **depth buffer** (or $z$-buffer). Just like a color buffer, a default depth buffer is created by GLFW. When depth testing is enabled, OpenGL compares a fragment's depth with the existing value in the buffer; if the fragment is in front, value in the buffer is overwritten. This way, objects closer to the camera become the ones appearing in the final image. Depth testing is disabled by default — an OpenGL capability can be enabled via a `glEnable` call by specifying an ID. When it's enabled, depth buffer should be included in the `glClear` calls to remove residual data from the previous frame.
+OpenGL stores a per-fragment depth information in a **depth buffer** (or _z_-buffer). Just like a color buffer, a default depth buffer is created by GLFW. When depth testing is enabled, OpenGL compares a fragment's depth with the existing value in the buffer; if the fragment is in front, value in the buffer is overwritten. This way, objects closer to the camera become the ones appearing in the final image. Depth testing is disabled by default — an OpenGL capability can be enabled via a `glEnable` call by specifying an ID. When it's enabled, depth buffer should be included in the `glClear` calls to remove residual data from the previous frame.
 
 ```cpp
 glEnable(GL_DEPTH_TEST);

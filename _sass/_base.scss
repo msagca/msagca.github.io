@@ -20,8 +20,13 @@ body {
   word-break: break-word;
   word-wrap: break-word;
 }
-p {
-  margin: var(--spacing-md) auto;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 a {
   color: var(--color-text-link);
@@ -40,6 +45,7 @@ pre {
   hyphens: none;
   overflow-wrap: normal;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 code {
   color: var(--color-text-code);
@@ -47,9 +53,7 @@ code {
 pre {
   cursor: pointer;
   display: block;
-  line-height: var(--line-height-code);
-  margin: var(--spacing-md) auto;
-  padding: var(--spacing-sm);
+  line-height: normal;
   white-space: pre;
 }
 pre code {
@@ -57,31 +61,16 @@ pre code {
   color: inherit;
 }
 pre:hover {
-  box-shadow: var(--width-border) var(--width-border) var(--color-text-code);
+  box-shadow: var(--width-border) 0 var(--color-text-code);
 }
 pre.copied {
-  box-shadow: var(--width-border) var(--width-border) var(--color-text-link);
+  box-shadow: var(--width-border) 0 var(--color-text-link);
 }
 blockquote {
   color: var(--color-text-muted);
   font-family: var(--font-quote);
-  margin: 0 auto;
-  padding: var(--spacing-xs) var(--spacing-lg);
-  position: relative;
-}
-blockquote::before {
-  content: '"';
-  font-size: var(--font-size-social);
-  left: 0;
-  position: absolute;
-  top: 0;
-}
-hr {
-  border: none;
-  border-top: var(--width-border) dashed var(--color-text-muted);
-}
-hr.solid {
-  border-top-style: solid;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 ul,
 ol {
@@ -97,18 +86,11 @@ video,
 iframe {
   border: none;
   display: block;
-  height: auto;
   margin: 0 auto;
   max-width: 100%;
 }
 figure {
-  margin: var(--spacing-md) auto;
   text-align: center;
-}
-figure video {
-  height: auto;
-  margin: 0;
-  width: 100%;
 }
 figcaption {
   color: var(--color-text-muted);
