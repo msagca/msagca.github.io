@@ -16,4 +16,4 @@ kramdown:
   syntax_highlighter: rouge
 plugins:
   - jekyll-paginate
-paginate: 3
+paginate: 10

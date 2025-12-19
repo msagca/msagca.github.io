@@ -488,7 +488,7 @@ $$
 
 ## Matrix Operations
 
-A **matrix** (_M_) is a 2D array of elements, where each element is identified by its row and column indices. If a matrix has _m_ rows and _n_ columns, it's an _mxn_ matrix, and these are called the matrix dimensions. Matrices can be used to solve systems of linear equations; for example, one matrix can store the coefficients while another stores the variables.
+A **matrix** (_M_) is a 2D array of elements, where each element is identified by its row and column indices. If a matrix has _m_ rows and _n_ columns, it's an _mxn_ matrix, and these are called the matrix dimensions.
 
 > If both dimensions are the same, then the matrix is called a **square matrix**.
 
@@ -830,7 +830,7 @@ S_z \cdot z + T_z \\
 \end{bmatrix}
 $$
 
-Matrix multiplication is **associative**, that is, $(AB)C = A(BC)$; hence, we are free to combine any anjacent pair without changing the order. This allows us to collapse the entire transformation chain into one matrix, and multiply the combined result with the vector. If these are some predefined transformations or do not change often, this can save a lot of CPU/GPU time and memory resources. Let's combine the translation and scale matrices:
+Matrix multiplication is **associative**, that is, $(AB)C = A(BC)$; hence, we are free to combine any anjacent pair without changing the order. This allows us to collapse the entire transformation chain into one matrix. Let's combine the translation and scale matrices:
 
 $$
 \begin{bmatrix}
@@ -864,6 +864,8 @@ z \\
 1
 \end{bmatrix}
 $$
+
+> Being able to represent a sequence of transformations as a single matrix can save precious GPU resources.
 
 It the vector was represented as a row vector, then the multiplication would be done left to right in reverse order, i.e., we would take the transpose of the transformation chain: $(TS\vec{v})^T=\vec{v}^TS^TT^T$. Notice that the vector dimensions become _1x4_, and the transform matrices are of size _4x4_, which explains the need to reverse the order to make them compatible for multiplication.
 
@@ -1044,7 +1046,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/glm")
 target_link_libraries("${PROJECT_NAME}" PUBLIC glm)
 ```
 
-Now, we can include the required GLM headers and define the transformation matrices. We usually start with a unit matrix, and call either one of `glm::rotate`, `glm::scale`, or `glm::translate`, to obtain a combined matrix. Since GLM, like OpenGL, represents matrices in **column-major** order, we place the first transformation to apply at the end in the multiplication.
+Now, we can include the required GLM headers and define the transformation matrices. We usually start with a unit matrix, and call either one of `glm::rotate`, `glm::scale` or `glm::translate`, to obtain a combined matrix. Since GLM, like OpenGL, represents matrices in **column-major** order, we place the first transformation to apply at the end in the multiplication.
 
 ```cpp
 #include <glm/glm.hpp>

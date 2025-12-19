@@ -51,10 +51,16 @@ code {
   color: var(--color-text-code);
 }
 pre {
+  -ms-overflow-style: none;
   cursor: pointer;
   display: block;
   line-height: normal;
+  overflow-x: auto;
+  scrollbar-width: none;
   white-space: pre;
+}
+pre::-webkit-scrollbar {
+  display: none;
 }
 pre code {
   background: none;
@@ -96,3 +102,4 @@ figcaption {
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
 }
+

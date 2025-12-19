@@ -1,14 +1,8 @@
 <div class="sidebar">
   <h1>
-    <a href="{{ '/' | relative_url }}">
-      {{ site.title }}
-    </a>
+    <a href="{{ '/' | relative_url }}"> {{ site.title }} </a>
   </h1>
-  <div class="sidebar-social">
-    {% for social in site.author.social %}
-    <a href="{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] }}">
+  <div class="sidebar-social"> {% for social in site.author.social %} <a href="{{ social[1] }}" target="_blank" rel="noopener" class="social-link" aria-label="{{ social[0] }}">
       <i class="fab fa-{{ social[0] }}"></i>
-    </a>
-    {% endfor %}
-  </div>
+    </a> {% endfor %} </div>
 </div>
