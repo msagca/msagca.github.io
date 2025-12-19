@@ -72,9 +72,11 @@
   height: 100%;
   width: 100%;
 }
+.MathJax,
 .MathJax_Display {
   max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 @media (min-width: 768px) {
   .layout {

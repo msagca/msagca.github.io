@@ -55,7 +55,6 @@ pre {
   cursor: pointer;
   display: block;
   line-height: normal;
-  overflow-x: auto;
   scrollbar-width: none;
   white-space: pre;
 }
@@ -102,4 +101,3 @@ figcaption {
   color: var(--color-text-muted);
   font-size: var(--font-size-caption);
 }
-
