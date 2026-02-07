@@ -3,7 +3,7 @@ title: "Making a Game Engine"
 description:
 date: 2025-05-30
 tags: ["C++"]
-categories: ["Game Engines"]
+categories: ["Engine Development"]
 image:
 math:
 license:

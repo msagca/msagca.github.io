@@ -13,15 +13,15 @@ build:
   list: always
 ---
 
-I’ve prepared a concise summary of the lectures from <https://learnopengl.com/> for a quick reference.
+I’ve prepared a concise summary of the lectures from <https://learnopengl.com> for a quick reference.
 
 > This text explains graphics concepts without using visuals.
 
 ## OpenGL
 
-[OpenGL](https://www.opengl.org/) is a cross-platform API for rendering graphics, maintained by the [Khronos Group](https://www.khronos.org/). It is a specification that must be implemented by GPU vendors (or third parties) and made available through graphics driver software.
+[OpenGL](https://www.opengl.org) is a cross-platform API for rendering graphics, maintained by the [Khronos Group](https://www.khronos.org). It is a specification that must be implemented by GPU vendors (or third parties) and made available through graphics driver software.
 
-If you're building your project with [CMake](https://cmake.org/) and want to use OpenGL in your C++ application, your **CMakeLists.txt** should include the following commands:
+If you're building your project with [CMake](https://cmake.org) and want to use OpenGL in your C++ application, your **CMakeLists.txt** should include the following commands:
 
 ```cmake
 find_package(OpenGL REQUIRED)
@@ -30,9 +30,9 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC OpenGL::GL)
 
 ## GLFW
 
-A graphics application requires a window to draw to, but creating a window is OS-specific. [GLFW](https://www.glfw.org/) is a cross-platform library that abstracts away the details and provides a simple API for creating native windows (and more).
+A graphics application requires a window to draw to, but creating a window is OS-specific. [GLFW](https://www.glfw.org) is a cross-platform library that abstracts away the details and provides a simple API for creating native windows (and more).
 
-The GLFW source code can be included in a [Git](https://git-scm.com/) repository as a submodule.
+The GLFW source code can be included in a [Git](https://git-scm.com) repository as a submodule.
 
 ```bash
 git submodule add https://github.com/glfw/glfw /external/glfw
@@ -51,7 +51,7 @@ Due to the differences between implementations and platforms, OpenGL function ad
 
 To generate a GLAD loader:
 
-- Go to <https://glad.dav1d.de/>
+- Go to <https://glad.dav1d.de>
 - Select a GL API version (3.3+ is recommended)
 - Select the **Core** profile
 - Enable **Generate a loader** option
@@ -1589,4 +1589,4 @@ void DebugMessageCallback(unsigned int source, unsigned int type, unsigned int i
 }
 ```
 
-These debug messages may help you identify common issues such as buffer-target mismatches; however, there are more nuanced issues that do not necessarily generate error messages, but can only be identified visually while the application is running. Tools like [RenderDoc](https://renderdoc.org/) allow you to capture frames, step through every draw call, view GPU resources (e.g., textures), inspect pipeline stages, and visually debug meshes and vertex attributes.
+These debug messages may help you identify common issues such as buffer-target mismatches; however, there are more nuanced issues that do not necessarily generate error messages, but can only be identified visually while the application is running. Tools like [RenderDoc](https://renderdoc.org) allow you to capture frames, step through every draw call, view GPU resources (e.g., textures), inspect pipeline stages, and visually debug meshes and vertex attributes.

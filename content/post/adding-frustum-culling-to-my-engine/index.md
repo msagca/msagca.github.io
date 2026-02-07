@@ -3,7 +3,7 @@ title: "Adding Frustum Culling to My Engine"
 description:
 date: 2025-09-19
 tags: ["C++"]
-categories: ["Game Engines"]
+categories: ["Engine Development"]
 image:
 math: true
 license:
