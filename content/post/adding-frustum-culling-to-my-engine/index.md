@@ -4,7 +4,7 @@ description:
 date: 2025-09-19
 tags: ["C++"]
 categories: ["Engine Development"]
-image:
+image: cover.png
 math: true
 license:
 comments: true
@@ -33,8 +33,10 @@ struct BoundingBox {
   BoundingBox(glm::vec3, glm::vec3);
   BoundingBox GetWorldBounds(glm::mat4);
 };
+
 BoundingBox::BoundingBox()
   : min(glm::vec3(std::numeric_limits<float>::max())), max(glm::vec3(std::numeric_limits<float>::lowest())) {}
+
 BoundingBox::BoundingBox(glm::vec3 min, glm::vec3 max) {
   if (glm::any(glm::lessThan(max, min)))
     throw std::invalid_argument("Max bounds must be greater than or equal to min bounds.");

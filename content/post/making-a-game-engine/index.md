@@ -68,6 +68,7 @@ struct KUKI_ENGINE_API Property {
   PropertyType type{PropertyType::Number};
   Property(const std::string& = "", const PropertyValue& = 0, PropertyType = PropertyType::Number);
 };
+
 struct IComponent {
   virtual ~IComponent() = default;
   virtual const std::string GetName() const = 0;

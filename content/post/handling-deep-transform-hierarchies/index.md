@@ -4,7 +4,7 @@ description:
 date: 2026-02-07
 tags: ["C++"]
 categories: ["Engine Development"]
-image:
+image: cover.png
 math:
 license:
 comments: true
