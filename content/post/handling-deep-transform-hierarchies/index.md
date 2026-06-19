@@ -4,7 +4,7 @@ description:
 date: 2026-02-07
 tags: ["C++"]
 categories: ["Engine Development"]
-image: cover.png
+image:
 math:
 license:
 comments: true
@@ -16,7 +16,7 @@ build:
 `Transform` component of an entity in a game scene encodes where that entity is in the scene, how it's oriented, what is its relation to other entities, and so on. It's a crucial component in game engines, and must be attached to most (or all) entities since multiple systems may require it to carry out their tasks. In my game engine, and many others, its definition more or less looks like this:
 
 ```cpp
-struct Transform final : public Component {
+struct Transform {
   glm::vec3 position{};
   glm::quat rotation{};
   glm::vec3 scale{1.0f};
@@ -30,7 +30,7 @@ struct Transform final : public Component {
 
 Initially, it only consisted of `position`, `rotation`, `scale`, and a `parent` pointer. Yes, a pointer, a raw one. For context, the components are stored in contiguous arrays (`std::vector`) for cache-friendly iterations, and to preserve this contiguity, the array reallocates when its size reaches its capacity, which usually results in doubled capacity. So, when reallocation happens, all existing elements are moved/copied to the newly allocated memory block, which invalidates all iterators/pointers/references to the old addresses. I knew reallocation would happen at some point, but didn't really pay attention to it when declaring the parent as a pointer. Only after an exception, and a lengthy debugging session, I realized my mistake. A safe alternative would be to store an index into the array, as it's an offset from the pointer to the first element (at index 0). However, in practice, entities are referred to by an `EntityID`; so, a more ergonomic solution is to maintain a map between entity IDs and component indices, and go through this indirection layer when accessing components.
 
-The values stored in a `Transform` component are usually with respect to the parent of that entity, i.e., they are defined in the parent's coordinate frame. Here, the `local` transform encodes an entity's relation to its parent, and can be calculated from the `position`, `rotation` and `scale` values. The `world` transform is with respect to a larger world, and it can be obtained by multiplying the `local` transform matrix with the parent's `world` matrix. The multiplication order matters though; for column-major representations (like GLM's), the `local` matrix appears on the right (`parent->world * local`). As I briefly mentioned in [an earlier post]({{< relref "post/a-summary-of-learnopengl/index.md#common-transformations" >}}), keeping both matrices make it easier to work with and reason about transforms.
+The values stored in a `Transform` component are usually with respect to the parent of that entity, i.e., they are defined in the parent's coordinate frame. Here, the `local` transform encodes an entity's relation to its parent, and can be calculated from the `position`, `rotation` and `scale` values. The `world` transform is with respect to a larger world, and it can be obtained by multiplying the `local` transform matrix with the parent's `world` matrix. The multiplication order matters though; for column-major representations (like GLM's), the `local` matrix appears on the right (`parent->world * local`). As I briefly mentioned in [an earlier post]({{< relref "post/opengl-3d-rendering/index.md#common-transformations" >}}), keeping both matrices make it easier to work with and reason about transforms.
 
 > For entities with no parents (root entities), the `world` transform is equal to the `local` transform.
 

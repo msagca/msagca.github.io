@@ -4,7 +4,7 @@ description:
 date: 2025-09-19
 tags: ["C++"]
 categories: ["Engine Development"]
-image: cover.png
+image:
 math: true
 license:
 comments: true
