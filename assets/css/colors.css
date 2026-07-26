@@ -1,0 +1,186 @@
+html {
+  color-scheme: dark;
+  --bg: #101010;
+  --bg-elevated: #272727;
+  --fg: #b0b0b0;
+  --fg-dim: #474747;
+  --border: #ffffff;
+  --emphasis: #ffffff;
+  --func: #ffffff;
+  --string: #ffffff;
+  --keyword: #777777;
+  --comment: #50585d;
+  --accent: #458ee6;
+  --info: #8ebeec;
+  --success: #86cd82;
+  --warning: #d9ba73;
+  --danger: #ff7676;
+  --green: #14ba19;
+  --orange: #ff5733;
+  --red: #701516;
+  --pink: #f2a4db;
+  --cyan: #5abfb5;
+}
+html[data-mode="dark"][data-scheme-dark="dark"] {
+  color-scheme: dark;
+  --bg: #101010;
+  --bg-elevated: #272727;
+  --fg: #b0b0b0;
+  --fg-dim: #474747;
+  --border: #ffffff;
+  --emphasis: #ffffff;
+  --func: #ffffff;
+  --string: #ffffff;
+  --keyword: #777777;
+  --comment: #50585d;
+  --accent: #458ee6;
+  --info: #8ebeec;
+  --success: #86cd82;
+  --warning: #d9ba73;
+  --danger: #ff7676;
+  --green: #14ba19;
+  --orange: #ff5733;
+  --red: #701516;
+  --pink: #f2a4db;
+  --cyan: #5abfb5;
+}
+html[data-mode="dark"][data-scheme-dark="moss"] {
+  color-scheme: dark;
+  --bg: #0e1415;
+  --bg-elevated: #182325;
+  --fg: #cecece;
+  --fg-dim: #30464a;
+  --border: #cecece;
+  --emphasis: #71ade7;
+  --func: #71ade7;
+  --string: #95cb82;
+  --keyword: #999999;
+  --comment: #707070;
+  --accent: #cd974b;
+  --info: #8ebeec;
+  --success: #6abf40;
+  --warning: #ec8013;
+  --danger: #d2322d;
+  --green: #95cb82;
+  --orange: #ec8013;
+  --red: #c33c33;
+  --pink: #cc8bc9;
+  --cyan: #47bea9;
+}
+html[data-mode="light"][data-scheme-light="light"] {
+  color-scheme: light;
+  --bg: #faf9f5;
+  --bg-elevated: #ebebeb;
+  --fg: #101010;
+  --fg-dim: #cccccc;
+  --border: #000000;
+  --emphasis: #000000;
+  --func: #000000;
+  --string: #407f00;
+  --keyword: #666666;
+  --comment: #969ba5;
+  --accent: #0253be;
+  --info: #0253be;
+  --success: #407f00;
+  --warning: #b07700;
+  --danger: #ca0043;
+  --green: #019833;
+  --orange: #f54d27;
+  --red: #701516;
+  --pink: #a200d1;
+  --cyan: #007d7d;
+}
+html[data-mode="light"][data-scheme-light="glade"] {
+  color-scheme: light;
+  --bg: #f7f7f7;
+  --bg-elevated: #e2eeee;
+  --fg: #000000;
+  --fg-dim: #bfd9d9;
+  --border: #999999;
+  --emphasis: #325cc0;
+  --func: #325cc0;
+  --string: #448c27;
+  --keyword: #525252;
+  --comment: #696969;
+  --accent: #bc7500;
+  --info: #007acc;
+  --success: #448c27;
+  --warning: #bc7500;
+  --danger: #d13e23;
+  --green: #448c27;
+  --orange: #ec8013;
+  --red: #aa3731;
+  --pink: #7a3e9d;
+  --cyan: #0083b2;
+}
+html[data-mode="light"][data-scheme-light="latte"] {
+  color-scheme: light;
+  --bg: #eff1f5;
+  --bg-elevated: #e6e9ef;
+  --fg: #4c4f69;
+  --fg-dim: #9ca0b0;
+  --border: #7c7f93;
+  --emphasis: #8839ef;
+  --func: #1e66f5;
+  --string: #40a02b;
+  --keyword: #8839ef;
+  --comment: #8c8fa1;
+  --accent: #8839ef;
+  --info: #04a5e5;
+  --success: #40a02b;
+  --warning: #df8e1d;
+  --danger: #d20f39;
+  --green: #40a02b;
+  --orange: #fe640b;
+  --red: #d20f39;
+  --pink: #ea76cb;
+  --cyan: #179299;
+}
+html[data-mode="dark"][data-scheme-dark="macchiato"] {
+  color-scheme: dark;
+  --bg: #24273a;
+  --bg-elevated: #363a4f;
+  --fg: #cad3f5;
+  --fg-dim: #6e738d;
+  --border: #939ab7;
+  --emphasis: #c6a0f6;
+  --func: #8aadf4;
+  --string: #a6da95;
+  --keyword: #c6a0f6;
+  --comment: #8087a2;
+  --accent: #c6a0f6;
+  --info: #91d7e3;
+  --success: #a6da95;
+  --warning: #eed49f;
+  --danger: #ed8796;
+  --green: #a6da95;
+  --orange: #f5a97f;
+  --red: #ed8796;
+  --pink: #f5bde6;
+  --cyan: #8bd5ca;
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-mode]) {
+    color-scheme: light;
+    --bg: #faf9f5;
+    --bg-elevated: #ebebeb;
+    --fg: #101010;
+    --fg-dim: #cccccc;
+    --border: #000000;
+    --emphasis: #000000;
+    --func: #000000;
+    --string: #407f00;
+    --keyword: #666666;
+    --comment: #969ba5;
+    --accent: #0253be;
+    --info: #0253be;
+    --success: #407f00;
+    --warning: #b07700;
+    --danger: #ca0043;
+    --green: #019833;
+    --orange: #f54d27;
+    --red: #701516;
+    --pink: #a200d1;
+    --cyan: #007d7d;
+  }
+}

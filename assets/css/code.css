@@ -1,0 +1,133 @@
+.highlight {
+  position: relative;
+  margin: 1.25rem 0;
+  border: none;
+  border-radius: 0;
+  overflow: auto;
+}
+.chroma {
+  color: var(--fg);
+  background-color: var(--bg-elevated);
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 0;
+  overflow: auto;
+  font-size: 0.88rem;
+}
+.chroma .hl {
+  background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.chroma .err {
+  color: var(--danger);
+}
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr,
+.chroma .kt,
+.chroma .ow {
+  color: var(--keyword);
+  font-weight: 600;
+}
+.chroma .nt,
+.chroma .o {
+  color: var(--keyword);
+}
+.chroma .na,
+.chroma .nc,
+.chroma .nd,
+.chroma .ne,
+.chroma .nx,
+.chroma .nf,
+.chroma .fm {
+  color: var(--func);
+}
+.chroma .no {
+  color: var(--const);
+}
+.chroma .l,
+.chroma .ld,
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .sd,
+.chroma .s2,
+.chroma .se,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .sr,
+.chroma .s1,
+.chroma .ss {
+  color: var(--string);
+}
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo {
+  color: var(--const);
+}
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs,
+.chroma .cp,
+.chroma .cpf {
+  color: var(--comment);
+  font-style: italic;
+}
+.chroma .gd {
+  color: var(--danger);
+}
+.chroma .gi {
+  color: var(--success);
+}
+.chroma .ge {
+  font-style: italic;
+}
+.chroma .gs {
+  font-weight: bold;
+}
+.chroma .gu {
+  color: var(--comment);
+}
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--fg-dim);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease;
+}
+.highlight:hover .copy-btn,
+.copy-btn:focus-visible {
+  opacity: 1;
+}
+.copy-btn:hover {
+  color: var(--accent);
+}
+.copy-btn.is-copied {
+  color: var(--success);
+  opacity: 1;
+}

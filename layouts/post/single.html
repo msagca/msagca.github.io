@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ $related := where (site.RegularPages.Related .) "Type" "post" }}
+{{ $hasRelated := gt (len $related) 0 }}
+{{ $hasToc := findRE "<li>" .TableOfContents }}
+<div class="post-layout{{ if not $hasRelated }} no-related{{ end }}{{ if not $hasToc }} no-toc{{ end }}">
+  <aside class="post-related">
+    {{ partial "related-posts.html" . }}
+  </aside>
+
+  <article class="post-content-col">
+    <header class="post-header">
+      <h1>{{ .Title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format ":date_full" .Date }}</time>
+        {{ if site.Params.readingTime | default true }}<span class="post-reading-time">{{ .ReadingTime }} min read</span>{{ end }}
+      </div>
+      {{ with .Params.tags }}
+      <ul class="tag-list">
+        {{ range . }}<li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a></li>{{ end }}
+      </ul>
+      {{ end }}
+    </header>
+
+    <div class="post-body">
+      {{ .Content }}
+    </div>
+  </article>
+
+  <aside class="post-toc">
+    {{ partial "toc.html" . }}
+  </aside>
+</div>
+{{ end }}

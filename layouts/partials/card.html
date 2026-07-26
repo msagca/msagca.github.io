@@ -1,0 +1,33 @@
+{{- $page := . -}}
+<div class="card"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
+  {{- with $page.Params.image }}
+    {{- $img := $page.Resources.GetMatch . }}
+    <img class="card-image" src="{{ if $img }}{{ $img.RelPermalink }}{{ else }}{{ . }}{{ end }}" alt="" loading="lazy">
+  {{- end }}
+  <div class="card-body">
+    <div class="card-top-row">
+      {{- with $page.Params.series }}
+        {{- $seriesName := . }}
+        {{- $seriesPosts := (where site.RegularPages "Params.series" $seriesName).ByDate }}
+        {{- $seriesIndex := 0 }}
+        {{- range $i, $p := $seriesPosts }}
+          {{- if eq $p $page }}{{ $seriesIndex = add $i 1 }}{{ end }}
+        {{- end }}
+        <button type="button" class="card-series-badge card-series-filter" data-series-filter="{{ $seriesName }}">
+          <span class="card-series-name">{{ $seriesName }}</span><span class="card-series-index">{{ $seriesIndex }}</span>
+        </button>
+      {{- end }}
+      <time class="card-date" datetime="{{ $page.Date.Format "2006-01-02" }}">
+        <span class="card-date-full">{{ $page.Date.Format "Jan 2, 2006" }}</span>
+        <span class="card-date-short">{{ $page.Date.Format "Jan 2" }}</span>
+      </time>
+    </div>
+    <h3 class="card-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
+    <p class="card-excerpt">{{ $page.Summary | plainify | truncate 160 "" }}&hellip;</p>
+    {{- with $page.Params.tags }}
+    <ul class="card-tags">
+      {{ range . }}<li><button type="button" class="card-tag" data-tag-filter="{{ . }}">{{ . }}</button></li>{{ end }}
+    </ul>
+    {{- end }}
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{{- $height := .Get "height" | default "360" -}}
+{{- $src := .Get "src" -}}
+{{- $code := "" -}}
+{{- if $src -}}
+  {{- with .Page.Resources.GetMatch $src -}}{{ $code = .Content }}{{- end -}}
+{{- else -}}
+  {{- $code = .Inner -}}
+{{- end -}}
+{{- $embed := printf `<div class="shader-embed" style="--shader-height:%spx"><canvas class="shader-canvas" aria-label="Live GLSL shader demo"></canvas><p class="shader-error" hidden></p><script type="x-shader/x-fragment">%s</script></div>` $height $code -}}
+{{ $embed | safeHTML }}

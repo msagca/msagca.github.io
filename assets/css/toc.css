@@ -1,0 +1,93 @@
+.post-header {
+  margin-bottom: 1.5rem;
+}
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--comment);
+  font-size: 0.88rem;
+  margin: 0.3rem 0;
+}
+.rail-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--emphasis);
+  margin: 0 0 0.6rem;
+}
+.post-toc-rail,
+.post-related-rail {
+  font-size: 0.85rem;
+}
+.post-toc-rail ul,
+.post-toc-rail ol,
+.post-related-rail ul,
+.post-related-rail ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.post-toc-rail li,
+.post-related-rail li {
+  margin: 0.35rem 0;
+}
+.post-toc-rail a,
+.post-related-rail a {
+  color: var(--comment);
+}
+.post-toc-rail a:hover,
+.post-related-rail a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+.post-toc-mobile,
+.post-related-mobile {
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+.post-toc-mobile summary,
+.post-related-mobile summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--emphasis);
+}
+.post-toc-mobile ul,
+.post-toc-mobile ol,
+.post-related-mobile ul {
+  padding-left: 1.1rem;
+  margin: 0.6rem 0 0;
+}
+.post-toc-mobile ul,
+.post-toc-mobile ol {
+  list-style: none;
+}
+.post-toc-rail,
+.post-related-rail {
+  display: none;
+}
+.post-content-col {
+  order: 1;
+}
+.post-toc {
+  order: 2;
+}
+.post-related {
+  order: 3;
+}
+@media (min-width: 1240px) {
+  .post-toc-rail,
+  .post-related-rail {
+    display: block;
+  }
+  .post-toc-mobile,
+  .post-related-mobile {
+    display: none;
+  }
+  .post-content-col,
+  .post-toc,
+  .post-related {
+    order: initial;
+  }
+}

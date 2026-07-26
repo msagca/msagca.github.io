@@ -1,0 +1,27 @@
+{{- $entry := . -}}
+{{- $url := $entry.URL -}}
+{{- $isMail := hasPrefix $url "mailto:" -}}
+
+{{- $icon := "" -}}
+{{- if $isMail -}}
+  {{- $icon = "fa-solid fa-envelope" -}}
+{{- else -}}
+  {{- $icon = printf "fa-brands fa-%s" $entry.Identifier -}}
+{{- end -}}
+{{- with $entry.Params.icon }}{{ $icon = . }}{{ end -}}
+
+{{- $name := $entry.Name -}}
+{{- if not $name -}}
+  {{- if $isMail -}}
+    {{- $name = "Email" -}}
+  {{- else -}}
+    {{- $name = title (replace $entry.Identifier "-" " ") -}}
+  {{- end -}}
+{{- end -}}
+
+<li>
+  <a href="{{ $url }}" target="_blank" rel="me noopener noreferrer" title="{{ $name }}">
+    <i class="{{ $icon }}" aria-hidden="true"></i>
+    <span class="visually-hidden">{{ $name }}</span>
+  </a>
+</li>

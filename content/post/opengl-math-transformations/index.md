@@ -4,6 +4,7 @@ description:
 date: 2025-08-29
 tags: ["C++", "OpenGL", "Linear Algebra"]
 categories: ["Computer Graphics"]
+series: "OpenGL"
 image:
 math: true
 license:
@@ -243,6 +244,7 @@ $$
 The transpose of a product is equal to the product of the transposes in **reverse** order.
 
 $$
+\begin{aligned}
 (AB)^T =
 B^TA^T =
 \begin{bmatrix}
@@ -257,7 +259,7 @@ B^TA^T =
 5 \cdot 1 + 7 \cdot 2 & 5 \cdot 3 + 7 \cdot 4 \\
 6 \cdot 1 + 8 \cdot 2 & 6 \cdot 3 + 8 \cdot 4
 \end{bmatrix} \\
-= \begin{bmatrix}
+&= \begin{bmatrix}
 5 + 14 & 15 + 28 \\
 6 + 16 & 18 + 32
 \end{bmatrix} =
@@ -265,6 +267,7 @@ B^TA^T =
 19 & 43 \\
 22 & 50
 \end{bmatrix}
+\end{aligned}
 $$
 
 ## Transformations
@@ -305,17 +308,21 @@ We can change the length (and direction) of a vector by scaling it. This is achi
 We would like to form a scale matrix (_S_) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
 
 $$
-x' = S_x \cdot x \\
-y' = S_y \cdot y \\
-z' = S_z \cdot z
+\begin{aligned}
+x' &= S_x \cdot x \\
+y' &= S_y \cdot y \\
+z' &= S_z \cdot z
+\end{aligned}
 $$
 
 Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a _3x1_ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a _3x3_ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
 
 $$
-x' = S_x \cdot x + 0 \cdot y + 0 \cdot z \\
-y' = 0 \cdot x + S_y \cdot y + 0 \cdot z \\
-z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
+\begin{aligned}
+x' &= S_x \cdot x + 0 \cdot y + 0 \cdot z \\
+y' &= 0 \cdot x + S_y \cdot y + 0 \cdot z \\
+z' &= 0 \cdot x + 0 \cdot y + S_z \cdot z
+\end{aligned}
 $$
 
 We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to 0. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
@@ -343,9 +350,11 @@ $$
 We can move (translate) a vector by adding another vector to it. Similar to scaling, we would love to represent this too as a matrix multiplication, which will help us combine both matrices into one. Again, let's start by writing a set of equations that translate a vector:
 
 $$
-x' = x + T_x \\
-y' = y + T_y \\
-z' = z + T_z
+\begin{aligned}
+x' &= x + T_x \\
+y' &= y + T_y \\
+z' &= z + T_z
+\end{aligned}
 $$
 
 Wait... can we obtain $x+T_x$ through matrix multiplication? This seems impossible... and it is, in the same dimensional space. The reason is that matrix multiplication is a **linear transformation**; but, translation is an **affine transformation**.
@@ -371,9 +380,11 @@ $$
 There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be 0. On the other hand, translation amounts must be preserved; hence, they are multiplied by 1.
 
 $$
-x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1 \\
-y' = 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1 \\
-z' = 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
+\begin{aligned}
+x' &= 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1 \\
+y' &= 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1 \\
+z' &= 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
+\end{aligned}
 $$
 
 It looks like our vector is not $(x,y,z)$ anymore, but rather $(x,y,z,1)$. Similarly, each row appears to have one more coefficient that is the translation amount. Let's try to convert this to a matrix multiplication using the available information:
@@ -450,7 +461,8 @@ $$
 Now, let's try to apply scaling followed by translation. When using column vectors, this chain of operations is written left to right, but performed right to left. It follows the **nested functions** analogy: $f(g(h(x))) = (f \circ g \circ h)(x)$.
 
 $$
-TS\vec{v} =
+\begin{aligned}
+TS\vec{v} &=
 \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
@@ -469,7 +481,7 @@ y \\
 z \\
 1
 \end{bmatrix} \\
-= \begin{bmatrix}
+&= \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
 0 & 0 & 1 & T_z \\
@@ -487,6 +499,7 @@ S_y \cdot y + T_y \\
 S_z \cdot z + T_z \\
 1
 \end{bmatrix}
+\end{aligned}
 $$
 
 Matrix multiplication is **associative**, that is, $(AB)C = A(BC)$; hence, we are free to combine any adjacent pair without changing the order. This allows us to collapse the entire transformation chain into one matrix. Let's combine the translation and scale matrices:
@@ -529,6 +542,7 @@ $$
 If the vector was represented as a row vector, then the multiplication would be done left to right in reverse order, i.e., we would take the transpose of the transformation chain: $(TS\vec{v})^T=\vec{v}^TS^TT^T$. Notice that the vector dimensions become _1x4_, and the transform matrices are of size _4x4_, which explains the need to reverse the order to make them compatible for multiplication.
 
 $$
+\begin{aligned}
 \begin{bmatrix}
 x & y & z & 1
 \end{bmatrix}
@@ -544,7 +558,7 @@ S_x & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 T_x & T_y & T_z & 1
 \end{bmatrix} \\
-= \begin{bmatrix}
+&= \begin{bmatrix}
 x & y & z & 1
 \end{bmatrix}
 \begin{bmatrix}
@@ -553,6 +567,7 @@ S_x & 0 & 0 & 0 \\
 0 & 0 & S_z & 0 \\
 T_x & T_y & T_z & 1
 \end{bmatrix}
+\end{aligned}
 $$
 
 ### Rotation

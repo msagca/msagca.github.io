@@ -4,6 +4,7 @@ description:
 date: 2025-08-30
 tags: ["C++", "OpenGL"]
 categories: ["Computer Graphics"]
+series: "OpenGL"
 image:
 math: true
 license:
@@ -153,9 +154,11 @@ This type of projection is an affine transformation — it preserves straight li
 > _x_e_ is the eye (view) space, _x_c_ is the clip space, and _x_n_ is the NDC space coordinate.
 
 $$
-\frac{x_c}{1-(-1)} = \frac{x_e-\frac{r+l}{2}}{r-l} \Rightarrow x_c = \frac{2x_e-(r+l)}{r-l} \\
-y_c = \frac{2y_e-(t+b)}{t-b} \\
-\frac{z_c}{1-(-1)} = -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
+\begin{aligned}
+\frac{x_c}{1-(-1)} &= \frac{x_e-\frac{r+l}{2}}{r-l} \Rightarrow x_c = \frac{2x_e-(r+l)}{r-l} \\
+y_c &= \frac{2y_e-(t+b)}{t-b} \\
+\frac{z_c}{1-(-1)} &= -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
+\end{aligned}
 $$
 
 We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the _xy_-plane, i.e., _l_ and _b_ are equal to negative _r_ and _t_, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the _z_-axis is negated, because larger (less negative) _z_ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
@@ -209,16 +212,20 @@ In orthographic projection, we projected each component of a point independently
 We can hypothetically project any point inside the frustum onto the near plane to have a better understanding of where each point will end up in the final image. In the process, we calculate the ratios between the _x_e_ and _y_e_ coordinates and their projections (_x_p_ and _y_p_) using the properties of similar triangles.
 
 $$
-\frac{x_p}{x_e} = \frac{n}{-z_e} \Rightarrow x_p = x_e\frac{n}{-z_e} \\
-\frac{y_p}{y_e} = \frac{n}{-z_e} \Rightarrow y_p = y_e\frac{n}{-z_e}
+\begin{aligned}
+\frac{x_p}{x_e} &= \frac{n}{-z_e} \Rightarrow x_p = x_e\frac{n}{-z_e} \\
+\frac{y_p}{y_e} &= \frac{n}{-z_e} \Rightarrow y_p = y_e\frac{n}{-z_e}
+\end{aligned}
 $$
 
 Once they're on the near plane, we can linearly map both _x_p_ and _y_p_ to NDC (_x_n_ and _y_n_) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in _w_c_. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with _z_e_ are just clip space coordinates.
 
 $$
-x_n = \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
-\Rightarrow -z_ex_n = \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
--z_ey_n = \frac{2ny_e}{t-b}+\frac{z_e(t+b)}{t-b} = y_c
+\begin{aligned}
+x_n &= \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
+&\Rightarrow -z_ex_n = \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
+-z_ey_n &= \frac{2ny_e}{t-b}+\frac{z_e(t+b)}{t-b} = y_c
+\end{aligned}
 $$
 
 Projecting _z_e_ onto the near plane would result in all having the same $-n$ value since they are along the same axis. So, there is not much information to gain from that. We know that _z_n_ does not depend on _x_e_ or _y_e_, so we can write it as a linear combination of _z_e_ and _w_e_. In eye space, _w_ is 1, so the equation can be written as follows:
@@ -230,9 +237,11 @@ $$
 We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, which gives us two equations to solve for _a_ and _b_.
 
 $$
--1 = \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \\
-\Rightarrow a = -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
-z_c = -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
+\begin{aligned}
+-1 &= \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \\
+\Rightarrow a &= -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
+z_c &= -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
+\end{aligned}
 $$
 
 We now have all the elements needed to construct the perspective projection matrix. Notice that the clip space _w_ component is equal to eye space _z_ after the multiplication, which is the value used in perspective divide to normalize all components of the clip space vector. This final step is performed by the GPU, and the result is the NDC coordinates.

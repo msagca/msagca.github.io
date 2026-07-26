@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{ if eq .Kind "term" }}
+  <div class="card-grid-wrap">
+    <h1>{{ .Title }}</h1>
+    {{ $pages := where .Pages "Type" "post" }}
+    {{ if not $pages }}{{ $pages = .Pages }}{{ end }}
+    <div class="card-grid">
+      {{ range $pages.ByDate.Reverse }}
+        {{ partial "card.html" . }}
+      {{ end }}
+    </div>
+  </div>
+{{ else }}
+  <div class="page-content">
+    <h1>{{ .Title }}</h1>
+    <ul class="tag-list">
+      {{ range .Data.Terms.Alphabetical }}
+      <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span style="color:var(--comment)">({{ .Count }})</span></a></li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}
+{{ end }}

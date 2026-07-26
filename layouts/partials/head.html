@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ site.Params.subtitle }}{{ end }}">
+{{ hugo.Generator }}
+<link rel="icon" type="image/svg+xml" href="{{ "img/favicon.svg" | relURL }}">
+<link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | relURL }}" title="{{ site.Title }}">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&family=Red+Hat+Mono:wght@400;500;600&display=swap">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css" integrity="sha512-DzC7h7+bDlpXPDQsX/0fShhf1dLxXlHuhPBkBo/5wJWRoTU6YL7moeiNoej6q3wh5ti78C57Tu1JwTNlcgHSjg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<script>
+  (function () {
+    try {
+      var stored = JSON.parse(localStorage.getItem("koda-theme") || "{}");
+      var mode = stored.mode || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      var root = document.documentElement;
+      root.setAttribute("data-mode", mode);
+      root.setAttribute("data-scheme-light", stored.light || "light");
+      root.setAttribute("data-scheme-dark", stored.dark || "dark");
+    } catch (e) {}
+  })();
+</script>
+
+{{ $css := slice
+  (resources.Get "css/colors.css")
+  (resources.Get "css/base.css")
+  (resources.Get "css/layout.css")
+  (resources.Get "css/cards.css")
+  (resources.Get "css/code.css")
+  (resources.Get "css/toc.css")
+  (resources.Get "css/search.css")
+  (resources.Get "css/shader.css")
+}}
+{{ $style := $css | resources.Concat "css/site.css" }}
+{{ if hugo.IsProduction }}
+  {{ $style = $style | minify | fingerprint }}
+{{ end }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+{{ if .Params.math }}
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]] }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+{{ end }}

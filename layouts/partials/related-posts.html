@@ -1,0 +1,21 @@
+{{- $page := . -}}
+{{- $related := where (site.RegularPages.Related $page) "Type" "post" -}}
+{{- $related = first 5 $related -}}
+{{- if $related }}
+<nav class="post-related-rail" aria-label="Related posts">
+  <p class="rail-title">Related Posts</p>
+  <ul>
+    {{ range $related }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</nav>
+<details class="post-related-mobile">
+  <summary>Related Posts</summary>
+  <ul>
+    {{ range $related }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</details>
+{{- end -}}

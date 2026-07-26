@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "header.html" . }}
+  <main id="main-content">
+    <div class="search-results-page" id="search-results-page" hidden>
+      <div class="card-grid-wrap">
+        <div class="card-grid" id="search-results-grid"></div>
+        <p id="search-results-empty" class="search-results-empty" hidden>No posts found.</p>
+      </div>
+    </div>
+    <div id="page-main-content">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  {{ $js := resources.Get "js/main.js" }}
+  {{ if hugo.IsProduction }}{{ $js = $js | js.Build | minify | fingerprint }}{{ else }}{{ $js = $js | js.Build }}{{ end }}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+
+  {{ $search := resources.Get "js/search.js" }}
+  {{ if hugo.IsProduction }}{{ $search = $search | js.Build | minify | fingerprint }}{{ else }}{{ $search = $search | js.Build }}{{ end }}
+  <script src="{{ $search.RelPermalink }}" data-index="{{ "index.json" | relURL }}" defer></script>
+
+  {{ $shader := resources.Get "js/shader-runtime.js" }}
+  {{ if hugo.IsProduction }}{{ $shader = $shader | js.Build | minify | fingerprint }}{{ else }}{{ $shader = $shader | js.Build }}{{ end }}
+  <script src="{{ $shader.RelPermalink }}" defer></script>
+
+  {{ $filter := resources.Get "js/post-filter.js" }}
+  {{ if hugo.IsProduction }}{{ $filter = $filter | js.Build | minify | fingerprint }}{{ else }}{{ $filter = $filter | js.Build }}{{ end }}
+  <script src="{{ $filter.RelPermalink }}" defer></script>
+</body>
+</html>
