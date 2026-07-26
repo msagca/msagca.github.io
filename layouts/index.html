@@ -2,11 +2,7 @@
 {{ $posts := (where site.RegularPages "Type" "post").ByDate.Reverse }}
 
 <div class="card-grid-wrap">
-  <div class="home-toolbar">
-    <button type="button" id="post-filter-chip" class="post-filter-chip" hidden>
-      Showing <span id="post-filter-label"></span> <span id="post-filter-kind"></span>
-    </button>
-  </div>
+  {{ partial "filter-chip.html" . }}
   <div class="card-grid">
     {{ range $posts }}
       {{ partial "card.html" . }}

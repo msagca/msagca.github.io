@@ -16,11 +16,10 @@
   font: inherit;
   font-size: 0.9rem;
   padding: 0.3rem 0.2rem;
-  direction: rtl;
   text-align: left;
-}
-.search-inline-input::placeholder {
-  direction: ltr;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .search-inline-input:focus {
   outline: none;

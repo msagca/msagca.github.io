@@ -3,15 +3,10 @@ title: "Math and Transformations for OpenGL"
 description:
 date: 2025-08-29
 tags: ["C++", "OpenGL", "Linear Algebra"]
-categories: ["Computer Graphics"]
 series: "OpenGL"
 image:
 math: true
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 ## Coordinate Spaces, Systems and Frames

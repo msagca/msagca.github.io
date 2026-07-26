@@ -3,14 +3,9 @@ title: "Formal Syntax Scraping With ANTLR"
 description:
 date: 2023-05-07
 tags: ["ANTLR", "Python"]
-categories: ["Programming Languages"]
 image:
 math:
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 A few years ago, I discovered [ANTLR](https://www.antlr.org/) while trying to build a parser for a custom config file format. By defining a simple grammar, I was able to get my work done. Then, I discovered the [grammars-v4](https://github.com/antlr/grammars-v4) repository on GitHub and looked at the existing grammars of the languages I knew at the time. I immediately noticed that the **SystemVerilog** grammar was incomplete and the **Verilog** grammar had many commented-out rules for some reason. I decided to contribute by completing these two grammars, and started writing the grammar rules for SystemVerilog by copy-pasting sections from the [specification document](https://ieeexplore.ieee.org/document/8299595) and manually(!) converting the [BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) syntax to ANTLR's grammar format.

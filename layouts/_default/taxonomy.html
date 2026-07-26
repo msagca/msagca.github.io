@@ -4,6 +4,7 @@
     <h1>{{ .Title }}</h1>
     {{ $pages := where .Pages "Type" "post" }}
     {{ if not $pages }}{{ $pages = .Pages }}{{ end }}
+    {{ partial "filter-chip.html" . }}
     <div class="card-grid">
       {{ range $pages.ByDate.Reverse }}
         {{ partial "card.html" . }}

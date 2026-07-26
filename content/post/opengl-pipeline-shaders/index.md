@@ -3,14 +3,9 @@ title: "OpenGL Rendering Pipeline and Shaders"
 description:
 date: 2025-08-28
 tags: ["C++", "OpenGL", "GLSL"]
-categories: ["Computer Graphics"]
 series: "OpenGL"
 image:
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 ## Rendering Pipeline

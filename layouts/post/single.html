@@ -16,7 +16,7 @@
       </div>
       {{ with .Params.tags }}
       <ul class="tag-list">
-        {{ range . }}<li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/">{{ . }}</a></li>{{ end }}
+        {{ range . }}<li><a href="{{ "/" | relLangURL }}?tag={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
       </ul>
       {{ end }}
     </header>

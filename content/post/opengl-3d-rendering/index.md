@@ -3,15 +3,10 @@ title: "3D Rendering With OpenGL"
 description:
 date: 2025-08-30
 tags: ["C++", "OpenGL"]
-categories: ["Computer Graphics"]
 series: "OpenGL"
 image:
 math: true
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 ## Common Transformations

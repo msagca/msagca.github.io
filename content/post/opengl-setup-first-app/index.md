@@ -3,14 +3,9 @@ title: "OpenGL Setup and First Application"
 description:
 date: 2025-08-27
 tags: ["C++", "OpenGL"]
-categories: ["Computer Graphics"]
 series: "OpenGL"
 image:
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 This is the first post of a series summarizing the lectures on <https://learnopengl.com> with some additions of my own.

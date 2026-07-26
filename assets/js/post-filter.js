@@ -45,4 +45,8 @@
   chip.addEventListener("click", function () {
     applyFilter(null);
   });
+  var urlTag = new URLSearchParams(window.location.search).get("tag");
+  if (urlTag) {
+    applyFilter({ type: "tag", value: urlTag });
+  }
 })();

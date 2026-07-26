@@ -3,14 +3,9 @@ title: "Making a Game Engine"
 description:
 date: 2025-05-30
 tags: ["C++"]
-categories: ["Engine Development"]
 image:
 math:
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 I'm writing this to reflect on my progress so far in making my own game engine, [Kuki](https://github.com/msagca/kuki), that is named after my eldest cat. My journey began by following the tutorials at [learnopengl.com](https://learnopengl.com) to learn graphics programming. After some time, I realized that I was just copy-pasting code and running it locally. This is often the case with tutorials — without a clear goal, it's easy to lose focus and interest. So, I wanted to do something meaningful with the stuff I was learning. The choice was obvious: creating a game engine.

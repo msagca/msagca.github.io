@@ -3,14 +3,9 @@ title: "Adding Frustum Culling to My Engine"
 description:
 date: 2025-09-19
 tags: ["C++"]
-categories: ["Engine Development"]
 image:
 math: true
-license:
-comments: true
 draft:
-build:
-  list: always
 ---
 
 Even though not every object in a 3D scene appears on the screen, their data is still sent to the GPU for processing, only to be discarded later in the rendering pipeline. This increases the number of draw calls needed to render the scene, which adds extra latency and processing costs. However, we could just pick the objects that lie inside the viewing volume of the camera and send only the data associated with this subset of entities to the GPU. This is what **Frustum Culling** does, and it can dramatically improve the performance in many applications.
