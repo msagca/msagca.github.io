@@ -1,10 +1,14 @@
 .search-inline-field {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
 }
 .search-inline-input {
-  width: 320px;
-  max-width: 60vw;
+  width: 100%;
+  min-width: 0;
+  max-width: 320px;
   border: none;
   border-bottom: 1px solid var(--fg-dim);
   background: transparent;
@@ -12,6 +16,11 @@
   font: inherit;
   font-size: 0.9rem;
   padding: 0.3rem 0.2rem;
+  direction: rtl;
+  text-align: left;
+}
+.search-inline-input::placeholder {
+  direction: ltr;
 }
 .search-inline-input:focus {
   outline: none;
@@ -32,9 +41,4 @@
   color: var(--comment);
   font-size: 0.95rem;
   text-align: center;
-}
-@media (max-width: 640px) {
-  .search-inline-input {
-    width: 130px;
-  }
 }
