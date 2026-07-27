@@ -83,7 +83,7 @@
 .card-excerpt {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--fg-dim);
+  color: var(--comment);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -97,9 +97,9 @@
   min-width: 0;
   max-width: 100%;
   font: inherit;
-  color: var(--fg-dim);
+  color: var(--comment);
   background: transparent;
-  border: 1px solid var(--fg-dim);
+  border: 1px solid var(--comment);
   border-radius: 999px;
   padding: 0;
   cursor: pointer;
@@ -143,9 +143,9 @@
   z-index: 1;
   font: inherit;
   font-size: 0.72rem;
-  color: var(--fg-dim);
+  color: var(--comment);
   background: transparent;
-  border: 1px solid var(--fg-dim);
+  border: 1px solid var(--comment);
   padding: 0.1rem 0.55rem;
   border-radius: 999px;
   cursor: pointer;

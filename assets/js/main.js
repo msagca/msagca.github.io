@@ -35,13 +35,15 @@
     light: "Light",
     glade: "Glade",
     latte: "Latte",
+    melange: "Melange",
     dark: "Dark",
     moss: "Moss",
     macchiato: "Macchiato",
+    mocha: "Mocha",
   };
   var SCHEME_GROUPS = {
-    light: ["light", "glade", "latte"],
-    dark: ["dark", "moss", "macchiato"],
+    light: ["light", "glade", "latte", "melange"],
+    dark: ["dark", "moss", "macchiato", "mocha", "melange"],
   };
   function loadPrefs() {
     try {
@@ -112,6 +114,7 @@
     btn.innerHTML =
       '<i class="fa-regular fa-clipboard" aria-hidden="true"></i>';
     btn.setAttribute("aria-label", "Copy code to clipboard");
+    var highlight = pre.closest(".highlight") || pre;
     btn.addEventListener("click", function () {
       var code = pre.innerText;
       navigator.clipboard.writeText(code).then(function () {
@@ -120,10 +123,17 @@
         btn.classList.add("is-copied");
         btn.setAttribute("aria-label", "Copied");
         setTimeout(function () {
-          btn.innerHTML =
-            '<i class="fa-regular fa-clipboard" aria-hidden="true"></i>';
           btn.classList.remove("is-copied");
           btn.setAttribute("aria-label", "Copy code to clipboard");
+          var resetIcon = function () {
+            btn.innerHTML =
+              '<i class="fa-regular fa-clipboard" aria-hidden="true"></i>';
+          };
+          if (highlight.matches(":hover")) {
+            resetIcon();
+          } else {
+            btn.addEventListener("transitionend", resetIcon, { once: true });
+          }
         }, 1600);
       });
     });

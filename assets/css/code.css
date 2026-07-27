@@ -113,7 +113,7 @@
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: var(--fg-dim);
+  color: var(--comment);
   cursor: pointer;
   opacity: 0;
   transition:
