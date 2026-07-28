@@ -21,6 +21,10 @@
   {{ if hugo.IsProduction }}{{ $js = $js | js.Build | minify | fingerprint }}{{ else }}{{ $js = $js | js.Build }}{{ end }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 
+  {{ $masonry := resources.Get "js/masonry.js" }}
+  {{ if hugo.IsProduction }}{{ $masonry = $masonry | js.Build | minify | fingerprint }}{{ else }}{{ $masonry = $masonry | js.Build }}{{ end }}
+  <script src="{{ $masonry.RelPermalink }}" defer></script>
+
   {{ $search := resources.Get "js/search.js" }}
   {{ if hugo.IsProduction }}{{ $search = $search | js.Build | minify | fingerprint }}{{ else }}{{ $search = $search | js.Build }}{{ end }}
   <script src="{{ $search.RelPermalink }}" data-index="{{ "index.json" | relURL }}" defer></script>

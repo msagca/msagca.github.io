@@ -1,12 +1,9 @@
 ---
 title: "Math and Transformations for OpenGL"
-description:
 date: 2025-08-29
 tags: ["C++", "OpenGL", "Linear Algebra"]
 series: "OpenGL"
-image:
 math: true
-draft:
 ---
 
 ## Coordinate Spaces, Systems and Frames

@@ -1,12 +1,10 @@
 ---
 title: "3D Rendering With OpenGL"
-description:
 date: 2025-08-30
 tags: ["C++", "OpenGL"]
 series: "OpenGL"
-image:
 math: true
-draft:
+shader: cover.glsl
 ---
 
 ## Common Transformations

@@ -86,6 +86,7 @@
       });
       render(matches);
       showResults();
+      if (window.KodaMasonry) window.KodaMasonry.layout();
     });
   }
   input.addEventListener("input", function () {

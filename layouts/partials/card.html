@@ -1,8 +1,21 @@
 {{- $page := . -}}
 <div class="card"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
-  {{- with $page.Params.image }}
+  {{- $shaderFile := "" }}
+  {{- with $page.Params.shader }}{{ $shaderFile = . }}{{ end }}
+  {{- if $shaderFile }}
+    {{- with $page.Resources.GetMatch $shaderFile }}
+      {{- $embed := printf `<div class="shader-embed card-image"><canvas class="shader-canvas" aria-hidden="true"></canvas><p class="shader-error" hidden></p><script type="x-shader/x-fragment">%s</script></div>` .Content }}
+      {{ $embed | safeHTML }}
+    {{- end }}
+  {{- else }}
+    {{- with $page.Params.image }}
     {{- $img := $page.Resources.GetMatch . }}
     <img class="card-image" src="{{ if $img }}{{ $img.RelPermalink }}{{ else }}{{ . }}{{ end }}" alt="" loading="lazy">
+    {{- else }}
+      {{- with $page.Params.youtube }}
+        <img class="card-image" src="https://img.youtube.com/vi/{{ . }}/hqdefault.jpg" alt="" loading="lazy">
+      {{- end }}
+    {{- end }}
   {{- end }}
   <div class="card-body">
     <div class="card-top-row">

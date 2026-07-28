@@ -35,15 +35,16 @@
     light: "Light",
     glade: "Glade",
     latte: "Latte",
+    summer: "Summer",
     melange: "Melange",
     dark: "Dark",
     moss: "Moss",
-    macchiato: "Macchiato",
     mocha: "Mocha",
+    fall: "Fall",
   };
   var SCHEME_GROUPS = {
-    light: ["light", "glade", "latte", "melange"],
-    dark: ["dark", "moss", "macchiato", "mocha", "melange"],
+    light: ["light", "glade", "latte", "summer", "melange"],
+    dark: ["dark", "moss", "mocha", "fall", "melange"],
   };
   function loadPrefs() {
     try {

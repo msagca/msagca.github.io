@@ -79,6 +79,7 @@
 .icon-btn:hover,
 .icon-btn:focus-visible {
   color: var(--accent);
+  text-decoration: none;
 }
 .icon-btn svg {
   width: 1.1rem;

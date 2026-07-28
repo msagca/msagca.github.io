@@ -1,11 +1,7 @@
 ---
 title: "Pathfinding and AI in Unity"
-description:
 date: 2024-10-29
 tags: ["Unity", "C#"]
-image:
-math:
-draft:
 ---
 
 Following my experiments with procedural map generation, I wanted to see some action on the maps I generated. So, I decided to add agents to the scene to observe how they navigate through the map. And, in order to make it look more interesting, I wanted the agents to behave intelligently and perform certain tasks.

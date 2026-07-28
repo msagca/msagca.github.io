@@ -136,29 +136,6 @@ html[data-mode="light"][data-scheme-light="latte"] {
   --pink: #ea76cb;
   --cyan: #179299;
 }
-html[data-mode="dark"][data-scheme-dark="macchiato"] {
-  color-scheme: dark;
-  --bg: #24273a;
-  --bg-elevated: #363a4f;
-  --fg: #cad3f5;
-  --fg-dim: #6e738d;
-  --border: #939ab7;
-  --emphasis: #c6a0f6;
-  --func: #8aadf4;
-  --string: #a6da95;
-  --keyword: #c6a0f6;
-  --comment: #8087a2;
-  --accent: #c6a0f6;
-  --info: #91d7e3;
-  --success: #a6da95;
-  --warning: #eed49f;
-  --danger: #ed8796;
-  --green: #a6da95;
-  --orange: #f5a97f;
-  --red: #ed8796;
-  --pink: #f5bde6;
-  --cyan: #8bd5ca;
-}
 html[data-mode="dark"][data-scheme-dark="mocha"] {
   color-scheme: dark;
   --bg: #1e1e2e;
@@ -182,6 +159,29 @@ html[data-mode="dark"][data-scheme-dark="mocha"] {
   --pink: #f5c2e7;
   --cyan: #94e2d5;
 }
+html[data-mode="dark"][data-scheme-dark="fall"] {
+  color-scheme: dark;
+  --bg: #232a2e;
+  --bg-elevated: #2b3337;
+  --fg: #f8f9e8;
+  --fg-dim: #4a585c;
+  --border: #96b4aa;
+  --emphasis: #cbe3b3;
+  --func: #cbe3b3;
+  --string: #dbe6af;
+  --keyword: #f57f82;
+  --comment: #839e9a;
+  --accent: #cbe3b3;
+  --info: #b3e3ca;
+  --success: #cbe3b3;
+  --warning: #f5d098;
+  --danger: #f57f82;
+  --green: #cbe3b3;
+  --orange: #f7a182;
+  --red: #f57f82;
+  --pink: #f3c0e5;
+  --cyan: #b3e6db;
+}
 html[data-mode="dark"][data-scheme-dark="melange"] {
   color-scheme: dark;
   --bg: #292522;
@@ -204,6 +204,29 @@ html[data-mode="dark"][data-scheme-dark="melange"] {
   --red: #bd8183;
   --pink: #cf9bc2;
   --cyan: #7b9695;
+}
+html[data-mode="light"][data-scheme-light="summer"] {
+  color-scheme: light;
+  --bg: #f5efe6;
+  --bg-elevated: #f2eae1;
+  --fg: #2b3034;
+  --fg-dim: #ceccbd;
+  --border: #829084;
+  --emphasis: #91a77a;
+  --func: #91a77a;
+  --string: #abb182;
+  --keyword: #c58687;
+  --comment: #707d76;
+  --accent: #91a77a;
+  --info: #74a48b;
+  --success: #91a77a;
+  --warning: #c4aa80;
+  --danger: #c58687;
+  --green: #91a77a;
+  --orange: #c69883;
+  --red: #c58687;
+  --pink: #c499b8;
+  --cyan: #719f96;
 }
 html[data-mode="light"][data-scheme-light="melange"] {
   color-scheme: light;
