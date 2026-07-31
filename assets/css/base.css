@@ -142,3 +142,8 @@ code {
   color: var(--accent);
   text-decoration: none;
 }
+mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

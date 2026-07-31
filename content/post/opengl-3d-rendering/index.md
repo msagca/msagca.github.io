@@ -1,7 +1,7 @@
 ---
 title: "3D Rendering With OpenGL"
 date: 2025-08-30
-tags: ["C++", "OpenGL"]
+tags: ["C++", "OpenGL", "Linear Algebra"]
 series: "OpenGL"
 math: true
 shader: cover.glsl
@@ -148,29 +148,33 @@ This type of projection is an affine transformation — it preserves straight li
 
 $$
 \begin{aligned}
-\frac{x_c}{1-(-1)} &= \frac{x_e-\frac{r+l}{2}}{r-l} \Rightarrow x_c = \frac{2x_e-(r+l)}{r-l} \\
-y_c &= \frac{2y_e-(t+b)}{t-b} \\
-\frac{z_c}{1-(-1)} &= -\frac{z_e-\frac{f+n}{2}}{f-n} \Rightarrow z_c = \frac{2z_e-(f+n)}{n-f}
+\frac{x_c}{1-(-1)} &= \frac{x_e-\frac{r+l}{2}}{r-l} \\
+\Rightarrow x_c &= \frac{2x_e-(r+l)}{r-l} \\
+\frac{y_c}{1-(-1)} &= \frac{y_e-\frac{t+b}{2}}{t-b} \\
+\Rightarrow y_c &= \frac{2y_e-(t+b)}{t-b} \\
+\frac{z_c}{1-(-1)} &= -\frac{z_e-\frac{f+n}{2}}{f-n} \\
+\Rightarrow z_c &= \frac{2z_e-(f+n)}{n-f}
 \end{aligned}
 $$
 
 We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the _xy_-plane, i.e., _l_ and _b_ are equal to negative _r_ and _t_, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the _z_-axis is negated, because larger (less negative) _z_ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
 
 $$
+\begin{aligned}
 \begin{bmatrix}
 x_n \\
 y_n \\
 z_n \\
 w_n
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+&= \begin{bmatrix}
 x_c \\
 y_c \\
 z_c \\
 w_c
-\end{bmatrix} =
-M_{orthographic}\vec{v_e} =
-\begin{bmatrix}
+\end{bmatrix}
+= M_{orthographic}\vec{v_e} \\
+&= \begin{bmatrix}
 \frac{2}{r-l} & 0 & 0 & -\frac{r+l}{r-l} \\
 0 & \frac{2}{t-b} & 0 & -\frac{t+b}{t-b} \\
 0 & 0 & -\frac{2}{f-n} & -\frac{f+n}{f-n} \\
@@ -182,6 +186,7 @@ y_e \\
 z_e \\
 w_e
 \end{bmatrix}
+\end{aligned}
 $$
 
 This matrix can be created by calling `glm::ortho` with the plane coordinates as inputs. To prevent stretching or squashing due to a mismatch in aspect ratio between the viewport and the viewing volume, we multiply the width (length along the _x_-axis) of the cuboid with the aspect ratio ($width/height$).
@@ -215,8 +220,9 @@ Once they're on the near plane, we can linearly map both _x_p_ and _y_p_ to NDC 
 
 $$
 \begin{aligned}
-x_n &= \frac{2x_p}{r-l}-\frac{r+l}{r-l} \Rightarrow x_n = \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
-&\Rightarrow -z_ex_n = \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
+x_n &= \frac{2x_p}{r-l}-\frac{r+l}{r-l} \\
+\Rightarrow x_n &= \frac{2nx_e}{-z_e(r-l)}-\frac{r+l}{r-l} \\
+\Rightarrow -z_ex_n &= \frac{2nx_e}{r-l}+\frac{z_e(r+l)}{r-l} = x_c \\
 -z_ey_n &= \frac{2ny_e}{t-b}+\frac{z_e(t+b)}{t-b} = y_c
 \end{aligned}
 $$
@@ -231,23 +237,31 @@ We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, w
 
 $$
 \begin{aligned}
--1 &= \frac{-na+b}{n},\, 1 = \frac{-fa+b}{f} \\
-\Rightarrow a &= -\frac{f+n}{f-n},\, b = -\frac{2fn}{f-n} \\
-z_c &= -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
+\begin{aligned}
+-1 &= \frac{-na+b}{n} \\
+1 &= \frac{-fa+b}{f}
+\end{aligned}
+\Rightarrow
+\begin{aligned}
+a &= -\frac{f+n}{f-n} \\
+b &= -\frac{2fn}{f-n}
+\end{aligned} \\
+z_c = -z_ez_n = -\frac{f+n}{f-n}z_e -\frac{2fn}{f-n}
 \end{aligned}
 $$
 
 We now have all the elements needed to construct the perspective projection matrix. Notice that the clip space _w_ component is equal to eye space _z_ after the multiplication, which is the value used in perspective divide to normalize all components of the clip space vector. This final step is performed by the GPU, and the result is the NDC coordinates.
 
 $$
+\begin{aligned}
 \begin{bmatrix}
 x_c \\
 y_c \\
 z_c \\
 w_c
-\end{bmatrix} =
-M_{perspective}\vec{v_e} =
-\begin{bmatrix}
+\end{bmatrix}
+&= M_{perspective}\vec{v_e} \\
+&= \begin{bmatrix}
 \frac{2n}{r-l} & 0 & \frac{r+l}{r-l} & 0 \\
 0 & \frac{2n}{t-b} & \frac{t+b}{t-b} & 0 \\
 0 & 0 & -\frac{f+n}{f-n} & -\frac{2fn}{f-n} \\
@@ -259,6 +273,7 @@ y_e \\
 z_e \\
 w_e
 \end{bmatrix}
+\end{aligned}
 $$
 
 ```cpp

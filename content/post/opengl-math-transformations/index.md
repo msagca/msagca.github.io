@@ -19,8 +19,8 @@ In graphics applications, some calculations can be done more efficiently and are
 A **vector** ($\vec{v}$) is a 1D array of numerical components. It can be of size _n_, which is the number of components the vector has. In computer graphics, we usually use vectors of size up to 4.
 
 $$
-\vec{a} =
-\begin{bmatrix}
+\vec{a}
+= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -32,13 +32,13 @@ A **vector space** (_V_) defines a set of axioms (e.g., commutativity, associati
 We can add or subtract a scalar (_c_) to or from a vector, or multiply or divide a vector by a scalar by simply applying this operation to each component of the vector.
 
 $$
-c\vec{a} = c
-\begin{bmatrix}
+c\vec{a}
+= c \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 c \cdot a_1 \\
 c \cdot a_2 \\
 c \cdot a_3
@@ -56,9 +56,9 @@ A vector can be **normalized** to obtain a **unit vector** (a vector with a leng
 > Normalizing does not change a vector's direction.
 
 $$
-\hat{a} =
-\frac{\vec{a}}{\|\vec{a}\|} =
-\frac{1}{\sqrt{a_1^2+a_2^2+a_3^2}}
+\hat{a}
+= \frac{\vec{a}}{\|\vec{a}\|}
+= \frac{1}{\sqrt{a_1^2+a_2^2+a_3^2}}
 \begin{bmatrix}
 a_1 \\
 a_2 \\
@@ -69,8 +69,8 @@ $$
 Two vectors of the same size can be added or subtracted through component-wise addition or subtraction.
 
 $$
-\vec{a} + \vec{b} =
-\begin{bmatrix}
+\vec{a} + \vec{b}
+= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -79,8 +79,8 @@ a_3
 b_1 \\
 b_2 \\
 b_3
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 a_1 + b_1 \\
 a_2 + b_2 \\
 a_3 + b_3
@@ -96,8 +96,9 @@ In graphics applications, it's important to know how much two vectors align, i.e
 > The result of a dot product is a scalar (not a vector).
 
 $$
-\vec{a} \cdot \vec{b} =
-\begin{bmatrix}
+\begin{aligned}
+\vec{a} \cdot \vec{b}
+&= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -106,7 +107,10 @@ a_3
 b_1 \\
 b_2 \\
 b_3
-\end{bmatrix} = a_1b_1 + a_2b_2 + a_3b_3 = \|\vec{a}\| \|\vec{b}\| \cos{\theta}
+\end{bmatrix} \\
+&= a_1b_1 + a_2b_2 + a_3b_3 \\
+&= \|\vec{a}\| \|\vec{b}\| \cos{\theta}
+\end{aligned}
 $$
 
 > If two vectors are perpendicular, their dot product is zero ($\cos{90^\circ} = 0$).
@@ -120,8 +124,9 @@ A geometric space, e.g., a Euclidean space, is a vector space plus an inner prod
 This operation takes two non-parallel vectors as input and outputs a vector that is orthogonal to both inputs. It will prove useful in future chapters.
 
 $$
-\vec{a} \times \vec{b} =
-\begin{bmatrix}
+\begin{aligned}
+\vec{a} \times \vec{b}
+&= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -130,12 +135,13 @@ a_3
 b_1 \\
 b_2 \\
 b_3
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 a_2b_3 - a_3b_2 \\
 a_3b_1 - a_1b_3 \\
 a_1b_2 - a_2b_1
 \end{bmatrix}
+\end{aligned}
 $$
 
 ## Matrix Operations
@@ -147,115 +153,123 @@ A **matrix** (_M_) is a 2D array of elements, where each element is identified b
 A matrix-scalar product multiplies each element of the matrix by a scalar. Addition and subtraction can be done element-wise if both matrices have the same dimensions.
 
 $$
-A + B =
-\begin{bmatrix}
+\begin{aligned}
+A + B
+&= \begin{bmatrix}
 1 & 2 \\
 3 & 4
 \end{bmatrix} +
 \begin{bmatrix}
 5 & 6 \\
 7 & 8
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+&= \begin{bmatrix}
 1 + 5 & 2 + 6 \\
 3 + 7 & 4 + 8
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+&= \begin{bmatrix}
 6 & 8 \\
 10 & 12
 \end{bmatrix}
+\end{aligned}
 $$
 
 Two matrices, _A_ and _B_, can be multiplied (in this order) if the number of columns in _A_ is equal to the number of rows in _B_. Every element in a row of _A_ is multiplied by the corresponding element in a column of _B_. Then, these products are summed up to obtain one element in the resulting matrix _C_. The result obtained from processing row _i_ of _A_ and column _j_ of _B_ will end up in the $i^{th}$ row and $j^{th}$ column of _C_. This implies that the resulting matrix has the same number of rows as _A_ and the same number of columns as _B_.
 
 $$
-AB =
-\begin{bmatrix}
+\begin{aligned}
+AB
+&= \begin{bmatrix}
 1 & 2 \\
 3 & 4
 \end{bmatrix}
 \begin{bmatrix}
 5 & 6 \\
 7 & 8
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+&= \begin{bmatrix}
 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8
 \end{bmatrix} \\
 = \begin{bmatrix}
 5 + 14 & 6 + 16 \\
 15 + 28 & 18 + 32
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+&= \begin{bmatrix}
 19 & 22 \\
 43 & 50
 \end{bmatrix}
+\end{aligned}
 $$
 
 > Matrix multiplication is not commutative, that is, _AB_ is not the same as _BA_.
 
 $$
-BA =
-\begin{bmatrix}
+\begin{aligned}
+BA
+&= \begin{bmatrix}
 5 & 6 \\
 7 & 8
 \end{bmatrix}
 \begin{bmatrix}
 1 & 2 \\
 3 & 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 5 \cdot 1 + 6 \cdot 3 & 5 \cdot 2 + 6 \cdot 4 \\
 7 \cdot 1 + 8 \cdot 3 & 7 \cdot 2 + 8 \cdot 4
 \end{bmatrix} \\
-= \begin{bmatrix}
+&= \begin{bmatrix}
 5 + 18 & 10 + 24 \\
 7 + 24 & 14 + 32
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 23 & 34 \\
 31 & 46
 \end{bmatrix}
+\end{aligned}
 $$
 
 When a matrix is **transposed**, its rows become its columns and vice versa. If _M_ has the dimensions _mxn_, $M^T$ (transpose of _M_) has a dimension of _nxm_.
 
 $$
-A^T =
-\begin{bmatrix}
+\begin{aligned}
+A^T
+&= \begin{bmatrix}
 1 & 3 \\
 2 & 4
 \end{bmatrix},
-B^T =
-\begin{bmatrix}
+B^T
+&= \begin{bmatrix}
 5 & 7 \\
 6 & 8
 \end{bmatrix}
+\end{aligned}
 $$
 
 The transpose of a product is equal to the product of the transposes in **reverse** order.
 
 $$
 \begin{aligned}
-(AB)^T =
-B^TA^T =
-\begin{bmatrix}
+(AB)^T
+= B^TA^T
+&= \begin{bmatrix}
 5 & 7 \\
 6 & 8
 \end{bmatrix}
 \begin{bmatrix}
 1 & 3 \\
 2 & 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 5 \cdot 1 + 7 \cdot 2 & 5 \cdot 3 + 7 \cdot 4 \\
 6 \cdot 1 + 8 \cdot 2 & 6 \cdot 3 + 8 \cdot 4
 \end{bmatrix} \\
 &= \begin{bmatrix}
 5 + 14 & 15 + 28 \\
 6 + 16 & 18 + 32
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 19 & 43 \\
 22 & 50
 \end{bmatrix}
@@ -271,22 +285,25 @@ A vector is basically an _nx1_ matrix, if represented as a **column vector** (i.
 An **identity matrix** is an _nxn_ matrix that has _1s_ on its **main diagonal** (from top-left to bottom-right) and _0s_ elsewhere. When you multiply any compatible matrix or vector with it, you get the original matrix or vector back. So, it's essentially a **no transform**.
 
 $$
-IA = \begin{bmatrix}
+\begin{aligned}
+IA
+&= \begin{bmatrix}
 1 & 0 \\
 0 & 1
 \end{bmatrix}
 \begin{bmatrix}
 1 & 2 \\
 3 & 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 1 \cdot 1 + 0 \cdot 3 & 1 \cdot 2 + 0 \cdot 4 \\
 0 \cdot 1 + 1 \cdot 3 & 0 \cdot 2 + 1 \cdot 4
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 1 & 2 \\
 3 & 4
 \end{bmatrix}
+\end{aligned}
 $$
 
 > A **diagonal matrix** has non-zero entries only along its main diagonal.
@@ -324,8 +341,8 @@ $$
 x' \\
 y' \\
 z'
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 S_x & 0 & 0 \\
 0 & S_y & 0 \\
 0 & 0 & S_z
@@ -363,10 +380,13 @@ $$
 A(\vec{u}) = L\vec{u} + \vec{c}
 $$
 
-This is not linear because:
+This is not linear when $\vec{c} \neq \vec{0}$, because:
 
 $$
-A(\vec{u} + \vec{v}) = L(\vec{u} + \vec{v}) + \vec{c} \neq A(\vec{u}) + A(\vec{v}) = L(\vec{u}) + \vec{c} + L(\vec{v}) + \vec{c}
+\begin{aligned}
+A(\vec{u} + \vec{v}) &\neq A(\vec{u}) + A(\vec{v}) \\
+L(\vec{u} + \vec{v}) + \vec{c} &\neq L(\vec{u}) + \vec{c} + L(\vec{v}) + \vec{c}
+\end{aligned}
 $$
 
 There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be 0. On the other hand, translation amounts must be preserved; hence, they are multiplied by 1.
@@ -386,8 +406,8 @@ $$
 x' \\
 y' \\
 z'
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
 0 & 0 & 1 & T_z
@@ -417,8 +437,8 @@ x \\
 y \\
 z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 S_x \cdot x \\
 S_y \cdot y \\
 S_z \cdot z
@@ -441,8 +461,8 @@ x \\
 y \\
 z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 S_x \cdot x \\
 S_y \cdot y \\
 S_z \cdot z \\
@@ -454,8 +474,8 @@ Now, let's try to apply scaling followed by translation. When using column vecto
 
 $$
 \begin{aligned}
-TS\vec{v} &=
-\begin{bmatrix}
+TS\vec{v}
+&= \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
 0 & 0 & 1 & T_z \\
@@ -484,8 +504,8 @@ S_x \cdot x \\
 S_y \cdot y \\
 S_z \cdot z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+&= \begin{bmatrix}
 S_x \cdot x + T_x \\
 S_y \cdot y + T_y \\
 S_z \cdot z + T_z \\
@@ -497,6 +517,7 @@ $$
 Matrix multiplication is **associative**, that is, $(AB)C = A(BC)$; hence, we are free to combine any adjacent pair without changing the order. This allows us to collapse the entire transformation chain into one matrix. Let's combine the translation and scale matrices:
 
 $$
+\begin{aligned}
 \begin{bmatrix}
 1 & 0 & 0 & T_x \\
 0 & 1 & 0 & T_y \\
@@ -514,8 +535,8 @@ x \\
 y \\
 z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 S_x & 0 & 0 & T_x \\
 0 & S_y & 0 & T_y \\
 0 & 0 & S_z & T_z \\
@@ -527,6 +548,7 @@ y \\
 z \\
 1
 \end{bmatrix}
+\end{aligned}
 $$
 
 > Being able to represent a sequence of transformations as a single matrix can save precious GPU resources.
@@ -550,7 +572,7 @@ S_x & 0 & 0 & 0 \\
 0 & 0 & 1 & 0 \\
 T_x & T_y & T_z & 1
 \end{bmatrix} \\
-&= \begin{bmatrix}
+= \begin{bmatrix}
 x & y & z & 1
 \end{bmatrix}
 \begin{bmatrix}
@@ -567,8 +589,8 @@ $$
 One way to represent rotations is by using three separate rotations around coordinate axes, applied in a specific sequence. For example, we first rotate around _x_ by $\alpha$, then around _y_ by $\beta$, and finally around _z_ by $\gamma$. These are called **Euler angles**. In different industries, these rotations might have different names; for example, in avionics, rotations around _x_, _y_ and _z_ are called **pitch**, **yaw** and **roll**, respectively, given that _y_ is up. The following are the most common rotation matrices, derived for the right-handed basis [orientation](<https://en.wikipedia.org/wiki/Orientation_(vector_space)>).
 
 $$
-R_z R_y R_x =
-\begin{bmatrix}
+R_z R_y R_x
+= \begin{bmatrix}
 \cos{\gamma} & -\sin{\gamma} & 0 & 0\\
 \sin{\gamma} & \cos{\gamma} & 0 & 0 \\
 0 & 0 & 1 & 0 \\
@@ -665,6 +687,7 @@ Notice that the final rotation matrix only depends on the difference $\alpha-\ga
 In a matrix-based system, the order matters because the multiplication operation is not commutative. When deciding on an order, we must consider in what space each operation should happen. There is no right or wrong answer — it all depends on what result we want to achieve at the end. Let's analyze $TS\vec{v}$, which we derived before, in reverse order ($ST\vec{v}$).
 
 $$
+\begin{aligned}
 \begin{bmatrix}
 S_x & 0 & 0 & 0 \\
 0 & S_y & 0 & 0 \\
@@ -682,8 +705,8 @@ x \\
 y \\
 z \\
 1
-\end{bmatrix} =
-\begin{bmatrix}
+\end{bmatrix} \\
+= \begin{bmatrix}
 S_x & 0 & 0 & S_x \cdot T_x \\
 0 & S_y & 0 & S_y \cdot T_y \\
 0 & 0 & S_z & S_z \cdot T_z \\
@@ -695,6 +718,7 @@ y \\
 z \\
 1
 \end{bmatrix}
+\end{aligned}
 $$
 
 As you can see, if translation is applied first, then the translation vector is scaled as well. If it was rotation that followed translation, then the object would be rotated about a shifted origin, which would result in an arc shaped movement. If scale follows rotation, then it's applied with respect to the new orientation, which would make even a uniform scale look non-uniform. In many applications, we want to scale first, then rotate, and finally translate: $TRS\vec{v}$.
