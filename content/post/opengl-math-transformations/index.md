@@ -162,11 +162,11 @@ A + B
 \begin{bmatrix}
 5 & 6 \\
 7 & 8
-\end{bmatrix}
+\end{bmatrix} \\
 &= \begin{bmatrix}
 1 + 5 & 2 + 6 \\
 3 + 7 & 4 + 8
-\end{bmatrix}
+\end{bmatrix} \\
 &= \begin{bmatrix}
 6 & 8 \\
 10 & 12
@@ -186,15 +186,15 @@ AB
 \begin{bmatrix}
 5 & 6 \\
 7 & 8
-\end{bmatrix}
+\end{bmatrix} \\
 &= \begin{bmatrix}
 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8
 \end{bmatrix} \\
-= \begin{bmatrix}
+&= \begin{bmatrix}
 5 + 14 & 6 + 16 \\
 15 + 28 & 18 + 32
-\end{bmatrix}
+\end{bmatrix} \\
 &= \begin{bmatrix}
 19 & 22 \\
 43 & 50
@@ -238,7 +238,7 @@ A^T
 &= \begin{bmatrix}
 1 & 3 \\
 2 & 4
-\end{bmatrix},
+\end{bmatrix} \\
 B^T
 &= \begin{bmatrix}
 5 & 7 \\
