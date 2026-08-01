@@ -30,7 +30,7 @@
   var iconDark = document.getElementById("scheme-icon-dark");
   var iconLight = document.getElementById("scheme-icon-light");
   var root = document.documentElement;
-  var STORE_KEY = "koda-theme";
+  var STORE_KEY = "theme";
   var SCHEME_LABELS = {
     light: "Light",
     glade: "Glade",
@@ -81,6 +81,9 @@
       var prefs = loadPrefs();
       var currentMode = root.getAttribute("data-mode") || "dark";
       prefs.mode = currentMode === "dark" ? "light" : "dark";
+      prefs.osMode = window.matchMedia("(prefers-color-scheme: light)").matches
+        ? "light"
+        : "dark";
       savePrefs(prefs);
       applyPrefs(prefs);
     });

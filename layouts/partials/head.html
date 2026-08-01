@@ -18,8 +18,12 @@
 <script>
   (function () {
     try {
-      var stored = JSON.parse(localStorage.getItem("koda-theme") || "{}");
-      var mode = stored.mode || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      var stored = JSON.parse(localStorage.getItem("theme") || "{}");
+      var osMode = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      var mode = (stored.mode && stored.osMode === osMode) ? stored.mode : osMode;
+      stored.mode = mode;
+      stored.osMode = osMode;
+      localStorage.setItem("theme", JSON.stringify(stored));
       var root = document.documentElement;
       root.setAttribute("data-mode", mode);
       root.setAttribute("data-scheme-light", stored.light || "light");
