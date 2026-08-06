@@ -21,6 +21,12 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.search-inline-input::placeholder {
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  color: var(--comment);
+  opacity: 1;
+}
 .search-inline-input:focus {
   outline: none;
   border-color: var(--accent);

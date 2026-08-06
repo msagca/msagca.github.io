@@ -69,6 +69,7 @@
   function showPage() {
     resultsPage.hidden = true;
     pageContent.hidden = false;
+    if (window.SiteMasonry) window.SiteMasonry.layout();
   }
   function doSearch(query) {
     var q = query.trim().toLowerCase();
@@ -86,7 +87,7 @@
       });
       render(matches);
       showResults();
-      if (window.KodaMasonry) window.KodaMasonry.layout();
+      if (window.SiteMasonry) window.SiteMasonry.layout();
     });
   }
   input.addEventListener("input", function () {

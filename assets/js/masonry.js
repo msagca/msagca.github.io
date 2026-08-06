@@ -2,6 +2,7 @@
   "use strict";
   var ROW_UNIT = 1;
   function layoutGrid(grid) {
+    if (grid.offsetParent === null) return;
     var gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
     var cards = [].slice.call(grid.children).filter(function (el) {
       return el.classList.contains("card");
@@ -28,5 +29,5 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(layoutAll, 150);
   });
-  window.KodaMasonry = { layout: layoutAll };
+  window.SiteMasonry = { layout: layoutAll };
 })();

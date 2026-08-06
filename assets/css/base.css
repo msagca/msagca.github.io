@@ -57,6 +57,19 @@ h6 {
   color: var(--emphasis);
   scroll-margin-top: 5rem;
 }
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 1.25rem 0;
+}
+ul,
+ol {
+  margin: 1.25rem 0;
+  padding-left: 2rem;
+}
 blockquote {
   margin: 1.25rem 0;
   padding: 0.6rem 0.8rem;
@@ -68,7 +81,7 @@ blockquote p {
   margin: 0;
 }
 figure {
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   text-align: center;
 }
 figure img {
@@ -87,6 +100,9 @@ figure figcaption p {
   font-size: inherit;
   font-weight: inherit;
 }
+.post-body div:has(> iframe[src*="youtube"]) {
+  margin: 1.25rem 0;
+}
 hr {
   border: none;
   border-top: 1px solid var(--fg-dim);
@@ -99,7 +115,7 @@ table {
 th,
 td {
   border: 1px solid var(--fg-dim);
-  padding: 0.4rem 0.7rem;
+  padding: 0.6rem 0.8rem;
   text-align: left;
 }
 code {

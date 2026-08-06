@@ -1,11 +1,20 @@
 .highlight {
   position: relative;
   margin: 1.25rem 0;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0;
   overflow: auto;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.highlight.is-copied {
+  border-color: var(--success);
+}
+.chroma span {
+  cursor: text;
 }
 .chroma {
+  margin: 0;
   color: var(--fg);
   background-color: var(--bg-elevated);
   padding: 0.6rem 0.8rem;
@@ -98,36 +107,4 @@
 }
 .chroma .gu {
   color: var(--comment);
-}
-.copy-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: 0;
-  font-size: 0.8rem;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  color: var(--comment);
-  cursor: pointer;
-  opacity: 0;
-  transition:
-    opacity 0.15s ease,
-    color 0.15s ease;
-}
-.highlight:hover .copy-btn,
-.copy-btn:focus-visible {
-  opacity: 1;
-}
-.copy-btn:hover {
-  color: var(--accent);
-}
-.copy-btn.is-copied {
-  color: var(--success);
-  opacity: 1;
 }

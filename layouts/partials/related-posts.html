@@ -10,12 +10,4 @@
     {{ end }}
   </ul>
 </nav>
-<details class="post-related-mobile">
-  <summary>Related Posts</summary>
-  <ul>
-    {{ range $related }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-    {{ end }}
-  </ul>
-</details>
 {{- end -}}
