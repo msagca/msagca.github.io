@@ -128,7 +128,10 @@ code {
   background: var(--bg-elevated);
   padding: 0.15em 0.4em;
   border-radius: 4px;
-  overflow-wrap: break-word;
+  /* Allow inline code to wrap and break long uninterrupted identifiers */
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-wrap: break-word; /* legacy */
 }
 .visually-hidden {
   position: absolute;
