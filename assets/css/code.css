@@ -108,3 +108,9 @@
 .chroma .gu {
   color: var(--comment);
 }
+.chroma,
+.highlight {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
