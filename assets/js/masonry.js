@@ -25,7 +25,10 @@
     document.fonts.ready.then(layoutAll);
   }
   var resizeTimer;
+  var lastWidth = window.innerWidth;
   window.addEventListener("resize", function () {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(layoutAll, 150);
   });
