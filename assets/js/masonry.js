@@ -5,7 +5,7 @@
     if (grid.offsetParent === null) return;
     var gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
     var cards = [].slice.call(grid.children).filter(function (el) {
-      return el.classList.contains("card");
+      return el.classList.contains("card") && !el.hidden;
     });
     cards.forEach(function (card) {
       card.style.gridRowEnd = "";

@@ -31,6 +31,7 @@
     } else {
       chip.hidden = true;
     }
+    if (window.SiteMasonry) window.SiteMasonry.layout();
   }
   grid.querySelectorAll(".card-series-filter").forEach(function (btn) {
     btn.addEventListener("click", function () {
