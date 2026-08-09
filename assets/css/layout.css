@@ -44,8 +44,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 2.2rem;
+  height: 2.2rem;
   color: var(--comment);
   border-radius: 50%;
   transition:
@@ -58,15 +58,15 @@
   text-decoration: none;
 }
 .social-links i {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 .icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   border: none;
   background: transparent;
@@ -82,12 +82,12 @@
   text-decoration: none;
 }
 .icon-btn svg {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.15rem;
+  height: 1.15rem;
   fill: currentColor;
 }
 .icon-btn i {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 .scheme-picker {

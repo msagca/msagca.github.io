@@ -2,6 +2,7 @@
 title: "Adding Frustum Culling to My Engine"
 date: 2025-09-19
 tags: ["C++"]
+series: "Kuki"
 math: true
 ---
 

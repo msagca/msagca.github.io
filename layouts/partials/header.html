@@ -6,9 +6,13 @@
     </a>
 
     {{ with site.Menus.social }}
-    <ul class="social-links">
-      {{ range . }}{{ partial "social-link.html" . }}{{ end }}
-    </ul>
+    <div class="row-scroll">
+      <button type="button" class="row-scroll-arrow row-scroll-arrow--prev icon-btn" aria-label="Scroll left" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+      <ul class="social-links row-scroll-track">
+        {{ range . }}{{ partial "social-link.html" . }}{{ end }}
+      </ul>
+      <button type="button" class="row-scroll-arrow row-scroll-arrow--next icon-btn" aria-label="Scroll right" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    </div>
     {{ end }}
   </div>
 

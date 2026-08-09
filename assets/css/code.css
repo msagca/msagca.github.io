@@ -8,7 +8,7 @@
   transition: border-color 0.2s ease;
 }
 .highlight.is-copied {
-  border-color: var(--success);
+  border-color: var(--emphasis);
 }
 .chroma span {
   cursor: text;
@@ -21,7 +21,7 @@
   border: none;
   border-radius: 0;
   overflow: auto;
-  font-size: 0.88rem;
+  font-size: 0.94rem;
 }
 .chroma .hl {
   background-color: color-mix(in srgb, var(--accent) 15%, transparent);

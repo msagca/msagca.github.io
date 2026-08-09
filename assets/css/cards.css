@@ -140,6 +140,16 @@
   padding: 0.15rem 0.5rem;
   border-left: 1px solid color-mix(in srgb, currentColor 35%, transparent);
 }
+.card-tags-scroll {
+  justify-content: flex-end;
+}
+.card-tags-scroll .row-scroll-arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.card-tags-scroll .row-scroll-arrow i {
+  font-size: 0.68rem;
+}
 .card-tags {
   list-style: none;
   display: flex;

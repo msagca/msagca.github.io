@@ -14,11 +14,22 @@
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format ":date_full" .Date }}</time>
         {{ if site.Params.readingTime | default true }}<span class="post-reading-time">{{ .ReadingTime }} min read</span>{{ end }}
       </div>
-      {{ with .Params.tags }}
-      <ul class="tag-list">
-        {{ range . }}<li><a href="{{ "/" | relLangURL }}?tag={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
-      </ul>
-      {{ end }}
+      <div class="post-tags-row">
+        {{ with .Params.tags }}
+        <div class="row-scroll post-tags-scroll">
+          <button type="button" class="row-scroll-arrow row-scroll-arrow--prev icon-btn" aria-label="Scroll tags left" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          <ul class="tag-list row-scroll-track">
+            {{ range . }}<li><a href="{{ "/" | relLangURL }}?tag={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
+          </ul>
+          <button type="button" class="row-scroll-arrow row-scroll-arrow--next icon-btn" aria-label="Scroll tags right" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+        {{ end }}
+        <div class="post-share">
+          <button type="button" class="icon-btn" id="post-share-btn" title="Share" aria-label="Share">
+            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </header>
 
     <div class="post-body">

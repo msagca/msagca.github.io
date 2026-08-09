@@ -5,7 +5,8 @@
     var lastY = window.scrollY;
     var ticking = false;
     var onScroll = function () {
-      var y = window.scrollY;
+      var maxY = document.documentElement.scrollHeight - window.innerHeight;
+      var y = Math.max(0, Math.min(window.scrollY, maxY));
       if (y > lastY && y > header.offsetHeight) {
         header.classList.add("site-header--hidden");
       } else {

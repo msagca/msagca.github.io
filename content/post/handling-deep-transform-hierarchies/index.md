@@ -2,6 +2,7 @@
 title: "Handling Deep Transform Hierarchies"
 date: 2026-02-07
 tags: ["C++"]
+series: "Kuki"
 ---
 
 `Transform` component of an entity in a game scene encodes where that entity is in the scene, how it's oriented, what is its relation to other entities, and so on. It's a crucial component in game engines, and must be attached to most (or all) entities since multiple systems may require it to carry out their tasks. In my game engine, and many others, its definition more or less looks like this:

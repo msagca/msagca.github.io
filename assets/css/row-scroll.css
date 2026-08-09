@@ -1,0 +1,29 @@
+.row-scroll {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.row-scroll-track {
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.row-scroll-track::-webkit-scrollbar {
+  display: none;
+}
+.row-scroll-track > * {
+  flex-shrink: 0;
+}
+.row-scroll-arrow {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.row-scroll-arrow[hidden] {
+  display: none;
+}

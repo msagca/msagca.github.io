@@ -1,2 +1,3 @@
 mainSections = ["post"]
 readingTime = true
+subtitle = "Posts about graphics programming and game engine architecture"

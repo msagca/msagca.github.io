@@ -6,6 +6,7 @@
 html {
   background: var(--bg);
   color: var(--fg);
+  overscroll-behavior-y: none;
   font-family:
     "Red Hat Display",
     -apple-system,
@@ -57,6 +58,24 @@ h6 {
   line-height: 1.25;
   color: var(--emphasis);
   scroll-margin-top: 5rem;
+}
+h1 {
+  font-size: 1.75rem;
+}
+h2 {
+  font-size: 1.4rem;
+}
+h3 {
+  font-size: 1.15rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.9rem;
+}
+h6 {
+  font-size: 0.8rem;
 }
 h2,
 h3,
@@ -138,13 +157,33 @@ code {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+.post-tags-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 0.5rem 0;
+}
+.post-tags-scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.post-share {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.post-share .icon-btn.is-copied {
+  color: var(--emphasis);
+}
 .tag-list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0;
-  margin: 0.5rem 0;
+  margin: 0;
 }
 .tag-list a {
   display: inline-block;

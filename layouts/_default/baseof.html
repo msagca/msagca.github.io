@@ -36,5 +36,15 @@
   {{ $filter := resources.Get "js/post-filter.js" }}
   {{ if hugo.IsProduction }}{{ $filter = $filter | js.Build | minify | fingerprint }}{{ else }}{{ $filter = $filter | js.Build }}{{ end }}
   <script src="{{ $filter.RelPermalink }}" defer></script>
+
+  {{ $rowScroll := resources.Get "js/row-scroll.js" }}
+  {{ if hugo.IsProduction }}{{ $rowScroll = $rowScroll | js.Build | minify | fingerprint }}{{ else }}{{ $rowScroll = $rowScroll | js.Build }}{{ end }}
+  <script src="{{ $rowScroll.RelPermalink }}" defer></script>
+
+  {{ if eq .Type "post" }}
+  {{ $share := resources.Get "js/post-share.js" }}
+  {{ if hugo.IsProduction }}{{ $share = $share | js.Build | minify | fingerprint }}{{ else }}{{ $share = $share | js.Build }}{{ end }}
+  <script src="{{ $share.RelPermalink }}" defer></script>
+  {{ end }}
 </body>
 </html>
