@@ -24,6 +24,8 @@
   justify-self: start;
 }
 .site-header-center {
+  display: flex;
+  justify-content: flex-end;
   min-width: 0;
 }
 .site-header-right {
@@ -89,6 +91,9 @@
 .icon-btn i {
   font-size: 1.1rem;
   line-height: 1;
+}
+.search-toggle.is-active {
+  color: var(--accent);
 }
 .scheme-picker {
   display: flex;

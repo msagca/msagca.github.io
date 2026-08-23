@@ -1,14 +1,23 @@
 .search-inline-field {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-end;
+  width: 0;
+  max-width: 100%;
   min-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    width 0.25s ease,
+    opacity 0.15s ease;
+}
+.search-inline-field.is-open {
+  width: 18ch;
+  opacity: 1;
 }
 .search-inline-input {
   width: 100%;
   min-width: 0;
-  max-width: 320px;
   border: none;
   border-bottom: 1px solid var(--fg-dim);
   background: transparent;
@@ -22,13 +31,8 @@
   text-overflow: ellipsis;
 }
 .search-inline-input::placeholder {
-  font-family: "Font Awesome 7 Free";
-  font-weight: 900;
   color: var(--comment);
   opacity: 1;
-}
-.search-inline-input:focus::placeholder {
-  opacity: 0;
 }
 .search-inline-input:focus {
   outline: none;

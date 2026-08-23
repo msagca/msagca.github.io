@@ -1,13 +1,40 @@
 (function () {
   "use strict";
   var input = document.getElementById("search-inline-input");
+  var field = document.getElementById("search-inline-field");
+  var toggle = document.getElementById("search-toggle");
   var pageContent = document.getElementById("page-main-content");
   var resultsPage = document.getElementById("search-results-page");
   var grid = document.getElementById("search-results-grid");
   var empty = document.getElementById("search-results-empty");
   var indexUrl = document.currentScript && document.currentScript.dataset.index;
   var data = null;
-  if (!input || !pageContent || !resultsPage || !grid) return;
+  var MIN_CH = 18;
+  var GROW_CH = 8;
+  if (!input || !field || !toggle || !pageContent || !resultsPage || !grid) return;
+  input.tabIndex = -1;
+  function fitWidth() {
+    var ch = Math.max(MIN_CH, input.value.length + GROW_CH);
+    field.style.width = ch + "ch";
+  }
+  function openSearch() {
+    field.classList.add("is-open");
+    toggle.classList.add("is-active");
+    toggle.setAttribute("aria-expanded", "true");
+    input.tabIndex = 0;
+    fitWidth();
+    input.focus();
+  }
+  function closeSearch() {
+    field.classList.remove("is-open");
+    toggle.classList.remove("is-active");
+    toggle.setAttribute("aria-expanded", "false");
+    input.tabIndex = -1;
+    field.style.width = "";
+  }
+  function isOpen() {
+    return field.classList.contains("is-open");
+  }
   function loadIndex() {
     if (data) return Promise.resolve(data);
     return fetch(indexUrl)
@@ -91,18 +118,35 @@
     });
   }
   input.addEventListener("input", function () {
+    fitWidth();
     doSearch(input.value);
+  });
+  toggle.addEventListener("click", function () {
+    if (isOpen()) {
+      if (input.value) {
+        input.value = "";
+        showPage();
+      }
+      closeSearch();
+    } else {
+      openSearch();
+    }
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && document.activeElement === input) {
       input.value = "";
       showPage();
-      input.blur();
+      closeSearch();
       return;
     }
     if ((e.key === "k" || e.key === "/") && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
-      input.focus();
+      openSearch();
     }
+  });
+  document.addEventListener("click", function (e) {
+    if (!isOpen() || input.value) return;
+    if (field.contains(e.target) || toggle.contains(e.target)) return;
+    closeSearch();
   });
 })();
