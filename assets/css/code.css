@@ -21,7 +21,6 @@
   border: none;
   border-radius: 0;
   overflow: auto;
-  font-size: 0.94rem;
 }
 .chroma .hl {
   background-color: color-mix(in srgb, var(--accent) 15%, transparent);

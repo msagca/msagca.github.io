@@ -3,7 +3,7 @@
   var chip = document.getElementById("post-filter-chip");
   var chipLabel = document.getElementById("post-filter-label");
   var chipKind = document.getElementById("post-filter-kind");
-  var grid = document.querySelector("#page-main-content .card-grid");
+  var grid = document.querySelector("#main-content .card-grid");
   if (!chip || !chipLabel || !chipKind || !grid) return;
   var cards = [].slice.call(grid.querySelectorAll(":scope > .card"));
   function cardTags(card) {

@@ -7,22 +7,41 @@
 .post-meta {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
   color: var(--comment);
-  font-size: 0.88rem;
   margin: 0.3rem 0;
 }
+.post-meta-group {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+.post-meta-icon {
+  flex-shrink: 0;
+  margin-right: 0.45rem;
+  color: var(--comment);
+}
+.post-meta-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--icon-box);
+  color: var(--comment);
+}
 .rail-title {
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
   font-weight: 600;
   color: var(--emphasis);
   margin: 0 0 0.6rem;
 }
-.post-toc-rail,
-.post-related-rail {
-  font-size: 0.9rem;
+.rail-title-icon {
+  flex-shrink: 0;
+  margin-right: 0.45rem;
+  color: var(--comment);
 }
 .post-toc-rail ul,
 .post-toc-rail ol,

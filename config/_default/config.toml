@@ -6,6 +6,6 @@ hasCJKLanguage = false
 [pagination]
 pagerSize = 24
 [outputs]
-home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS"]
 [taxonomies]
 tag = "tags"

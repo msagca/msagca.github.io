@@ -3,7 +3,7 @@
 {{- $related = first 5 $related -}}
 {{- if $related }}
 <nav class="post-related-rail" aria-label="Related posts">
-  <p class="rail-title">Related Posts</p>
+  <p class="rail-title"><i class="fa-solid fa-link fa-fw rail-title-icon" aria-hidden="true"></i>Related Posts</p>
   <ul>
     {{ range $related }}
     <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>

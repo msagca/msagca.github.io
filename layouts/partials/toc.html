@@ -1,7 +1,7 @@
 {{- $toc := .TableOfContents -}}
 {{- if findRE "<li>" $toc }}
 <nav class="post-toc-rail" aria-label="Table of contents">
-  <p class="rail-title">Table of Contents</p>
+  <p class="rail-title"><i class="fa-solid fa-list-ul fa-fw rail-title-icon" aria-hidden="true"></i>Table of Contents</p>
   {{ $toc }}
 </nav>
 {{- end -}}
