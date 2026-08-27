@@ -25,7 +25,7 @@ A graphics application requires a window to draw to, but creating a window is OS
 The GLFW source code can be included in a [Git](https://git-scm.com) repository as a submodule.
 
 ```bash
-git submodule add https://github.com/glfw/glfw /external/glfw
+git submodule add https://github.com/glfw/glfw external/glfw
 ```
 
 Then, it can be included in the build via `add_subdirectory`, since it contains a CMakeLists.txt that defines how it should be built.
@@ -90,7 +90,7 @@ In addition to creating windows and contexts, GLFW can also receive input events
 
 ## Minimal Application
 
-With this knowledge, we can create our first OpenGL application that displays a single color background.
+With this knowledge, we can create our first OpenGL application that displays a single color background. The window hints must be set before `glfwCreateWindow`; without them the driver hands back a context of its own choosing, which may not be the 3.3 core profile we generated the loader for.
 
 > Some calls in this program might fail, but the necessary checks are omitted.
 
@@ -100,6 +100,9 @@ With this knowledge, we can create our first OpenGL application that displays a 
 void FramebufferSizeCallback(GLFWwindow*, int, int);
 int main() {
   glfwInit();
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
   glfwMakeContextCurrent(window);
   glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
@@ -120,10 +123,10 @@ void FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 ## Debugging and Logging
 
-OpenGL cannot output its debug messages unless our application provides a way to display them. We can receive these messages by registering a callback function via `glDebugMessageCallback` and process them within this function. The most common way to handle debug messaging is by using a logger like [spdlog](https://github.com/gabime/spdlog) to either store the messages or directly output them to a chosen target (sink) as formatted text.
+OpenGL cannot output its debug messages unless our application provides a way to display them. We can receive these messages by registering a callback function via `glDebugMessageCallback` and process them within this function. This entry point is core from OpenGL 4.3 onwards, and reachable on 3.3 through the `KHR_debug` extension. Two things must also be in place before any message arrives: the window has to be created with `glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE)`, and `glEnable(GL_DEBUG_OUTPUT)` has to be called once the context is current. The most common way to handle debug messaging is by using a logger like [spdlog](https://github.com/gabime/spdlog) to either store the messages or directly output them to a chosen target (sink) as formatted text.
 
 ```bash
-git submodule add https://github.com/gabime/spdlog /external/spdlog
+git submodule add https://github.com/gabime/spdlog external/spdlog
 ```
 
 ```cmake

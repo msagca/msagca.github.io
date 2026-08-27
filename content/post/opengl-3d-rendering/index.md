@@ -46,7 +46,7 @@ To make the camera the origin point of this new coordinate frame, we apply a tra
 In many applications, like most games, we have a moving camera that the user can control in some way. So far, we've hardcoded the arguments when creating a view matrix. In practice, this matrix can be updated as frequently as every frame, e.g., in an FPS game. To implement this, all we need to do is to call the `glm::lookAt` function in the render loop, and specify a dynamic target that is in front of the camera. We've learned that the target position is needed to calculate a `forward` vector. This calculation, however, can also be done in reverse — we can obtain a target by adding the forward vector to the current position. The forward vector must be initialized beforehand, though.
 
 ```cpp
-auto forward = glm::vector3(0.0f, 0.0f, -1.0f);
+auto forward = glm::vec3(0.0f, 0.0f, -1.0f);
 auto view = glm::lookAt(position, position + forward, up);
 ```
 
@@ -72,7 +72,7 @@ One thing to notice is that the final position after 1 second depends on how man
 auto deltaTime = 0.0f;
 auto lastFrame = 0.0f;
 while (!glfwWindowShouldClose(window)) {
-  float currentFrame = glfwGetTime();
+  auto currentFrame = static_cast<float>(glfwGetTime());
   deltaTime = currentFrame - lastFrame;
   lastFrame = currentFrame;
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -90,6 +90,10 @@ forward.x = cos(yaw) * cos(pitch);
 forward.y = sin(pitch);
 forward.z = sin(yaw) * cos(pitch);
 ```
+
+> Note that these equations put the camera on the _x_-axis when `yaw` is 0. To match the `forward` vector of
+> $(0,0,-1)$ we started with, `yaw` must be initialized to $-90^\circ$; otherwise the view snaps
+> sideways as soon as the mouse is moved.
 
 If `forward` vector is modified, `right` and `up` vectors should be updated as well to re-orient the coordinate frame.
 
@@ -138,11 +142,11 @@ int main() {
 
 ## Projection
 
-Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogenous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The _w_ component was added for convenience — to enable translation to be expressed as matrix multiplication. At projection stage, we repurpose this component to store the depth information. But, _z_ already represents depth (distance from camera) in view space, why do we need to use the _w_ component? After applying the projection, _z_ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space _z_ value into _w_. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, _w_ remains 1 throughout the pipeline. Now, let's explore these two types of projection.
+Clip space is the result of applying a projection matrix to a region of the view space defined by some boundaries. This bounded region is called the **viewing volume**, and any point inside this volume that survives the **depth test** will end up on the screen. In clip space, points are represented using homogeneous coordinates, i.e., $(x,y,z,w)$, and are not yet normalized, i.e., they're not in the form $(x',y',z')$. The _w_ component was added for convenience — to enable translation to be expressed as matrix multiplication. At the projection stage, we repurpose this component to store the depth information. But, _z_ already represents depth (distance from camera) in view space, why do we need to use the _w_ component? After applying the projection, _z_ is no longer the original depth — it's been remapped for the depth buffer (usually to $[0,1]$ range). The projection matrix typically puts the original view space _z_ value into _w_. Note that this is only needed when **perspective projection** is used — for perspective division that happens after the projection matrix is applied. On the other hand, in **orthographic projection**, _w_ remains 1 throughout the pipeline. Now, let's explore these two types of projection.
 
 ### Orthographic Projection
 
-This type of projection is an affine transformation — it preserves straight lines, and ratios along a line (e.g., midpoints stay midpoints). It can be expressed as a combination of a linear transformation and a translation in Cartesian coordinates. To create an orthographic projection matrix, we first define a cubic viewing volume (a **cuboid**) bounded by six axis-aligned planes: near (_n_), far (_f_), left (_l_), right (_r_), bottom (_b_), and top (_t_). Then, we calculate the scaling factors and translation amounts that map each point in this volume to clip space ($[l, r][b, t][n, f] \rightarrow [-1,1]^3$), which is equal to NDC when using orthographic projection.
+This type of projection is an affine transformation — it preserves straight lines, and ratios along a line (e.g., midpoints stay midpoints). It can be expressed as a combination of a linear transformation and a translation in Cartesian coordinates. To create an orthographic projection matrix, we first define a box-shaped viewing volume (a **cuboid**) bounded by six axis-aligned planes: near (_n_), far (_f_), left (_l_), right (_r_), bottom (_b_), and top (_t_). Then, we calculate the scaling factors and translation amounts that map each point in this volume to clip space ($[l, r][b, t][n, f] \rightarrow [-1,1]^3$), which is equal to NDC when using orthographic projection.
 
 > _x_e_ is the eye (view) space, _x_c_ is the clip space, and _x_n_ is the NDC space coordinate.
 
@@ -152,12 +156,12 @@ $$
 \Rightarrow x_c &= \frac{2x_e-(r+l)}{r-l} \\
 \frac{y_c}{1-(-1)} &= \frac{y_e-\frac{t+b}{2}}{t-b} \\
 \Rightarrow y_c &= \frac{2y_e-(t+b)}{t-b} \\
-\frac{z_c}{1-(-1)} &= -\frac{z_e-\frac{f+n}{2}}{f-n} \\
-\Rightarrow z_c &= \frac{2z_e-(f+n)}{n-f}
+\frac{z_c}{1-(-1)} &= -\frac{z_e+\frac{f+n}{2}}{f-n} \\
+\Rightarrow z_c &= \frac{-2z_e-(f+n)}{f-n}
 \end{aligned}
 $$
 
-We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the _xy_-plane, i.e., _l_ and _b_ are equal to negative _r_ and _t_, respectively. By convention, near and far planes are given as positive distances. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the _z_-axis is negated, because larger (less negative) _z_ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
+We subtract the midpoint, e.g., $(r+l)\div2$, from each coordinate so that the points on the left map to $[-1,0]$ while those on the right map to $[0,1]$. The cuboid is usually centered on the _xy_-plane, i.e., _l_ and _b_ are equal to negative _r_ and _t_, respectively. By convention, near and far planes are given as positive distances, but the volume itself lies on the negative _z_-axis in view space, spanning $[-n,-f]$. Its midpoint is therefore $-\frac{f+n}{2}$, which is why the _z_ equation adds $\frac{f+n}{2}$ where the _x_ and _y_ equations subtract theirs. As opposed to view space, NDC uses the left-handed coordinate system, i.e., **far** maps to 1, and **near** maps to $-1$. Scale along the _z_-axis is negated, because larger (less negative) _z_ coordinates represent points that are closer to the near plane. This set of equations can be written in matrix form as follows:
 
 $$
 \begin{aligned}
@@ -189,21 +193,21 @@ w_e
 \end{aligned}
 $$
 
-This matrix can be created by calling `glm::ortho` with the plane coordinates as inputs. To prevent stretching or squashing due to a mismatch in aspect ratio between the viewport and the viewing volume, we multiply the width (length along the _x_-axis) of the cuboid with the aspect ratio ($width/height$).
+This matrix can be created by calling `glm::ortho` with the plane coordinates as inputs. Note the variables are named `zNear` and `zFar` rather than `near` and `far`: on Windows, `minwindef.h` defines both of those as empty macros, so any translation unit that reaches `<windows.h>` — directly or through a dependency — will mangle them into errors that point at the wrong line. To prevent stretching or squashing due to a mismatch in aspect ratio between the viewport and the viewing volume, we multiply the width (length along the _x_-axis) of the cuboid with the aspect ratio ($width/height$).
 
 ```cpp
 auto size = 2.0f;
 auto aspect = 16.0f / 9;
-auto near = 0.1f;
-auto far = 100.0f;
+auto zNear = 0.1f;
+auto zFar = 100.0f;
 auto left = -size * aspect;
 auto bottom = -size;
-glm::mat4 projection = glm::ortho(left, -left, bottom, -bottom, near, far);
+glm::mat4 projection = glm::ortho(left, -left, bottom, -bottom, zNear, zFar);
 ```
 
 ### Perspective Projection
 
-Orthographic projection has its uses in many engineering applications since it preserves relative sizes of objects, i.e., there is no sense of depth. However, in many other 3D applications, we want to see realistic results. In the context of projection, realism can be achieved by simulating the natural phenomenon of perspective foreshortening — objects appear smaller when they are moved farther away from the eye (camera). For example, a human that is close to the camera may appear the same height as a mountain that is miles away. It's clear that a cuboid cannot represent this viewing volume — if it barely covers a human close to the near frame, it will cover only a fraction of the mountain at the other end, due to both faces having the same area. A more appropriate volume would have a pyramid-like shape, which extends in cross-sectional area with increasing distance. However, its top will be cut off due to near plane being slightly larger than zero (for various reasons). This unique shape is called a **frustum**.
+Orthographic projection has its uses in many engineering applications since it preserves relative sizes of objects, i.e., there is no sense of depth. However, in many other 3D applications, we want to see realistic results. In the context of projection, realism can be achieved by simulating the natural phenomenon of perspective foreshortening — objects appear smaller when they are moved farther away from the eye (camera). For example, a human that is close to the camera may appear the same height as a mountain that is miles away. It's clear that a cuboid cannot represent this viewing volume — if it barely covers a human close to the near plane, it will cover only a fraction of the mountain at the other end, due to both faces having the same area. A more appropriate volume would have a pyramid-like shape, which extends in cross-sectional area with increasing distance. However, its top will be cut off because the near plane sits slightly in front of the eye (for various reasons). This unique shape is called a **frustum**.
 
 In orthographic projection, we projected each component of a point independently through linear transformations (scale + translate). In perspective projection, we have to map points on both near and far planes (and those in between) to the same $[-1,1]$ range, which implies that the larger plane must be "squeezed" more, and the scale amount is proportional to the depth. Scaling by _z_ (depth) is not a linear transformation — it's division by a component of the input vector. This cannot be represented as matrix multiplication; hence, it has to happen in a separate step called **perspective division**, after the projection matrix has been applied. Since we will lose the original _z_e_ value when we move from view space to clip space, we will store it in the _w_c_ component.
 
@@ -216,7 +220,7 @@ $$
 \end{aligned}
 $$
 
-Once they're on the near plane, we can linearly map both _x_p_ and _y_p_ to NDC (_x_n_ and _y_n_) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in _w_c_. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the multiplication of the NDC coordinates with _z_e_ are just clip space coordinates.
+Once they're on the near plane, we can linearly map both _x_p_ and _y_p_ to NDC (_x_n_ and _y_n_) just like we did in orthographic projection. However, we were supposed to go from eye space to NDC, so we need to rewrite the projected coordinates in terms of the eye space coordinates, which we calculated above. Remember that we can't represent division by $-z_e$ in matrix form, which is the reason we'll store the value in _w_c_. Hence, we can get rid of the $-z_e$ in the denominator by multiplying everything by it. Notice that the NDC coordinates multiplied by $-z_e$ are just the clip space coordinates.
 
 $$
 \begin{aligned}
@@ -279,14 +283,14 @@ $$
 ```cpp
 auto fov = glm::radians(45.0f);
 auto aspect = 16.0f / 9;
-auto near = 0.1f;
-auto far = 100.0f;
-glm::mat4 projection = glm::perspective(fov, aspect, near, far);
+auto zNear = 0.1f;
+auto zFar = 100.0f;
+glm::mat4 projection = glm::perspective(fov, aspect, zNear, zFar);
 ```
 
 ## Depth Buffer
 
-Perspective projection remaps _z_ into a normalized range $[-1,1]$ in NDC; however, unlike orthographic projection, this mapping is nonlinear (by design), which gives higher precision to depths closer to the near plane. For example, a point halfway between the near and far planes of the frustum will end up closer to the near side of the cube. This mimics how we see in real world — our eyes are more sensitive to depth changes nearby. On the other hand, it has side effects like **depth fighting** in distant geometry, i.e., there is not enough precision to reliably determine which vertex is in front of the other, and this leads to flickering, tearing or shimmering.
+Perspective projection remaps _z_ into a normalized range $[-1,1]$ in NDC; however, unlike orthographic projection, this mapping is nonlinear (by design), which gives higher precision to depths closer to the near plane. For example, with a near plane at $0.1$ and a far plane at $100$, a point halfway between them lands at $0.998$ in NDC — almost flush against the far side of the cube, because the near half of the frustum has already consumed nearly the whole range. This mimics how we see in real world — our eyes are more sensitive to depth changes nearby. On the other hand, it has side effects like **z-fighting** in distant geometry, i.e., there is not enough precision to reliably determine which fragment is in front of the other, and this leads to flickering, tearing or shimmering.
 
 OpenGL stores a per-fragment depth information in a **depth buffer** (or _z_-buffer). Just like a color buffer, a default depth buffer is created by GLFW. When depth testing is enabled, OpenGL compares a fragment's depth with the existing value in the buffer; if the fragment is in front, value in the buffer is overwritten. This way, objects closer to the camera become the ones appearing in the final image. Depth testing is disabled by default — an OpenGL capability can be enabled via a `glEnable` call by specifying an ID. When it's enabled, depth buffer should be included in the `glClear` calls to remove residual data from the previous frame.
 
@@ -376,7 +380,7 @@ unsigned int indices[] = {
 };
 ```
 
-Previously, we had to store $36\cdot 3\cdot 4=432$ bytes of data (a `float` is 4 bytes in most systems); now, we only need a storage area of $8\cdot 3\cdot 4+12\cdot 3\cdot 4=240$ bytes, which is a $44\%$ reduction. If a `byte` or `short` is sufficient to store the indices, and vertex reuse is high in the mesh, memory savings can be even more. However, GPUs today have huge amounts of memory, which makes it pointless to look for small optimizations like this. Now, let's see how we would use the `indices` buffer to draw a cube.
+Previously, we had to store $36\cdot 3\cdot 4=432$ bytes of data (a `float` is 4 bytes in most systems); now, we only need a storage area of $8\cdot 3\cdot 4+12\cdot 3\cdot 4=240$ bytes, which is a $44\%$ reduction. If a `byte` or `short` is sufficient to store the indices, and vertex reuse is high in the mesh, memory savings can be even more. The bytes saved are not the main reason to use an index buffer, though: a vertex referenced by several triangles is transformed once instead of once per triangle, because the GPU keeps recently processed vertices in a post-transform cache and looks them up by index. Fewer vertex shader invocations, and less data crossing the bus per draw. Now, let's see how we would use the `indices` buffer to draw a cube.
 
 ```cpp
 GLuint ebo;
@@ -401,7 +405,7 @@ glBindVertexArray(0);
 
 ## MVP
 
-To obtain the final position of a vertex in clip space, we apply the model, view and projection (MVP) transforms in succession ($PVM\vec{v}$). Our vertex shader now has three `uniform mat4` inputs each of whom shall be sent separately to the GPU. The model matrix should also encode parent transformations if there is a hierarchy.
+To obtain the final position of a vertex in clip space, we apply the model, view and projection (MVP) transforms in succession ($PVM\vec{v}$). Our vertex shader now has three `uniform mat4` inputs, each of which must be sent separately to the GPU. The model matrix should also encode parent transformations if there is a hierarchy.
 
 ```glsl
 #version 330 core

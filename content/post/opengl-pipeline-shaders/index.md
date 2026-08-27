@@ -132,16 +132,17 @@ std::stringstream ss;
 ss << fs.rdbuf();
 fs.close();
 std::string vertexText = ss.str();
+const char* vertexSource = vertexText.c_str();
 // compile the shader
 GLuint vertexShader;
 vertexShader = glCreateShader(GL_VERTEX_SHADER);
-glShaderSource(vertexShader, 1, &vertexText.c_str(), NULL);
+glShaderSource(vertexShader, 1, &vertexSource, NULL);
 glCompileShader(vertexShader);
 ```
 
 ## Fragment Shader
 
-A **fragment** contains all the data that is needed to shade a pixel. A **fragment shader** usually has a single color output. Unlike the vertex shader, there is no predefined output variables (they are deprecated). OpenGL assigns the location 0 to the first output by default, but it can also be specified manually, especially when there are multiple outputs. The following is a fragment shader that assigns a predefined color to the output. The fourth component in the color vector is the alpha value that is used in [blending](https://www.khronos.org/opengl/wiki/Blending).
+A **fragment** contains all the data that is needed to shade a pixel. A **fragment shader** usually has a single color output. Unlike the vertex shader, there are no predefined output variables (they are deprecated). OpenGL assigns the location 0 to the first output by default, but it can also be specified manually, especially when there are multiple outputs. The following is a fragment shader that assigns a predefined color to the output. The fourth component in the color vector is the alpha value that is used in [blending](https://www.khronos.org/opengl/wiki/Blending).
 
 ```glsl
 #version 330 core
@@ -193,8 +194,8 @@ Let's update our `vertices` array to include per-vertex color data:
 ```cpp
 float vertices[] = {
   // x, y, z, r, g, b
-  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // A
-  -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // B
+  -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // A
+  0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // B
   0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f // C
 };
 ```

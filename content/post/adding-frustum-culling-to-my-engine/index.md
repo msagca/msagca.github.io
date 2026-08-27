@@ -6,7 +6,7 @@ series: "Kuki"
 math: true
 ---
 
-Even though not every object in a 3D scene appears on the screen, their data is still sent to the GPU for processing, only to be discarded later in the rendering pipeline. This increases the number of draw calls needed to render the scene, which adds extra latency and processing costs. However, we could just pick the objects that lie inside the viewing volume of the camera and send only the data associated with this subset of entities to the GPU. This is what **Frustum Culling** does, and it can dramatically improve the performance in many applications.
+Even though not every object in a 3D scene appears on the screen, their data is still sent to the GPU for processing, only to be discarded later in the rendering pipeline. Those draw calls are pure waste: the CPU pays to issue them and the GPU pays to transform and clip geometry that was never going to be seen. However, we could just pick the objects that lie inside the viewing volume of the camera and send only the data associated with this subset of entities to the GPU. This is what **Frustum Culling** does, and it can dramatically improve the performance in many applications.
 
 > The name is somewhat of a misnomer as this technique can be applied to orthographic cameras as well.
 
@@ -14,7 +14,7 @@ Frustum culling operates by iterating over a list of objects (entities) in the a
 
 ## Bounding Box
 
-A bounding box is a 3D volume that contains all the vertices of a mesh. Ideally, it should tightly contain the mesh so it could be accurately determined if the object intersects the frustum. An axis aligned bounding box (AABB), where each face is parallel to either one of the _xz_, _xy_ or _yz_ plane, is good enough in many cases. Though, there could be cases such as a model of the [Leaning Tower of Pisa](https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa) that might require special handling. In my AABB implementation, I use two points that are the corners with the minimum and maximum coordinate values. These points are given in model space and are valid for the original scale.
+A bounding box is a 3D volume that contains all the vertices of a mesh. Ideally, it should tightly contain the mesh so it could be accurately determined if the object intersects the frustum. An axis aligned bounding box (AABB), where each face is parallel to one of the _xz_, _xy_ or _yz_ planes, is good enough in many cases. Though, there could be cases such as a model of the [Leaning Tower of Pisa](https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa) that might require special handling. In my AABB implementation, I use two points that are the corners with the minimum and maximum coordinate values. These points are given in model space and are valid for the original scale.
 
 > In the following code, the definitions should either be marked `inline` or put in a separate (source) file to prevent multiple definition errors.
 
@@ -24,7 +24,7 @@ struct BoundingBox {
   glm::vec3 max{};
   BoundingBox();
   BoundingBox(glm::vec3, glm::vec3);
-  BoundingBox GetWorldBounds(glm::mat4);
+  BoundingBox GetWorldBounds(const glm::mat4&) const;
 };
 
 BoundingBox::BoundingBox()
@@ -56,7 +56,7 @@ void AssetLoader::CalculateBounds(Mesh& mesh, const std::vector<Vertex>& vertice
 Since we need to check for intersections with the camera frustum, we need to bring the local bounds to the world space. The following method accepts a world transform and calculates a new bounding box that contains the transformed points. Notice that we apply the transformation to each of the 8 corners of the box and take all into consideration. The reason is that the original extremes might get replaced by other corners after transformations like rotation or non-uniform scale.
 
 ```cpp
-BoundingBox BoundingBox::GetWorldBounds(const glm::mat4& transform) {
+BoundingBox BoundingBox::GetWorldBounds(const glm::mat4& transform) const {
   glm::vec3 corners[8] = {
     {min.x, min.y, min.z},
     {max.x, min.y, min.z},
@@ -114,7 +114,7 @@ float Plane::SignedDistance(const glm::vec3& point) const {
 }
 ```
 
-For a box to be considered on the positive side of a plane, any portion of it must lie on the positive side. However, we don't need to test every corner, we're only interested in the one that is most likely to pass the test. This is the corner that is most aligned with the plane normal (i.e., that would result in the most positive dot product). If correctly calculated, the `max` coordinates of a bounding box must be greater than the `min` coordinates — `max.x` is greater than `min.x` and so on. To find the corner farthest in the normal’s direction, check the sign of each normal component and choose the box’s min or max value on that axis accordingly — always taking the value that lies farther along the normal. It doesn't matter if it has the same sign as the normal component or not — if `normal.x` is positive and both `bounds.min` and `bounds.max` are in the negative x-axis, then `bounds.max` is the more positive (less negative) of the two in the normal direction. After determining which one of the eight points is the best candidate, we calculate its signed distance from the plane to see if it's on the positive side.
+For a box to be considered on the positive side of a plane, any portion of it must lie on the positive side. However, we don't need to test every corner, we're only interested in the one that is most likely to pass the test. This is the corner that is most aligned with the plane normal (i.e., that would result in the most positive dot product). If correctly calculated, the `max` coordinates of a bounding box must be greater than the `min` coordinates — `max.x` is greater than `min.x` and so on. To find the corner farthest in the normal's direction, check the sign of each normal component and choose the box's min or max value on that axis accordingly — always taking the value that lies farther along the normal. It doesn't matter if it has the same sign as the normal component or not — if `normal.x` is positive and both `bounds.min` and `bounds.max` are in the negative x-axis, then `bounds.max` is the more positive (less negative) of the two in the normal direction. After determining which one of the eight points is the best candidate, we calculate its signed distance from the plane to see if it's on the positive side.
 
 ```cpp
 bool Plane::OnPositiveSide(const BoundingBox& bounds) const {
@@ -138,19 +138,23 @@ bool Frustum::InFrustum(const BoundingBox& bounds) const {
 }
 ```
 
+> This test is conservative: a box can be on the positive side of all six planes and still fall outside
+> the frustum near a corner. That only costs us a draw call for something off screen, which is a fine
+> trade for six dot products.
+
 The implementation is then straightforward: get a reference to the active `Camera` object and call `InFrustum` for each entity that has a `MeshFilter` (container for `Mesh`) component, then initiate draw calls for the ones that pass the test. There are obviously ways to optimize this process. Instead of individual draw calls, we could group entities that share the same mesh and material settings, and do instanced rendering. I won't get into that in this post, but I would like to talk about another technique that could significantly reduce the number of tests performed.
 
 ## Spatial Partitioning
 
-If a scene contains _n_ entities, we have to perform _n_ tests to obtain a set of visible entities. This has $O(n)$ time complexity, but we could do better. If you have ever attempted to solve a [LeetCode](https://leetcode.com/) problem and your $O(n)$ solution timed out for a large input, then you know that the next best thing you can do is $O(\log{n})$. To achieve that, we have to employ a divide-and-conquer technique. Currently, we have _n_ (invisible) bounding boxes in the scene, each containing an entire object. What if these boxes too were contained inside bigger boxes, and those inside even bigger ones, stacked like [Matryoshka dolls](https://en.wikipedia.org/wiki/Matryoshka_doll), up to a single huge box that contains the entire scene?
+If a scene contains _n_ entities, we have to perform _n_ tests to obtain a set of visible entities. This has $O(n)$ time complexity. We cannot beat that in the worst case, since the test has to return every visible entity, and a camera pointed at the bulk of the scene sees most of them. What we can do is make the cost track the number of entities actually in view rather than the size of the scene, by rejecting whole groups of them with a single test. To achieve that, we have to employ a divide-and-conquer technique. Currently, we have _n_ (invisible) bounding boxes in the scene, each containing an entire object. What if these boxes too were contained inside bigger boxes, and those inside even bigger ones, stacked like [Matryoshka dolls](https://en.wikipedia.org/wiki/Matryoshka_doll), up to a single huge box that contains the entire scene?
 
-An [octree](https://www.open3d.org/docs/release/tutorial/geometry/octree.html) is a data structure where each node has exactly eight children. It can be used to partition 3D space such that each axis is split in half at the origin to create eight subdivisions (octants). Each node can be further (recursively) subdivided as needed. In practice, we work with a bounded volume that is large enough to contain the entire scene or the part we're interested in.
+An [octree](https://www.open3d.org/docs/release/tutorial/geometry/octree.html) is a data structure where each internal node has up to eight children — leaf nodes, which is where the entities actually sit, have none. It can be used to partition 3D space such that each axis is split in half at the node's own center to create eight subdivisions (octants). Each node can be further (recursively) subdivided as needed. In practice, we work with a bounded volume that is large enough to contain the entire scene or the part we're interested in.
 
 Initially, every object is inside the root node that is a cubic volume centered around the origin. A node stores a list of items (entities) whose bounding boxes either intersect or are fully contained by the node's volume, which is a bigger box. If the number of items in a node exceeds a certain limit, the node subdivides and distributes its items to its children. This can be implemented in various ways; for example, if no child fully contains the item it remains associated with the parent. If items are being removed, the opposite happens, that is, the child nodes collapse (merge) by giving their items back to their parent node. But, how does this help with frustum culling?
 
-> The upper limit for subdivision should be set proportional to the node volume — child nodes shall have lower limits, e.g., 1/8 of those of the parent node.
+> The upper limit for subdivision should be set proportional to the node volume — child nodes should have lower limits, e.g., 1/8 of those of the parent node.
 
-Without partitioning, we have to check every bounding box for intersection with the frustum to determine the objects to be culled. However, after just one subdivision, we put those objects into 8 separate boxes (9 including the root node). If any one of these big boxes does not intersect with the camera, then this means that the objects inside it are out of the view, and there is no need to individually test them. With deeper hierarchies, and optimal limits, the search space can be reduced even further.
+Without partitioning, we have to check every bounding box for intersection with the frustum to determine the objects to be culled. However, after just one subdivision, we put those objects into 8 separate boxes, plus the root itself for anything that straddles a boundary and so is not fully contained by any child. If any one of these big boxes does not intersect the frustum, then this means that the objects inside it are out of the view, and there is no need to individually test them. With deeper hierarchies, and optimal limits, the search space can be reduced even further.
 
 The following is a demonstration of frustum culling applied to a scene represented by an octree.
 

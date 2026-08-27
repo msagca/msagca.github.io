@@ -117,7 +117,7 @@ $$
 
 > Dot product is commutative, that is, $\vec{a}\cdot\vec{b}$ is equal to $\vec{b}\cdot\vec{a}$.
 
-A geometric space, e.g., a Euclidean space, is a vector space plus an inner product that defines lengths of vectors, angles between vectors, or orthogonality. An **inner product**, e.g., the dot product, is an operation that takes two vectors and produces a single scalar in a way that encodes geometric meaning — it lets us talk about lengths, angles, and orthogonality inside a vector space.
+A vector space paired with an inner product is called an **inner product space**, and it is the inner product that gives us lengths of vectors, angles between vectors, and orthogonality. A Euclidean space is one such space. An **inner product**, e.g., the dot product, is an operation that takes two vectors and produces a single scalar in a way that encodes geometric meaning — it lets us talk about lengths, angles, and orthogonality inside a vector space.
 
 ### Cross Product
 
@@ -422,7 +422,7 @@ $$
 
 This operation is valid because the translation matrix (_T_) has a dimension of _3x4_ and it is multiplied by a _4x1_ vector, and the resulting vector is of size _3x1_. More importantly, it gives the correct result. So, we've finally obtained a translation matrix by introducing a new dimension.
 
-> When a 3D point is represented in a 4D projective space, the new coordinate system is referred to as **homogenous coordinates**.
+> When a 3D point is represented in a 4D projective space, the new coordinate system is referred to as **homogeneous coordinates**.
 
 There is a problem though. The _w_ component we added to our original vector makes it impossible to perform multiplications with our scale matrix since the dimensions _3x3_ and _4x1_ are not compatible ($3\neq 4$). As a workaround, we could add one extra column of _0s_ to our scale matrix:
 
@@ -616,7 +616,7 @@ An important thing to know is that there are two types of rotations: intrinsic a
 
 > When we talk about rotations, we usually mean intrinsic rotations.
 
-The problems associated with the representation above is not clear at first glance. To give you a clue, the first axis (rightmost in the matrix multiplication, outermost in a three-gimbal mechanism) can spin freely as it's fixed in the world frame, the middle one is orthogonal to both the first and the last by definition, but there is a chance for the first and last to align when the middle axis is at its extremes (e.g., at 90 degrees). When two axes align, rotations around both will have the same effect; hence, we lose one degree of freedom, which is called **gimbal lock**. Changing the multiplication order does not prevent this from happening, it just changes the pair that gets aligned.
+The problems associated with the representation above are not clear at first glance. To give you a clue, picture the three-gimbal mechanism the matrices describe. The outermost ring — the leftmost matrix in the multiplication, and the last one applied — is bolted to the base, so its axis is fixed in the world frame and always spins freely. The innermost ring — the rightmost matrix — carries the object. The middle one is orthogonal to both by construction. When that middle axis reaches its extremes (e.g., at 90 degrees), it swings the innermost axis into alignment with the outermost, which is exactly the pair that the algebra below couples. When two axes align, rotations around both will have the same effect; hence, we lose one degree of freedom, which is called **gimbal lock**. Changing the multiplication order does not prevent this from happening, it just changes the pair that gets aligned.
 
 To avoid gimbal lock, we could limit the movement of the middle axis, and in some cases, we could get away with it. For example, in an FPS game, players rarely look up to the sky or down to the ground, and it won't bother them when the rotation hits its limitations as it would also be physically impossible for a human's head to move beyond those angles. However, this is not a fix, just a mitigation. To eliminate the possibility of a gimbal lock altogether, modern graphics applications represent rotations using [quaternions](https://en.wikipedia.org/wiki/Quaternion).
 
@@ -721,14 +721,14 @@ z \\
 \end{aligned}
 $$
 
-As you can see, if translation is applied first, then the translation vector is scaled as well. If it was rotation that followed translation, then the object would be rotated about a shifted origin, which would result in an arc shaped movement. If scale follows rotation, then it's applied with respect to the new orientation, which would make even a uniform scale look non-uniform. In many applications, we want to scale first, then rotate, and finally translate: $TRS\vec{v}$.
+As you can see, if translation is applied first, then the translation vector is scaled as well. If it was rotation that followed translation, then the object would be rotated about a shifted origin, which would result in an arc-shaped movement. If scale follows rotation, then it's applied with respect to the new orientation, which would make even a uniform scale look non-uniform. In many applications, we want to scale first, then rotate, and finally translate: $TRS\vec{v}$.
 
 ## GLM
 
 In graphics applications, it's common, and often necessary, to perform matrix operations on the CPU. For example, in a game engine, object hierarchies are stored in CPU memory, and the transforms need to be re-calculated only when an object's local transform or a parent transform changes, which can be done more efficiently on the CPU. The **OpenGL Mathematics Library (GLM)** is a header-only C++ math library that provides a large set of classes and functions that follow the same naming conventions and functionality as GLSL. It can be added to a CMake project as we did with GLFW.
 
 ```bash
-git submodule add https://github.com/g-truc/glm /external/glm
+git submodule add https://github.com/g-truc/glm external/glm
 ```
 
 ```cmake
@@ -736,7 +736,7 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/glm")
 target_link_libraries("${PROJECT_NAME}" PUBLIC glm)
 ```
 
-Now, we can include the required GLM headers and define the transformation matrices. We usually start with a unit matrix, and call either one of `glm::rotate`, `glm::scale` or `glm::translate`, to obtain a combined matrix. Since GLM, like OpenGL, represents matrices in **column-major** order, we place the first transformation to apply at the end in the multiplication.
+Now, we can include the required GLM headers and define the transformation matrices. We usually start with an identity matrix, and call either one of `glm::rotate`, `glm::scale` or `glm::translate`, to obtain a combined matrix. Since we represent positions as **column vectors** ($M\vec{v}$), we place the first transformation to apply at the end in the multiplication, as derived above. This is a separate matter from GLM and OpenGL storing matrices in **column-major** order — that describes how the sixteen values are laid out in memory, not the order in which transformations are applied.
 
 ```cpp
 #include <glm/glm.hpp>
@@ -762,7 +762,7 @@ A transformation is typically defined per object — it applies to all vertices 
 
 > Uniform variables are global to the program object; if both vertex and fragment shaders define the same uniform, the linker treats them as referring to the same data.
 
-In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we represent the position in homogenous coordinates so that it's compatible with the matrix, and the _w_ component is `1.0` since this is a position vector.
+In our vertex shader, we can define a uniform of type `mat4` for the transform matrix. Then, we multiply the position vector with this matrix to obtain a final position. Notice that we represent the position in homogeneous coordinates so that it's compatible with the matrix, and the _w_ component is `1.0` since this is a position vector.
 
 ```glsl
 #version 330 core
@@ -773,10 +773,10 @@ void main() {
 }
 ```
 
-To send the transform matrix to the shader, we first need to query its location via `glGetUniformLocation`. It's advised to cache this location for later use since every communication with the graphics driver adds some latency. Then, we can send the transform data by calling `glUniformMatrix4fv` with the following arguments: location, the number of matrices to set, whether to transpose the matrix, and a pointer to the matrix data.
+To send the transform matrix to the shader, we first need to query its location via `glGetUniformLocation`. It's advised to cache this location for later use since every communication with the graphics driver adds some latency. The return type is `GLint`, not `GLuint`, because the call yields `-1` when the name cannot be found — which happens routinely, since the linker strips uniforms that do not affect the output. Then, we can send the transform data by calling `glUniformMatrix4fv` with the following arguments: location, the number of matrices to set, whether to transpose the matrix, and a pointer to the matrix data.
 
 ```cpp
 glUseProgram(shaderProgram);
-GLuint transformLoc = glGetUniformLocation(shaderProgram, "transform");
+GLint transformLoc = glGetUniformLocation(shaderProgram, "transform");
 glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 ```
