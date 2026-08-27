@@ -1,11 +1,10 @@
 .highlight {
   position: relative;
-  margin: 1.25rem 0;
   border: 1px solid transparent;
   border-radius: 0;
   overflow: auto;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 .highlight.is-copied {
   border-color: var(--emphasis);
@@ -53,7 +52,7 @@
   color: var(--func);
 }
 .chroma .no {
-  color: var(--const);
+  color: var(--orange);
 }
 .chroma .l,
 .chroma .ld,
@@ -80,7 +79,7 @@
 .chroma .mi,
 .chroma .il,
 .chroma .mo {
-  color: var(--const);
+  color: var(--orange);
 }
 .chroma .c,
 .chroma .ch,

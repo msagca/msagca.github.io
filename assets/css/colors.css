@@ -4,22 +4,15 @@ html {
   --bg-elevated: #272727;
   --fg: #b0b0b0;
   --fg-dim: #474747;
-  --border: #ffffff;
   --emphasis: #ffffff;
   --func: #ffffff;
   --string: #ffffff;
   --keyword: #777777;
   --comment: #50585d;
   --accent: #458ee6;
-  --info: #8ebeec;
   --success: #86cd82;
-  --warning: #d9ba73;
   --danger: #ff7676;
-  --green: #14ba19;
   --orange: #ff5733;
-  --red: #701516;
-  --pink: #f2a4db;
-  --cyan: #5abfb5;
 }
 html[data-mode="dark"][data-scheme-dark="dark"] {
   color-scheme: dark;
@@ -27,22 +20,15 @@ html[data-mode="dark"][data-scheme-dark="dark"] {
   --bg-elevated: #272727;
   --fg: #b0b0b0;
   --fg-dim: #474747;
-  --border: #ffffff;
   --emphasis: #ffffff;
   --func: #ffffff;
   --string: #ffffff;
   --keyword: #777777;
   --comment: #50585d;
   --accent: #458ee6;
-  --info: #8ebeec;
   --success: #86cd82;
-  --warning: #d9ba73;
   --danger: #ff7676;
-  --green: #14ba19;
   --orange: #ff5733;
-  --red: #701516;
-  --pink: #f2a4db;
-  --cyan: #5abfb5;
 }
 html[data-mode="dark"][data-scheme-dark="moss"] {
   color-scheme: dark;
@@ -50,22 +36,15 @@ html[data-mode="dark"][data-scheme-dark="moss"] {
   --bg-elevated: #182325;
   --fg: #cecece;
   --fg-dim: #30464a;
-  --border: #cecece;
   --emphasis: #71ade7;
   --func: #71ade7;
   --string: #95cb82;
   --keyword: #999999;
   --comment: #707070;
   --accent: #cd974b;
-  --info: #8ebeec;
   --success: #6abf40;
-  --warning: #ec8013;
   --danger: #d2322d;
-  --green: #95cb82;
   --orange: #ec8013;
-  --red: #c33c33;
-  --pink: #cc8bc9;
-  --cyan: #47bea9;
 }
 html[data-mode="light"][data-scheme-light="light"] {
   color-scheme: light;
@@ -73,22 +52,15 @@ html[data-mode="light"][data-scheme-light="light"] {
   --bg-elevated: #ebebeb;
   --fg: #101010;
   --fg-dim: #cccccc;
-  --border: #000000;
   --emphasis: #000000;
   --func: #000000;
   --string: #407f00;
   --keyword: #666666;
   --comment: #969ba5;
   --accent: #0253be;
-  --info: #0253be;
   --success: #407f00;
-  --warning: #b07700;
   --danger: #ca0043;
-  --green: #019833;
   --orange: #f54d27;
-  --red: #701516;
-  --pink: #a200d1;
-  --cyan: #007d7d;
 }
 html[data-mode="light"][data-scheme-light="glade"] {
   color-scheme: light;
@@ -96,22 +68,15 @@ html[data-mode="light"][data-scheme-light="glade"] {
   --bg-elevated: #e2eeee;
   --fg: #000000;
   --fg-dim: #bfd9d9;
-  --border: #999999;
   --emphasis: #325cc0;
   --func: #325cc0;
   --string: #448c27;
   --keyword: #525252;
   --comment: #696969;
   --accent: #bc7500;
-  --info: #007acc;
   --success: #448c27;
-  --warning: #bc7500;
   --danger: #d13e23;
-  --green: #448c27;
   --orange: #ec8013;
-  --red: #aa3731;
-  --pink: #7a3e9d;
-  --cyan: #0083b2;
 }
 html[data-mode="light"][data-scheme-light="latte"] {
   color-scheme: light;
@@ -119,22 +84,15 @@ html[data-mode="light"][data-scheme-light="latte"] {
   --bg-elevated: #e6e9ef;
   --fg: #4c4f69;
   --fg-dim: #9ca0b0;
-  --border: #7c7f93;
   --emphasis: #8839ef;
   --func: #1e66f5;
   --string: #40a02b;
   --keyword: #8839ef;
   --comment: #8c8fa1;
   --accent: #8839ef;
-  --info: #04a5e5;
   --success: #40a02b;
-  --warning: #df8e1d;
   --danger: #d20f39;
-  --green: #40a02b;
   --orange: #fe640b;
-  --red: #d20f39;
-  --pink: #ea76cb;
-  --cyan: #179299;
 }
 html[data-mode="dark"][data-scheme-dark="mocha"] {
   color-scheme: dark;
@@ -142,22 +100,15 @@ html[data-mode="dark"][data-scheme-dark="mocha"] {
   --bg-elevated: #313244;
   --fg: #cdd6f4;
   --fg-dim: #6c7086;
-  --border: #9399b2;
   --emphasis: #cba6f7;
   --func: #89b4fa;
   --string: #a6e3a1;
   --keyword: #cba6f7;
   --comment: #7f849c;
   --accent: #cba6f7;
-  --info: #89dceb;
   --success: #a6e3a1;
-  --warning: #f9e2af;
   --danger: #f38ba8;
-  --green: #a6e3a1;
   --orange: #fab387;
-  --red: #f38ba8;
-  --pink: #f5c2e7;
-  --cyan: #94e2d5;
 }
 html[data-mode="dark"][data-scheme-dark="fall"] {
   color-scheme: dark;
@@ -165,22 +116,15 @@ html[data-mode="dark"][data-scheme-dark="fall"] {
   --bg-elevated: #2b3337;
   --fg: #f8f9e8;
   --fg-dim: #4a585c;
-  --border: #96b4aa;
   --emphasis: #cbe3b3;
   --func: #cbe3b3;
   --string: #dbe6af;
   --keyword: #f57f82;
   --comment: #839e9a;
   --accent: #cbe3b3;
-  --info: #b3e3ca;
   --success: #cbe3b3;
-  --warning: #f5d098;
   --danger: #f57f82;
-  --green: #cbe3b3;
   --orange: #f7a182;
-  --red: #f57f82;
-  --pink: #f3c0e5;
-  --cyan: #b3e6db;
 }
 html[data-mode="dark"][data-scheme-dark="melange"] {
   color-scheme: dark;
@@ -188,22 +132,15 @@ html[data-mode="dark"][data-scheme-dark="melange"] {
   --bg-elevated: #34302c;
   --fg: #ece1d7;
   --fg-dim: #403a36;
-  --border: #867462;
   --emphasis: #e49b5d;
   --func: #ebc06d;
   --string: #a3a9ce;
   --keyword: #e49b5d;
   --comment: #c1a78e;
   --accent: #e49b5d;
-  --info: #89b3b6;
   --success: #85b695;
-  --warning: #ebc06d;
   --danger: #d47766;
-  --green: #78997a;
   --orange: #8b7449;
-  --red: #bd8183;
-  --pink: #cf9bc2;
-  --cyan: #7b9695;
 }
 html[data-mode="light"][data-scheme-light="summer"] {
   color-scheme: light;
@@ -211,22 +148,15 @@ html[data-mode="light"][data-scheme-light="summer"] {
   --bg-elevated: #f2eae1;
   --fg: #2b3034;
   --fg-dim: #ceccbd;
-  --border: #829084;
   --emphasis: #91a77a;
   --func: #91a77a;
   --string: #abb182;
   --keyword: #c58687;
   --comment: #707d76;
   --accent: #91a77a;
-  --info: #74a48b;
   --success: #91a77a;
-  --warning: #c4aa80;
   --danger: #c58687;
-  --green: #91a77a;
   --orange: #c69883;
-  --red: #c58687;
-  --pink: #c499b8;
-  --cyan: #719f96;
 }
 html[data-mode="light"][data-scheme-light="melange"] {
   color-scheme: light;
@@ -234,22 +164,15 @@ html[data-mode="light"][data-scheme-light="melange"] {
   --bg-elevated: #e9e1db;
   --fg: #54433a;
   --fg-dim: #d9d3ce;
-  --border: #a98a78;
   --emphasis: #bc5c00;
   --func: #a06d00;
   --string: #465aa4;
   --keyword: #bc5c00;
   --comment: #7d6658;
   --accent: #bc5c00;
-  --info: #3d6568;
   --success: #3a684a;
-  --warning: #a06d00;
   --danger: #bf0021;
-  --green: #6e9b72;
   --orange: #cca478;
-  --red: #c77b8b;
-  --pink: #904180;
-  --cyan: #739797;
 }
 @media (prefers-color-scheme: light) {
   html:not([data-mode]) {
@@ -258,21 +181,14 @@ html[data-mode="light"][data-scheme-light="melange"] {
     --bg-elevated: #ebebeb;
     --fg: #101010;
     --fg-dim: #cccccc;
-    --border: #000000;
     --emphasis: #000000;
     --func: #000000;
     --string: #407f00;
     --keyword: #666666;
     --comment: #969ba5;
     --accent: #0253be;
-    --info: #0253be;
     --success: #407f00;
-    --warning: #b07700;
     --danger: #ca0043;
-    --green: #019833;
     --orange: #f54d27;
-    --red: #701516;
-    --pink: #a200d1;
-    --cyan: #007d7d;
   }
 }
