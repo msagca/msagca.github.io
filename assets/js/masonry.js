@@ -1,20 +1,26 @@
 (function () {
   "use strict";
   var ROW_UNIT = 1;
+  var MAX_PASSES = 3;
   function layoutGrid(grid) {
     if (grid.offsetParent === null) return;
     var gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
     var cards = [].slice.call(grid.children).filter(function (el) {
       return el.classList.contains("card") && !el.hidden;
     });
-    cards.forEach(function (card) {
-      card.style.gridRowEnd = "";
-    });
-    cards.forEach(function (card) {
-      var height = card.getBoundingClientRect().height;
-      var span = Math.ceil((height + gap) / ROW_UNIT);
-      card.style.gridRowEnd = "span " + span;
-    });
+    for (var pass = 0; pass < MAX_PASSES; pass++) {
+      var spans = cards.map(function (card) {
+        var height = card.getBoundingClientRect().height;
+        return "span " + Math.ceil((height + gap) / ROW_UNIT);
+      });
+      var changed = false;
+      cards.forEach(function (card, i) {
+        if (card.style.gridRowEnd === spans[i]) return;
+        card.style.gridRowEnd = spans[i];
+        changed = true;
+      });
+      if (!changed) break;
+    }
   }
   function layoutAll() {
     document.querySelectorAll(".card-grid").forEach(layoutGrid);

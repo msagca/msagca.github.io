@@ -33,6 +33,10 @@
   {{ $share := resources.Get "js/post-share.js" }}
   {{ if hugo.IsProduction }}{{ $share = $share | js.Build | minify | fingerprint }}{{ else }}{{ $share = $share | js.Build }}{{ end }}
   <script src="{{ $share.RelPermalink }}" defer></script>
+
+  {{ $postHeader := resources.Get "js/post-header.js" }}
+  {{ if hugo.IsProduction }}{{ $postHeader = $postHeader | js.Build | minify | fingerprint }}{{ else }}{{ $postHeader = $postHeader | js.Build }}{{ end }}
+  <script src="{{ $postHeader.RelPermalink }}" defer></script>
   {{ end }}
 </body>
 </html>

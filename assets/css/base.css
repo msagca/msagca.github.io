@@ -20,8 +20,8 @@ html {
   line-height: 1.6;
   scroll-behavior: smooth;
   transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 body {
   margin: 0;
@@ -57,22 +57,26 @@ h5,
 h6 {
   line-height: 1.25;
   color: var(--emphasis);
-  scroll-margin-top: 4.25rem;
+  scroll-margin-top: calc(var(--header-h) + 0.85rem);
 }
 :root {
   --text-xl: 1.75rem;
   --text-lg: 1.4rem;
   --text-md: 1.15rem;
   --text-base: 1rem;
-  --text-meta: 0.95rem;
   --text-sm: 0.85rem;
-  --icon: 1.1rem;
+  --icon: 0.95rem;
   --icon-header: 1.25rem;
-  --icon-box: 1.9rem;
+  --icon-box: 1.55rem;
+  --icon-box-header: 1.9rem;
+  --header-h: calc(var(--icon-box-header) + 1.5rem);
+  --post-pad-top: 2.5rem;
+  --gutter: 1rem;
 }
 @media (max-width: 640px) {
   :root {
-    --text-meta: 0.76rem;
+    --text-sm: 0.72rem;
+    --gutter: 0.7rem;
   }
 }
 h1 {
@@ -95,10 +99,6 @@ h4 {
 .card-tags li,
 .post-meta,
 .tag-list li,
-.post-toc-rail,
-.post-related-rail {
-  font-size: var(--text-meta);
-}
 code,
 figure figcaption,
 .shader-error {
@@ -109,16 +109,20 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul,
+ol,
+blockquote,
+figure,
+.highlight,
+.post-body div:has(> iframe[src*="youtube"]) {
   margin: 1.25rem 0;
 }
 ul,
 ol {
-  margin: 1.25rem 0;
   padding-left: 2rem;
 }
 blockquote {
-  margin: 1.25rem 0;
   padding: 0.6rem 0.8rem;
   border-left: 3px solid var(--accent);
   color: var(--comment);
@@ -128,7 +132,6 @@ blockquote p {
   margin: 0;
 }
 figure {
-  margin: 1.25rem 0;
   text-align: center;
 }
 figure img {
@@ -145,9 +148,6 @@ figure figcaption p {
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
-}
-.post-body div:has(> iframe[src*="youtube"]) {
-  margin: 1.25rem 0;
 }
 hr {
   border: none;
@@ -184,20 +184,29 @@ code {
 }
 .post-tags-row {
   display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 0.5rem 0;
   margin: 0.5rem 0;
 }
-.post-tags-scroll {
+.post-tags {
+  display: flex;
+  align-items: flex-start;
   flex: 1 1 auto;
   min-width: 0;
+}
+.post-tags .post-meta-icon {
+  min-height: var(--icon-box);
+  display: inline-flex;
+  align-items: center;
 }
 .post-share {
   display: flex;
   align-items: center;
-  margin-left: auto;
   flex-shrink: 0;
+}
+.post-share:only-child {
+  margin-left: auto;
 }
 .post-share .icon-btn.is-copied {
   color: var(--emphasis);
@@ -207,9 +216,11 @@ code {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 0;
   padding: 0;
   margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: var(--icon-box);
 }
 .tag-list li {
   display: inline-flex;

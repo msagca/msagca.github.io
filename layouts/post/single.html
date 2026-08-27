@@ -24,13 +24,11 @@
       </div>
       <div class="post-tags-row">
         {{ with .Params.tags }}
-        <i class="fa-solid fa-tags fa-fw post-meta-icon" aria-hidden="true"></i>
-        <div class="row-scroll post-tags-scroll">
-          <button type="button" class="row-scroll-arrow row-scroll-arrow--prev icon-btn" aria-label="Scroll tags left" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-          <ul class="tag-list row-scroll-track">
+        <div class="post-tags">
+          <i class="fa-solid fa-tags fa-fw post-meta-icon" aria-hidden="true"></i>
+          <ul class="tag-list">
             {{ range . }}<li><a href="{{ "/" | relLangURL }}?tag={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
           </ul>
-          <button type="button" class="row-scroll-arrow row-scroll-arrow--next icon-btn" aria-label="Scroll tags right" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
         </div>
         {{ end }}
         <div class="post-share">

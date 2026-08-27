@@ -38,13 +38,9 @@
     <h3 class="card-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h3>
     <p class="card-excerpt">{{ $page.Summary | plainify | truncate 160 "" }}&hellip;</p>
     {{- with $page.Params.tags }}
-    <div class="row-scroll card-tags-scroll">
-      <button type="button" class="row-scroll-arrow row-scroll-arrow--prev icon-btn" aria-label="Scroll tags left" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-      <ul class="card-tags row-scroll-track">
-        {{ range . }}<li><button type="button" class="card-tag" data-tag-filter="{{ . }}">{{ . }}</button></li>{{ end }}
-      </ul>
-      <button type="button" class="row-scroll-arrow row-scroll-arrow--next icon-btn" aria-label="Scroll tags right" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-    </div>
+    <ul class="card-tags">
+      {{ range . }}<li><button type="button" class="card-tag" data-tag-filter="{{ . }}">{{ . }}</button></li>{{ end }}
+    </ul>
     {{- end }}
   </div>
 </div>
