@@ -124,4 +124,61 @@
       });
     });
   });
+  // Display formulas scroll inside their own box (see base.css). Inline
+  // ones cannot, so any that is wider than its line becomes a scrollable
+  // inline block rather than pushing the page sideways.
+  function fitMath() {
+    document
+      .querySelectorAll("mjx-container:not([display='true'])")
+      .forEach(function (m) {
+        m.classList.remove("math-scroll");
+        var parent = m.parentElement;
+        var cs = getComputedStyle(parent);
+        var avail =
+          parent.clientWidth -
+          parseFloat(cs.paddingLeft) -
+          parseFloat(cs.paddingRight);
+        if (m.getBoundingClientRect().width > avail) {
+          m.classList.add("math-scroll");
+        }
+      });
+  }
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(fitMath);
+  }
+  window.SiteMath = { fit: fitMath };
+  var fitWidth = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (window.innerWidth === fitWidth) return;
+    fitWidth = window.innerWidth;
+    fitMath();
+  });
+  var toc = document.getElementById("post-toc");
+  if (toc) {
+    // Kept in step with the wide-screen breakpoint in toc.css: always open
+    // as a side rail there, folded by default above the post otherwise.
+    var wide = window.matchMedia("(min-width: 1280px)");
+    var syncToc = function () {
+      toc.open = wide.matches;
+    };
+    syncToc();
+    wide.addEventListener("change", syncToc);
+    toc.querySelector("summary").addEventListener("click", function (e) {
+      if (wide.matches) e.preventDefault();
+    });
+    toc.querySelector(".rail-body").addEventListener("click", function (e) {
+      var link = e.target.closest("a");
+      if (wide.matches || !link) return;
+      var target = document.getElementById(
+        decodeURIComponent(link.hash.slice(1)),
+      );
+      if (!target) return;
+      // Fold first, then scroll: folding moves everything below it up, so
+      // the browser's own jump would land in the wrong place.
+      e.preventDefault();
+      toc.open = false;
+      history.pushState(null, "", link.hash);
+      target.scrollIntoView();
+    });
+  }
 })();

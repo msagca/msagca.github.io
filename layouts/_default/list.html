@@ -1,14 +1,9 @@
 {{ define "main" }}
-<div class="card-grid-wrap">
+<div class="post-list-wrap">
   <h1>{{ .Title }}</h1>
   {{ with .Content }}<div class="page-content" style="padding:0 0 1.5rem;max-width:none">{{ . }}</div>{{ end }}
   {{ $pages := where .Pages "Type" "post" }}
   {{ if not $pages }}{{ $pages = .Pages }}{{ end }}
-  {{ partial "filter-chip.html" . }}
-  <div class="card-grid">
-    {{ range $pages.ByDate.Reverse }}
-      {{ partial "card.html" . }}
-    {{ end }}
-  </div>
+  {{ partial "post-list.html" $pages.ByDate.Reverse }}
 </div>
 {{ end }}

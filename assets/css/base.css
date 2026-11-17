@@ -16,8 +16,8 @@ html {
     Helvetica,
     Arial,
     sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.7;
   scroll-behavior: smooth;
   transition:
     background-color 0.15s ease,
@@ -60,11 +60,14 @@ h6 {
   scroll-margin-top: calc(var(--header-h) + 0.85rem);
 }
 :root {
-  --text-xl: 1.75rem;
-  --text-lg: 1.4rem;
-  --text-md: 1.15rem;
+  --text-xl: 2.1rem;
+  --text-lg: 1.45rem;
+  --text-md: 1.2rem;
   --text-base: 1rem;
-  --text-sm: 0.85rem;
+  --text-sm: 0.86rem;
+  --measure: 40rem;
+  /* Grows into the free space beside the column, up to a cap. */
+  --rail-w: min(17rem, calc((100vw - var(--measure)) / 2 - 5 * var(--gutter)));
   --icon: 0.95rem;
   --icon-header: 1.25rem;
   --icon-box: 1.55rem;
@@ -74,9 +77,15 @@ h6 {
   --gutter: 1rem;
 }
 @media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
   :root {
-    --text-sm: 0.72rem;
-    --gutter: 0.7rem;
+    --text-xl: 1.8rem;
+    --text-lg: 1.35rem;
+    --text-md: 1.12rem;
+    --text-sm: 0.82rem;
+    --gutter: 1rem;
   }
 }
 h1 {
@@ -85,20 +94,14 @@ h1 {
 h2 {
   font-size: var(--text-lg);
 }
-h3,
-.card-title,
-.rail-title {
+h3 {
   font-size: var(--text-md);
 }
 h4 {
   font-size: var(--text-base);
 }
 .scheme-picker,
-.card-top-row,
-.card-excerpt,
-.card-tags li,
 .post-meta,
-.tag-list li,
 code,
 figure figcaption,
 .shader-error {
@@ -169,7 +172,27 @@ code {
     "Red Hat Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
     monospace;
 }
+.post-body > :first-child {
+  margin-top: 0;
+}
+.post-body h2 {
+  margin-top: 2.6rem;
+}
+.post-body h3,
+.post-body h4 {
+  margin-top: 2rem;
+}
+pre {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+pre code {
+  font-size: inherit;
+}
 :not(pre) > code {
+  /* Wrapped inline code keeps its padding and corners on every line. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   background: var(--bg-elevated);
   padding: 0.15em 0.4em;
   border-radius: 4px;
@@ -182,70 +205,19 @@ code {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-.post-tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 0.5rem 0;
-  margin: 0.5rem 0;
-}
-.post-tags {
-  display: flex;
-  align-items: flex-start;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.post-tags .post-meta-icon {
-  min-height: var(--icon-box);
-  display: inline-flex;
-  align-items: center;
-}
-.post-share {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.post-share:only-child {
-  margin-left: auto;
-}
-.post-share .icon-btn.is-copied {
-  color: var(--emphasis);
-}
-.tag-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: var(--icon-box);
-}
-.tag-list li {
-  display: inline-flex;
-  align-items: center;
-}
-.tag-list li:not(:last-child)::after,
-.card-tags li:not(:last-child)::after {
-  content: "";
-  flex-shrink: 0;
-  width: 0.38em;
-  height: 0.38em;
-  margin-inline: 0.6em;
-  background: var(--fg-dim);
-  transform: rotate(45deg);
-}
-.tag-list a {
-  display: inline-block;
-  color: var(--comment);
-}
-.tag-list a:hover {
-  color: var(--accent);
-  text-decoration: none;
-}
 mjx-container {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+}
+/* Back-to-back display formulas read as one group. */
+mjx-container[display="true"]:has(+ mjx-container[display="true"]) {
+  margin-bottom: 0.15em;
+}
+mjx-container[display="true"] + mjx-container[display="true"] {
+  margin-top: 0.15em;
+}
+mjx-container.math-scroll {
+  display: inline-block;
+  vertical-align: middle;
 }

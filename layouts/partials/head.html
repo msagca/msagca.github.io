@@ -31,9 +31,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&family=Red+Hat+Mono:wght@400;500;600&display=swap">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/fontawesome.min.css" integrity="sha512-WAQldzapOKc+yIZB/g4npsWhF43dQ74uxwR6WkySVIKVGKaVNSuRw19CQeqN2OmYmg34g7TsZv3sh9nsQXYj3g==" crossorigin="anonymous" referrerpolicy="no-referrer">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/brands.min.css" integrity="sha512-JvNYE/c3wl/dRKs3ZHX+QHe21Et1/ouedfAKJsQPB0XJ+QjVWipm2MVgK3BgrJbdTBXTg/r4rmY4nj6fuzWPyg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/solid.min.css" integrity="sha512-F65MsQcUqnYC7fOE5OrV/jETVn0ANBJjJ7Pe45tVmx7yr7SlHISUdPUiVap4+G79+7b5arc6xcoxPeJlPGepPg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/fontawesome.min.css" integrity="sha512-SMQ1DwSGiIDyNoXdQae7kUBADdtQa8Xsb3LxBxzAXExZNCCH/36yQSpZSYo1c6ckFshd1iMp9eD9+s9+tdhmyg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/brands.min.css" integrity="sha512-m0oLz1v7KqlXtoyxY2LmR11D1iUnjOykxdeLg2FjtwKwPW78NYG5/XETzS+KDekWZqZIRsQNhPwpQuxtOQ4+nw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/solid.min.css" integrity="sha512-E5l6RuM1LLr8r+BTSEtKE9mqwPrO+HQNKbBacr303FoExXNvjq2dX7/0A3sV6OwusCkVmMRZ5zcSDwCziA+n8Q==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
 <script>
   (function () {
@@ -56,7 +56,7 @@
   (resources.Get "css/colors.css")
   (resources.Get "css/base.css")
   (resources.Get "css/layout.css")
-  (resources.Get "css/cards.css")
+  (resources.Get "css/post-list.css")
   (resources.Get "css/code.css")
   (resources.Get "css/toc.css")
   (resources.Get "css/shader.css")
@@ -71,9 +71,29 @@
 {{ if .Params.math }}
 <script>
   window.MathJax = {
+    // Inline and display formulas wrap at operators when they don't fit.
+    output: { displayOverflow: "linebreak", linebreaks: { inline: true } },
     tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
-    chtml: { linebreaks: { automatic: true, width: "container" } }
+    startup: {
+      ready: function () {
+        MathJax.startup.defaultReady();
+        // A product of matrices never wraps: a break between factors would
+        // start a line with a lone factor followed by "=", which misreads.
+        // Such a formula scrolls inside its box when it doesn't fit instead.
+        var product = /\\end\{[bpvBV]?matrix\}\s*\\begin\{[bpvBV]?matrix\}/;
+        MathJax.startup.document.inputJax[0].postFilters.add(function (args) {
+          if (args.math.display && product.test(args.math.math)) {
+            args.data.root.attributes.set("overflow", "scroll");
+          }
+        });
+      },
+      pageReady: function () {
+        return MathJax.startup.defaultPageReady().then(function () {
+          if (window.SiteMath) window.SiteMath.fit();
+        });
+      }
+    }
   };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js" defer></script>
 {{ end }}

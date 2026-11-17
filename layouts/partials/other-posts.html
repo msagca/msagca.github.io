@@ -1,0 +1,27 @@
+{{- /*
+  Posts written around this one, newest first, with this post marked in
+  place: up to four newer posts above it and the one just before it below,
+  so clicking the last item always steps exactly one post back in time.
+*/ -}}
+{{- $page := . -}}
+{{- $all := (where site.RegularPages "Type" "post").ByDate.Reverse -}}
+{{- $idx := 0 -}}
+{{- range $i, $p := $all }}{{ if eq $p.Permalink $page.Permalink }}{{ $idx = $i }}{{ end }}{{ end -}}
+{{- $nNewer := math.Min 4 $idx | int -}}
+{{- $nOlder := math.Min 1 (sub (sub (len $all) $idx) 1) | int -}}
+{{- $newer := after (sub $idx $nNewer) (first $idx $all) -}}
+{{- $older := first $nOlder (after (add $idx 1) $all) -}}
+{{- if or $newer $older }}
+<nav class="post-rail post-related" aria-label="Other posts">
+  <p class="rail-title"><i class="fa-solid fa-link fa-fw rail-title-icon" aria-hidden="true"></i>Other Posts</p>
+  <ul class="rail-body">
+    {{- range $newer }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- end }}
+    <li class="is-current" aria-current="page">{{ $page.Title }}</li>
+    {{- range $older }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end -}}

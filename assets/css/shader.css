@@ -17,3 +17,11 @@
   color: var(--danger);
   background: var(--bg-elevated);
 }
+/* A post's `shader:` front matter renders as a cover above the title. */
+.shader-embed.post-cover {
+  margin: 0 0 2rem;
+}
+.post-cover .shader-canvas {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}

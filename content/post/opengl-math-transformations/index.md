@@ -1,8 +1,6 @@
 ---
 title: "Math and Transformations for OpenGL"
 date: 2025-08-29
-tags: ["C++", "OpenGL", "Linear Algebra"]
-series: "OpenGL"
 math: true
 ---
 
@@ -96,9 +94,8 @@ In graphics applications, it's important to know how much two vectors align, i.e
 > The result of a dot product is a scalar (not a vector).
 
 $$
-\begin{aligned}
 \vec{a} \cdot \vec{b}
-&= \begin{bmatrix}
+= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -107,10 +104,9 @@ a_3
 b_1 \\
 b_2 \\
 b_3
-\end{bmatrix} \\
-&= a_1b_1 + a_2b_2 + a_3b_3 \\
-&= \|\vec{a}\| \|\vec{b}\| \cos{\theta}
-\end{aligned}
+\end{bmatrix}
+= a_1b_1 + a_2b_2 + a_3b_3
+= \|\vec{a}\| \|\vec{b}\| \cos{\theta}
 $$
 
 > If two vectors are perpendicular, their dot product is zero ($\cos{90^\circ} = 0$).
@@ -124,9 +120,8 @@ A vector space paired with an inner product is called an **inner product space**
 This operation takes two non-parallel vectors as input and outputs a vector that is orthogonal to both inputs. It will prove useful in future chapters.
 
 $$
-\begin{aligned}
 \vec{a} \times \vec{b}
-&= \begin{bmatrix}
+= \begin{bmatrix}
 a_1 \\
 a_2 \\
 a_3
@@ -135,13 +130,12 @@ a_3
 b_1 \\
 b_2 \\
 b_3
-\end{bmatrix} \\
-&= \begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 a_2b_3 - a_3b_2 \\
 a_3b_1 - a_1b_3 \\
 a_1b_2 - a_2b_1
 \end{bmatrix}
-\end{aligned}
 $$
 
 ## Matrix Operations
@@ -153,25 +147,23 @@ A **matrix** (_M_) is a 2D array of elements, where each element is identified b
 A matrix-scalar product multiplies each element of the matrix by a scalar. Addition and subtraction can be done element-wise if both matrices have the same dimensions.
 
 $$
-\begin{aligned}
 A + B
-&= \begin{bmatrix}
+= \begin{bmatrix}
 1 & 2 \\
 3 & 4
 \end{bmatrix} +
 \begin{bmatrix}
 5 & 6 \\
 7 & 8
-\end{bmatrix} \\
-&= \begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 1 + 5 & 2 + 6 \\
 3 + 7 & 4 + 8
-\end{bmatrix} \\
-&= \begin{bmatrix}
+\end{bmatrix}
+= \begin{bmatrix}
 6 & 8 \\
 10 & 12
 \end{bmatrix}
-\end{aligned}
 $$
 
 Two matrices, _A_ and _B_, can be multiplied (in this order) if the number of columns in _A_ is equal to the number of rows in _B_. Every element in a row of _A_ is multiplied by the corresponding element in a column of _B_. Then, these products are summed up to obtain one element in the resulting matrix _C_. The result obtained from processing row _i_ of _A_ and column _j_ of _B_ will end up in the $i^{th}$ row and $j^{th}$ column of _C_. This implies that the resulting matrix has the same number of rows as _A_ and the same number of columns as _B_.
@@ -233,18 +225,19 @@ $$
 When a matrix is **transposed**, its rows become its columns and vice versa. If _M_ has the dimensions _mxn_, $M^T$ (transpose of _M_) has a dimension of _nxm_.
 
 $$
-\begin{aligned}
 A^T
-&= \begin{bmatrix}
+= \begin{bmatrix}
 1 & 3 \\
 2 & 4
-\end{bmatrix} \\
+\end{bmatrix}
+$$
+
+$$
 B^T
-&= \begin{bmatrix}
+= \begin{bmatrix}
 5 & 7 \\
 6 & 8
 \end{bmatrix}
-\end{aligned}
 $$
 
 The transpose of a product is equal to the product of the transposes in **reverse** order.
@@ -317,21 +310,29 @@ We can change the length (and direction) of a vector by scaling it. This is achi
 We would like to form a scale matrix (_S_) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
 
 $$
-\begin{aligned}
-x' &= S_x \cdot x \\
-y' &= S_y \cdot y \\
-z' &= S_z \cdot z
-\end{aligned}
+x' = S_x \cdot x
+$$
+
+$$
+y' = S_y \cdot y
+$$
+
+$$
+z' = S_z \cdot z
 $$
 
 Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a _3x1_ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a _3x3_ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
 
 $$
-\begin{aligned}
-x' &= S_x \cdot x + 0 \cdot y + 0 \cdot z \\
-y' &= 0 \cdot x + S_y \cdot y + 0 \cdot z \\
-z' &= 0 \cdot x + 0 \cdot y + S_z \cdot z
-\end{aligned}
+x' = S_x \cdot x + 0 \cdot y + 0 \cdot z
+$$
+
+$$
+y' = 0 \cdot x + S_y \cdot y + 0 \cdot z
+$$
+
+$$
+z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
 $$
 
 We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to 0. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
@@ -359,11 +360,15 @@ $$
 We can move (translate) a vector by adding another vector to it. Similar to scaling, we would love to represent this too as a matrix multiplication, which will help us combine both matrices into one. Again, let's start by writing a set of equations that translate a vector:
 
 $$
-\begin{aligned}
-x' &= x + T_x \\
-y' &= y + T_y \\
-z' &= z + T_z
-\end{aligned}
+x' = x + T_x
+$$
+
+$$
+y' = y + T_y
+$$
+
+$$
+z' = z + T_z
 $$
 
 Wait... can we obtain $x+T_x$ through matrix multiplication? This seems impossible... and it is, in the same dimensional space. The reason is that matrix multiplication is a **linear transformation**; but, translation is an **affine transformation**.
@@ -383,20 +388,24 @@ $$
 This is not linear when $\vec{c} \neq \vec{0}$, because:
 
 $$
-\begin{aligned}
-A(\vec{u} + \vec{v}) &\neq A(\vec{u}) + A(\vec{v}) \\
-L(\vec{u} + \vec{v}) + \vec{c} &\neq L(\vec{u}) + \vec{c} + L(\vec{v}) + \vec{c}
-\end{aligned}
+A(\vec{u} + \vec{v})
+= L(\vec{u} + \vec{v}) + \vec{c}
+\neq L(\vec{u}) + \vec{c} + L(\vec{v}) + \vec{c}
+= A(\vec{u}) + A(\vec{v})
 $$
 
 There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be 0. On the other hand, translation amounts must be preserved; hence, they are multiplied by 1.
 
 $$
-\begin{aligned}
-x' &= 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1 \\
-y' &= 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1 \\
-z' &= 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
-\end{aligned}
+x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1
+$$
+
+$$
+y' = 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1
+$$
+
+$$
+z' = 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
 $$
 
 It looks like our vector is not $(x,y,z)$ anymore, but rather $(x,y,z,1)$. Similarly, each row appears to have one more coefficient that is the translation amount. Let's try to convert this to a matrix multiplication using the available information:

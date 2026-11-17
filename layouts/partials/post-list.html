@@ -1,0 +1,8 @@
+<ol class="post-list">
+  {{- range . }}
+  <li class="post-row">
+    <h2 class="post-row-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <time class="post-row-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  </li>
+  {{- end }}
+</ol>

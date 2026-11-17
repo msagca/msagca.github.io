@@ -1,12 +1,5 @@
 {{ define "main" }}
-{{ $posts := (where site.RegularPages "Type" "post").ByDate.Reverse }}
-
-<div class="card-grid-wrap">
-  {{ partial "filter-chip.html" . }}
-  <div class="card-grid">
-    {{ range $posts }}
-      {{ partial "card.html" . }}
-    {{ end }}
-  </div>
+<div class="post-list-wrap">
+  {{ partial "post-list.html" (where site.RegularPages "Type" "post").ByDate.Reverse }}
 </div>
 {{ end }}

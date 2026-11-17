@@ -1,51 +1,26 @@
 {{ define "main" }}
-{{ $related := where (site.RegularPages.Related .) "Type" "post" }}
-{{ $hasRelated := gt (len $related) 0 }}
-{{ $hasToc := findRE "<li>" .TableOfContents }}
-<div class="post-layout{{ if not $hasRelated }} no-related{{ end }}{{ if not $hasToc }} no-toc{{ end }}">
-  <aside class="post-related">
-    {{ partial "related-posts.html" . }}
-  </aside>
-
+<div class="post-layout">
   <article class="post-content-col">
+    {{- with .Params.shader }}{{ with $.Resources.GetMatch . }}
+    {{ printf `<div class="shader-embed post-cover"><canvas class="shader-canvas" aria-hidden="true"></canvas><p class="shader-error" hidden></p><script type="x-shader/x-fragment">%s</script></div>` .Content | safeHTML }}
+    {{- end }}{{ end }}
     <header class="post-header">
       <h1>{{ .Title }}</h1>
       <div class="post-meta">
-        <span class="post-meta-group">
-          <i class="fa-solid fa-calendar-day fa-fw post-meta-icon" aria-hidden="true"></i>
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format ":date_full" .Date }}</time>
-        </span>
-        {{ if site.Params.readingTime | default true }}
-        <span class="post-meta-group">
-          <span class="post-reading-time">{{ .ReadingTime }} min read</span>
-          <span class="post-meta-icon-box"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
-        </span>
-        {{ end }}
-      </div>
-      <div class="post-tags-row">
-        {{ with .Params.tags }}
-        <div class="post-tags">
-          <i class="fa-solid fa-tags fa-fw post-meta-icon" aria-hidden="true"></i>
-          <ul class="tag-list">
-            {{ range . }}<li><a href="{{ "/" | relLangURL }}?tag={{ . | urlquery }}">{{ . }}</a></li>{{ end }}
-          </ul>
-        </div>
-        {{ end }}
-        <div class="post-share">
-          <button type="button" class="icon-btn" id="post-share-btn" title="Share" aria-label="Share">
-            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
-          </button>
-        </div>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format ":date_long" .Date }}</time>
+        <button type="button" class="icon-btn" id="post-share-btn" title="Share" aria-label="Share">
+          <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+        </button>
       </div>
     </header>
+
+    {{ partial "toc.html" . }}
 
     <div class="post-body">
       {{ .Content }}
     </div>
   </article>
 
-  <aside class="post-toc">
-    {{ partial "toc.html" . }}
-  </aside>
+  {{ partial "other-posts.html" . }}
 </div>
 {{ end }}
