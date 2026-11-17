@@ -124,6 +124,39 @@
       });
     });
   });
+  // Formulas never scroll sideways: any that is wider than its column is
+  // scaled down to fit, and restored when there is room again.
+  function fitMath() {
+    document.querySelectorAll("mjx-container").forEach(function (m) {
+      if (m.dataset.baseSize === undefined) {
+        m.dataset.baseSize = m.style.fontSize || "";
+      }
+      m.style.fontSize = m.dataset.baseSize;
+      var parent = m.parentElement;
+      var cs = getComputedStyle(parent);
+      var avail =
+        parent.clientWidth -
+        parseFloat(cs.paddingLeft) -
+        parseFloat(cs.paddingRight);
+      var natural =
+        m.getAttribute("display") === "true"
+          ? m.scrollWidth
+          : m.getBoundingClientRect().width;
+      if (natural <= avail) return;
+      var base = parseFloat(m.dataset.baseSize) || 100;
+      m.style.fontSize = (base * (avail - 1)) / natural + "%";
+    });
+  }
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(fitMath);
+  }
+  window.SiteMath = { fit: fitMath };
+  var fitWidth = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (window.innerWidth === fitWidth) return;
+    fitWidth = window.innerWidth;
+    fitMath();
+  });
   var toc = document.getElementById("post-toc");
   if (toc) {
     // Kept in step with the wide-screen breakpoint in toc.css: always open
@@ -138,7 +171,18 @@
       if (wide.matches) e.preventDefault();
     });
     toc.querySelector(".rail-body").addEventListener("click", function (e) {
-      if (!wide.matches && e.target.closest("a")) toc.open = false;
+      var link = e.target.closest("a");
+      if (wide.matches || !link) return;
+      var target = document.getElementById(
+        decodeURIComponent(link.hash.slice(1)),
+      );
+      if (!target) return;
+      // Fold first, then scroll: folding moves everything below it up, so
+      // the browser's own jump would land in the wrong place.
+      e.preventDefault();
+      toc.open = false;
+      history.pushState(null, "", link.hash);
+      target.scrollIntoView();
     });
   }
 })();

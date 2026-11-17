@@ -72,7 +72,14 @@
 <script>
   window.MathJax = {
     tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
-    chtml: { linebreaks: { automatic: true, width: "container" } }
+    chtml: { linebreaks: { automatic: true, width: "container" } },
+    startup: {
+      pageReady: function () {
+        return MathJax.startup.defaultPageReady().then(function () {
+          if (window.SiteMath) window.SiteMath.fit();
+        });
+      }
+    }
   };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>

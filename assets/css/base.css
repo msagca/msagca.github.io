@@ -185,6 +185,9 @@ code {
 pre {
   font-size: var(--text-sm);
   line-height: 1.55;
+  /* Long lines wrap; code never scrolls sideways. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 pre code {
   font-size: inherit;
