@@ -92,7 +92,6 @@
 }
 .post-toc #TableOfContents > ul {
   margin-top: 0;
-  padding-left: 1.35em;
 }
 .post-related {
   margin-top: 3rem;
@@ -137,9 +136,6 @@
   }
   .post-toc .rail-title-icon {
     display: inline-block;
-  }
-  .post-toc #TableOfContents > ul {
-    padding-left: 0;
   }
 }
 .post-rail .is-current {
