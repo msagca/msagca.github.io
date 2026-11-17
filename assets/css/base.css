@@ -86,7 +86,7 @@ h2 {
   font-size: var(--text-lg);
 }
 h3,
-.card-title,
+.post-row-title,
 .rail-title {
   font-size: var(--text-md);
 }
@@ -94,9 +94,7 @@ h4 {
   font-size: var(--text-base);
 }
 .scheme-picker,
-.card-top-row,
-.card-excerpt,
-.card-tags li,
+.post-row-meta,
 .post-meta,
 .tag-list li,
 code,
@@ -226,8 +224,7 @@ code {
   display: inline-flex;
   align-items: center;
 }
-.tag-list li:not(:last-child)::after,
-.card-tags li:not(:last-child)::after {
+.tag-list li:not(:last-child)::after {
   content: "";
   flex-shrink: 0;
   width: 0.38em;

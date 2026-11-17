@@ -1,0 +1,89 @@
+{{- /*
+  Single-column post list with previews in alternating side columns.
+
+  Every row has the same fixed height, so an image's size can be decided here
+  at build time, in row units, with no dependence on the viewport. Previews
+  alternate left/right in the order they appear, so an image may extend down
+  until the next preview on the same side begins (or the list ends). Within
+  that limit it takes as many rows as its aspect ratio asks for at the fixed
+  column width.
+*/ -}}
+{{- $pages := . -}}
+{{- $cfg := site.Params.postList | default dict -}}
+{{- $rowH := float ($cfg.rowHeight | default 3) -}}
+{{- $gap := float ($cfg.rowGap | default 1.25) -}}
+{{- $imgW := float ($cfg.imageWidth | default 12) -}}
+{{- $pitch := add $rowH $gap -}}
+
+{{- /* Pass 1: resolve each post's preview and its height/width ratio. */ -}}
+{{- $rows := slice -}}
+{{- $imageRows := slice -}}
+{{- range $i, $page := $pages -}}
+  {{- $kind := "" }}{{ $src := "" }}{{ $shader := "" }}{{ $ratio := 0.5625 -}}
+  {{- with $page.Params.shader -}}
+    {{- with $page.Resources.GetMatch . }}{{ $kind = "shader" }}{{ $shader = .Content }}{{ end -}}
+    {{- with $page.Params.shaderRatio }}{{ $ratio = float . }}{{ end -}}
+  {{- else -}}
+    {{- with $page.Params.image -}}
+      {{- $kind = "image" -}}
+      {{- with $page.Resources.GetMatch . -}}
+        {{- $src = .RelPermalink -}}
+        {{- if eq .MediaType.SubType "svg" -}}
+          {{- with findRESubmatch `viewBox="[-\d.]+[ ,]+[-\d.]+[ ,]+([\d.]+)[ ,]+([\d.]+)"` .Content 1 -}}
+            {{- $m := index . 0 }}{{ $ratio = div (float (index $m 2)) (float (index $m 1)) -}}
+          {{- end -}}
+        {{- else if and (eq .ResourceType "image") (gt .Width 0) -}}
+          {{- $ratio = div (float .Height) (float .Width) -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $src = . -}}
+      {{- end -}}
+      {{- with $page.Params.imageRatio }}{{ $ratio = float . }}{{ end -}}
+    {{- else -}}
+      {{- with $page.Params.youtube -}}
+        {{- $kind = "image" }}{{ $src = printf "https://img.youtube.com/vi/%s/hqdefault.jpg" . }}{{ $ratio = 0.75 -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $kind }}{{ $imageRows = $imageRows | append $i }}{{ end -}}
+  {{- $rows = $rows | append (dict "page" $page "kind" $kind "src" $src "shader" $shader "ratio" $ratio) -}}
+{{- end -}}
+{{- $n := len $rows -}}
+
+<div class="post-list" style="--row-h: {{ $rowH }}rem; --row-gap: {{ $gap }}rem; --image-w: {{ $imgW }}rem">
+  {{- range $i, $row := $rows }}
+  {{- $page := $row.page }}
+  {{- $line := add $i 1 }}
+  <article class="post-row" style="--row: {{ $line }}"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
+    <h2 class="post-row-title"><a href="{{ $page.RelPermalink }}" title="{{ $page.Title }}">{{ $page.Title }}</a></h2>
+    <div class="post-row-meta">
+      <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
+      {{- with $page.Params.series }}
+        {{- $name := . }}
+        {{- $index := 0 }}
+        {{- range $j, $p := (where site.RegularPages "Params.series" $name).ByDate }}{{ if eq $p $page }}{{ $index = add $j 1 }}{{ end }}{{ end }}
+      <button type="button" class="post-row-filter post-row-series" data-series-filter="{{ $name }}">{{ $name }}<span class="post-row-series-index">{{ $index }}</span></button>
+      {{- end }}
+      {{- range $page.Params.tags }}
+      <button type="button" class="post-row-filter" data-tag-filter="{{ . }}">{{ . }}</button>
+      {{- end }}
+    </div>
+  </article>
+  {{- if $row.kind }}
+    {{- $k := 0 }}{{ range $j, $r := $imageRows }}{{ if eq $r $i }}{{ $k = $j }}{{ end }}{{ end }}
+    {{- $side := cond (eq (mod $k 2) 0) "left" "right" }}
+    {{- $limit := $n }}
+    {{- if lt (add $k 2) (len $imageRows) }}{{ $limit = index $imageRows (add $k 2) }}{{ end }}
+    {{- $available := sub $limit $i }}
+    {{- $want := int (math.Round (div (add (mul $row.ratio $imgW) $gap) $pitch)) }}
+    {{- $span := math.Max 1 (math.Min $want $available) | int }}
+    <a class="post-row-image post-row-image--{{ $side }}" href="{{ $page.RelPermalink }}" style="--row: {{ $line }}; --span: {{ $span }}" tabindex="-1" aria-hidden="true">
+      {{- if eq $row.kind "shader" }}
+      {{- printf `<div class="shader-embed"><canvas class="shader-canvas"></canvas><p class="shader-error" hidden></p><script type="x-shader/x-fragment">%s</script></div>` $row.shader | safeHTML }}
+      {{- else }}
+      <img src="{{ $row.src }}" alt="" loading="lazy">
+      {{- end }}
+    </a>
+  {{- end }}
+  {{- end }}
+</div>

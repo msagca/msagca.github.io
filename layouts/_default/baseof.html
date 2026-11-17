@@ -13,9 +13,6 @@
   {{ if hugo.IsProduction }}{{ $js = $js | js.Build | minify | fingerprint }}{{ else }}{{ $js = $js | js.Build }}{{ end }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 
-  {{ $masonry := resources.Get "js/masonry.js" }}
-  {{ if hugo.IsProduction }}{{ $masonry = $masonry | js.Build | minify | fingerprint }}{{ else }}{{ $masonry = $masonry | js.Build }}{{ end }}
-  <script src="{{ $masonry.RelPermalink }}" defer></script>
 
   {{ $shader := resources.Get "js/shader-runtime.js" }}
   {{ if hugo.IsProduction }}{{ $shader = $shader | js.Build | minify | fingerprint }}{{ else }}{{ $shader = $shader | js.Build }}{{ end }}

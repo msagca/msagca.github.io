@@ -3,9 +3,9 @@
   var chip = document.getElementById("post-filter-chip");
   var chipLabel = document.getElementById("post-filter-label");
   var chipKind = document.getElementById("post-filter-kind");
-  var grid = document.querySelector("#main-content .card-grid");
+  var grid = document.querySelector("#main-content .post-list");
   if (!chip || !chipLabel || !chipKind || !grid) return;
-  var cards = [].slice.call(grid.querySelectorAll(":scope > .card"));
+  var cards = [].slice.call(grid.querySelectorAll(":scope > .post-row"));
   function cardTags(card) {
     try {
       return JSON.parse(card.dataset.tags || "[]");
@@ -31,14 +31,14 @@
     } else {
       chip.hidden = true;
     }
-    if (window.SiteMasonry) window.SiteMasonry.layout();
+    grid.classList.toggle("is-filtered", !!filter);
   }
-  grid.querySelectorAll(".card-series-filter").forEach(function (btn) {
+  grid.querySelectorAll("[data-series-filter]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       applyFilter({ type: "series", value: btn.dataset.seriesFilter });
     });
   });
-  grid.querySelectorAll(".card-tag").forEach(function (btn) {
+  grid.querySelectorAll("[data-tag-filter]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       applyFilter({ type: "tag", value: btn.dataset.tagFilter });
     });
