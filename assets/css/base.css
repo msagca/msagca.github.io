@@ -190,6 +190,9 @@ pre code {
   font-size: inherit;
 }
 :not(pre) > code {
+  /* Wrapped inline code keeps its padding and corners on every line. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   background: var(--bg-elevated);
   padding: 0.15em 0.4em;
   border-radius: 4px;
@@ -206,6 +209,13 @@ mjx-container {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+}
+/* Back-to-back display formulas read as one group. */
+mjx-container[display="true"]:has(+ mjx-container[display="true"]) {
+  margin-bottom: 0.4em;
+}
+mjx-container[display="true"] + mjx-container[display="true"] {
+  margin-top: 0.4em;
 }
 mjx-container.math-scroll {
   display: inline-block;

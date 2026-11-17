@@ -71,8 +71,22 @@
 {{ if .Params.math }}
 <script>
   window.MathJax = {
+    // Inline and display formulas wrap at operators when they don't fit.
+    output: { displayOverflow: "linebreak", linebreaks: { inline: true } },
     tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
     startup: {
+      ready: function () {
+        MathJax.startup.defaultReady();
+        // A product of matrices never wraps: a break between factors would
+        // start a line with a lone factor followed by "=", which misreads.
+        // Such a formula scrolls inside its box when it doesn't fit instead.
+        var product = /\\end\{[bpvBV]?matrix\}\s*\\begin\{[bpvBV]?matrix\}/;
+        MathJax.startup.document.inputJax[0].postFilters.add(function (args) {
+          if (args.math.display && product.test(args.math.math)) {
+            args.data.root.attributes.set("overflow", "scroll");
+          }
+        });
+      },
       pageReady: function () {
         return MathJax.startup.defaultPageReady().then(function () {
           if (window.SiteMath) window.SiteMath.fit();
