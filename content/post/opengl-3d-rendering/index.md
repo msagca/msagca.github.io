@@ -244,11 +244,19 @@ $$
 We want to map $[-n,-f]$ to $[-1,1]$ when transforming eye coordinates to NDC, which gives us two equations to solve for _a_ and _b_.
 
 $$
--1 = \frac{-na+b}{n},\quad 1 = \frac{-fa+b}{f}
+-1 = \frac{-na+b}{n}
 $$
 
 $$
-\Rightarrow a = -\frac{f+n}{f-n},\quad b = -\frac{2fn}{f-n}
+1 = \frac{-fa+b}{f}
+$$
+
+$$
+\Rightarrow a = -\frac{f+n}{f-n}
+$$
+
+$$
+b = -\frac{2fn}{f-n}
 $$
 
 $$

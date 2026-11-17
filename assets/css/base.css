@@ -212,10 +212,10 @@ mjx-container {
 }
 /* Back-to-back display formulas read as one group. */
 mjx-container[display="true"]:has(+ mjx-container[display="true"]) {
-  margin-bottom: 0.4em;
+  margin-bottom: 0.15em;
 }
 mjx-container[display="true"] + mjx-container[display="true"] {
-  margin-top: 0.4em;
+  margin-top: 0.15em;
 }
 mjx-container.math-scroll {
   display: inline-block;

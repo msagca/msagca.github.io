@@ -229,7 +229,11 @@ A^T
 = \begin{bmatrix}
 1 & 3 \\
 2 & 4
-\end{bmatrix},\quad B^T
+\end{bmatrix}
+$$
+
+$$
+B^T
 = \begin{bmatrix}
 5 & 7 \\
 6 & 8
@@ -306,13 +310,29 @@ We can change the length (and direction) of a vector by scaling it. This is achi
 We would like to form a scale matrix (_S_) so that the scaling operation could be represented as a matrix-vector multiplication. To obtain that matrix, let's first write a set of equations that describes scaling for a vector in a Euclidean space defined by Cartesian coordinates:
 
 $$
-x' = S_x \cdot x,\quad y' = S_y \cdot y,\quad z' = S_z \cdot z
+x' = S_x \cdot x
+$$
+
+$$
+y' = S_y \cdot y
+$$
+
+$$
+z' = S_z \cdot z
 $$
 
 Since there are 3 equations, there should be 3 rows in the scale matrix to store the coefficients for each equation. Also, since a 3D vector is a _3x1_ matrix, our matrix needs to have 3 columns to be compatible. So, this will be a _3x3_ matrix. Let's rewrite the equations so that each one has 3 coefficients (columns):
 
 $$
-x' = S_x \cdot x + 0 \cdot y + 0 \cdot z,\quad y' = 0 \cdot x + S_y \cdot y + 0 \cdot z,\quad z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
+x' = S_x \cdot x + 0 \cdot y + 0 \cdot z
+$$
+
+$$
+y' = 0 \cdot x + S_y \cdot y + 0 \cdot z
+$$
+
+$$
+z' = 0 \cdot x + 0 \cdot y + S_z \cdot z
 $$
 
 We want to scale each axis independently; hence, we want no contribution from other axes. For this purpose, we set the coefficients of other components to 0. In this type of scenario, we obtain a diagonal matrix. These equations can be written in matrix form as follows:
@@ -340,7 +360,15 @@ $$
 We can move (translate) a vector by adding another vector to it. Similar to scaling, we would love to represent this too as a matrix multiplication, which will help us combine both matrices into one. Again, let's start by writing a set of equations that translate a vector:
 
 $$
-x' = x + T_x,\quad y' = y + T_y,\quad z' = z + T_z
+x' = x + T_x
+$$
+
+$$
+y' = y + T_y
+$$
+
+$$
+z' = z + T_z
 $$
 
 Wait... can we obtain $x+T_x$ through matrix multiplication? This seems impossible... and it is, in the same dimensional space. The reason is that matrix multiplication is a **linear transformation**; but, translation is an **affine transformation**.
@@ -369,7 +397,15 @@ $$
 There is, however, an augmentation technique we can use to obtain a translation matrix. But first, let's expand the equations to include all the components, which must have a corresponding coefficient in each row of this matrix. It's obvious that these coefficients should be 0. On the other hand, translation amounts must be preserved; hence, they are multiplied by 1.
 
 $$
-x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1,\quad y' = 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1,\quad z' = 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
+x' = 1 \cdot x + 0 \cdot y + 0 \cdot z + T_x \cdot 1
+$$
+
+$$
+y' = 0 \cdot x + 1 \cdot y + 0 \cdot z + T_y \cdot 1
+$$
+
+$$
+z' = 0 \cdot x + 0 \cdot y + 1 \cdot z + T_z \cdot 1
 $$
 
 It looks like our vector is not $(x,y,z)$ anymore, but rather $(x,y,z,1)$. Similarly, each row appears to have one more coefficient that is the translation amount. Let's try to convert this to a matrix multiplication using the available information:
