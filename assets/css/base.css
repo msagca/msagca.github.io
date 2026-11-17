@@ -185,9 +185,6 @@ code {
 pre {
   font-size: var(--text-sm);
   line-height: 1.55;
-  /* Long lines wrap; code never scrolls sideways. */
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
 }
 pre code {
   font-size: inherit;
@@ -209,4 +206,8 @@ mjx-container {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+}
+mjx-container.math-scroll {
+  display: inline-block;
+  vertical-align: middle;
 }

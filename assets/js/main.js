@@ -124,28 +124,24 @@
       });
     });
   });
-  // Formulas never scroll sideways: any that is wider than its column is
-  // scaled down to fit, and restored when there is room again.
+  // Display formulas scroll inside their own box (see base.css). Inline
+  // ones cannot, so any that is wider than its line becomes a scrollable
+  // inline block rather than pushing the page sideways.
   function fitMath() {
-    document.querySelectorAll("mjx-container").forEach(function (m) {
-      if (m.dataset.baseSize === undefined) {
-        m.dataset.baseSize = m.style.fontSize || "";
-      }
-      m.style.fontSize = m.dataset.baseSize;
-      var parent = m.parentElement;
-      var cs = getComputedStyle(parent);
-      var avail =
-        parent.clientWidth -
-        parseFloat(cs.paddingLeft) -
-        parseFloat(cs.paddingRight);
-      var natural =
-        m.getAttribute("display") === "true"
-          ? m.scrollWidth
-          : m.getBoundingClientRect().width;
-      if (natural <= avail) return;
-      var base = parseFloat(m.dataset.baseSize) || 100;
-      m.style.fontSize = (base * (avail - 1)) / natural + "%";
-    });
+    document
+      .querySelectorAll("mjx-container:not([display='true'])")
+      .forEach(function (m) {
+        m.classList.remove("math-scroll");
+        var parent = m.parentElement;
+        var cs = getComputedStyle(parent);
+        var avail =
+          parent.clientWidth -
+          parseFloat(cs.paddingLeft) -
+          parseFloat(cs.paddingRight);
+        if (m.getBoundingClientRect().width > avail) {
+          m.classList.add("math-scroll");
+        }
+      });
   }
   if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
     MathJax.startup.promise.then(fitMath);
