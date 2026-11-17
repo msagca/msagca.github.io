@@ -61,6 +61,13 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.post-row--right {
+  text-align: right;
+}
+.post-row--right .post-row-meta {
+  /* Falls back to start when the line overflows, so the date stays visible. */
+  justify-content: safe flex-end;
+}
 .post-row-meta time {
   flex-shrink: 0;
 }
@@ -128,6 +135,10 @@
   .post-row {
     grid-column: 1;
     grid-row: auto;
+    text-align: left;
+  }
+  .post-row-meta {
+    justify-content: flex-start;
   }
 }
 .post-list.is-filtered {
@@ -139,6 +150,10 @@
 .post-list.is-filtered .post-row {
   grid-column: 1;
   grid-row: auto;
+  text-align: left;
+}
+.post-list.is-filtered .post-row-meta {
+  justify-content: flex-start;
 }
 .home-toolbar {
   display: flex;

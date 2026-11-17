@@ -54,7 +54,12 @@
   {{- range $i, $row := $rows }}
   {{- $page := $row.page }}
   {{- $line := add $i 1 }}
-  <article class="post-row" style="--row: {{ $line }}"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
+  {{- $side := "" }}{{ $k := 0 }}
+  {{- if $row.kind }}
+    {{- range $j, $r := $imageRows }}{{ if eq $r $i }}{{ $k = $j }}{{ end }}{{ end }}
+    {{- $side = cond (eq (mod $k 2) 0) "left" "right" }}
+  {{- end }}
+  <article class="post-row{{ if eq $side "right" }} post-row--right{{ end }}" style="--row: {{ $line }}"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
     <h2 class="post-row-title"><a href="{{ $page.RelPermalink }}" title="{{ $page.Title }}">{{ $page.Title }}</a></h2>
     <div class="post-row-meta">
       <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
@@ -70,8 +75,6 @@
     </div>
   </article>
   {{- if $row.kind }}
-    {{- $k := 0 }}{{ range $j, $r := $imageRows }}{{ if eq $r $i }}{{ $k = $j }}{{ end }}{{ end }}
-    {{- $side := cond (eq (mod $k 2) 0) "left" "right" }}
     {{- $limit := $n }}
     {{- if lt (add $k 2) (len $imageRows) }}{{ $limit = index $imageRows (add $k 2) }}{{ end }}
     {{- $available := sub $limit $i }}
