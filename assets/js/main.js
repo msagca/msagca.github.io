@@ -153,6 +153,15 @@
     fitWidth = window.innerWidth;
     fitMath();
   });
+  // Other Posts lists every post; when it outgrows its fixed rail on wide
+  // screens, scroll the rail (not the page) so the current post is centred.
+  var related = document.querySelector(".post-related");
+  var current = related && related.querySelector(".is-current");
+  if (current && related.scrollHeight > related.clientHeight) {
+    related.scrollTop =
+      current.offsetTop -
+      (related.clientHeight - current.offsetHeight) / 2;
+  }
   var toc = document.getElementById("post-toc");
   if (toc) {
     // Kept in step with the wide-screen breakpoint in toc.css: always open
