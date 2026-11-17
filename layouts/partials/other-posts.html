@@ -1,0 +1,12 @@
+{{- $page := . -}}
+{{- $others := first 5 (where (where site.RegularPages "Type" "post").ByDate.Reverse "Permalink" "ne" $page.Permalink) -}}
+{{- if $others }}
+<nav class="post-rail post-related" aria-label="Other posts">
+  <p class="rail-title"><i class="fa-solid fa-link fa-fw rail-title-icon" aria-hidden="true"></i>Other Posts</p>
+  <ul class="rail-body">
+    {{ range $others }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</nav>
+{{- end -}}
