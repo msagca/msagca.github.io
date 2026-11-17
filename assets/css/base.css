@@ -16,8 +16,8 @@ html {
     Helvetica,
     Arial,
     sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.75;
   scroll-behavior: smooth;
   transition:
     background-color 0.15s ease,
@@ -60,11 +60,13 @@ h6 {
   scroll-margin-top: calc(var(--header-h) + 0.85rem);
 }
 :root {
-  --text-xl: 1.75rem;
-  --text-lg: 1.4rem;
-  --text-md: 1.15rem;
+  --text-xl: 2.1rem;
+  --text-lg: 1.45rem;
+  --text-md: 1.2rem;
   --text-base: 1rem;
-  --text-sm: 0.85rem;
+  --text-sm: 0.86rem;
+  --measure: 40rem;
+  --rail-w: 13rem;
   --icon: 0.95rem;
   --icon-header: 1.25rem;
   --icon-box: 1.55rem;
@@ -74,9 +76,15 @@ h6 {
   --gutter: 1rem;
 }
 @media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
   :root {
-    --text-sm: 0.72rem;
-    --gutter: 0.7rem;
+    --text-xl: 1.8rem;
+    --text-lg: 1.35rem;
+    --text-md: 1.12rem;
+    --text-sm: 0.82rem;
+    --gutter: 1rem;
   }
 }
 h1 {
@@ -85,9 +93,7 @@ h1 {
 h2 {
   font-size: var(--text-lg);
 }
-h3,
-.post-row-title,
-.rail-title {
+h3 {
   font-size: var(--text-md);
 }
 h4 {
@@ -166,6 +172,13 @@ code {
   font-family:
     "Red Hat Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
     monospace;
+}
+pre {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+pre code {
+  font-size: inherit;
 }
 :not(pre) > code {
   background: var(--bg-elevated);

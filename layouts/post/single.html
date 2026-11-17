@@ -1,12 +1,5 @@
 {{ define "main" }}
-{{ $related := where (site.RegularPages.Related .) "Type" "post" }}
-{{ $hasRelated := gt (len $related) 0 }}
-{{ $hasToc := findRE "<li>" .TableOfContents }}
-<div class="post-layout{{ if not $hasRelated }} no-related{{ end }}{{ if not $hasToc }} no-toc{{ end }}">
-  <aside class="post-related">
-    {{ partial "related-posts.html" . }}
-  </aside>
-
+<div class="post-layout">
   <article class="post-content-col">
     <header class="post-header">
       <h1>{{ .Title }}</h1>
@@ -39,13 +32,13 @@
       </div>
     </header>
 
+    {{ partial "toc.html" . }}
+
     <div class="post-body">
       {{ .Content }}
     </div>
   </article>
 
-  <aside class="post-toc">
-    {{ partial "toc.html" . }}
-  </aside>
+  {{ partial "related-posts.html" . }}
 </div>
 {{ end }}

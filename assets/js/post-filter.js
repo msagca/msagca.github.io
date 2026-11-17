@@ -31,7 +31,6 @@
     } else {
       chip.hidden = true;
     }
-    grid.classList.toggle("is-filtered", !!filter);
   }
   grid.querySelectorAll("[data-series-filter]").forEach(function (btn) {
     btn.addEventListener("click", function () {

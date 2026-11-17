@@ -124,4 +124,21 @@
       });
     });
   });
+  var toc = document.getElementById("post-toc");
+  if (toc) {
+    // Kept in step with the wide-screen breakpoint in toc.css: always open
+    // as a side rail there, folded by default above the post otherwise.
+    var wide = window.matchMedia("(min-width: 1280px)");
+    var syncToc = function () {
+      toc.open = wide.matches;
+    };
+    syncToc();
+    wide.addEventListener("change", syncToc);
+    toc.querySelector("summary").addEventListener("click", function (e) {
+      if (wide.matches) e.preventDefault();
+    });
+    toc.querySelector(".rail-body").addEventListener("click", function (e) {
+      if (!wide.matches && e.target.closest("a")) toc.open = false;
+    });
+  }
 })();

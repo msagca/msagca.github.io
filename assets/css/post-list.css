@@ -1,35 +1,30 @@
 .post-list-wrap {
-  max-width: 64rem;
+  max-width: calc(var(--measure) + 2 * var(--gutter));
   margin-inline: auto;
   padding: var(--post-pad-top) var(--gutter) 4rem;
 }
 .post-list {
-  display: grid;
-  grid-template-columns: var(--image-w) minmax(0, 1fr) var(--image-w);
-  grid-auto-rows: var(--row-h);
-  row-gap: var(--row-gap);
-  column-gap: calc(2 * var(--gutter));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
 }
 .post-row {
   position: relative;
-  grid-column: 2;
-  grid-row: var(--row);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.15rem;
-  min-width: 0;
-  overflow: hidden;
+  gap: 0.3rem;
 }
 .post-row[hidden] {
   display: none;
 }
 .post-row-title {
   margin: 0;
+  font-size: var(--text-md);
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.35;
 }
 .post-row-title a {
   color: var(--emphasis);
@@ -50,26 +45,14 @@
 }
 .post-row:has(.post-row-title a:focus-visible) {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 6px;
 }
 .post-row-meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.9em;
-  min-width: 0;
+  gap: 0.2rem 0.9em;
   color: var(--comment);
-  white-space: nowrap;
-  overflow: hidden;
-}
-.post-row--right {
-  text-align: right;
-}
-.post-row--right .post-row-meta {
-  /* Falls back to start when the line overflows, so the date stays visible. */
-  justify-content: safe flex-end;
-}
-.post-row-meta time {
-  flex-shrink: 0;
 }
 .post-row-filter {
   position: relative;
@@ -92,68 +75,6 @@
 }
 .post-row-series-index::before {
   content: "#";
-}
-.post-row-image {
-  grid-row: var(--row) / span var(--span);
-  display: block;
-  overflow: hidden;
-  background: var(--fg-dim);
-}
-.post-row-image--left {
-  grid-column: 1;
-}
-.post-row-image--right {
-  grid-column: 3;
-}
-.post-row-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.post-row-image img[src$=".svg"] {
-  object-fit: contain;
-}
-.post-row-image .shader-embed {
-  height: 100%;
-  margin: 0;
-  border-radius: 0;
-}
-.post-row-image .shader-canvas {
-  height: 100%;
-  pointer-events: none;
-}
-/* Titles only: on tall screens, and while a filter hides rows the
-   build-time placement was computed for. */
-@media (orientation: portrait) {
-  .post-list {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .post-row-image {
-    display: none;
-  }
-  .post-row {
-    grid-column: 1;
-    grid-row: auto;
-    text-align: left;
-  }
-  .post-row-meta {
-    justify-content: flex-start;
-  }
-}
-.post-list.is-filtered {
-  grid-template-columns: minmax(0, 1fr);
-}
-.post-list.is-filtered .post-row-image {
-  display: none;
-}
-.post-list.is-filtered .post-row {
-  grid-column: 1;
-  grid-row: auto;
-  text-align: left;
-}
-.post-list.is-filtered .post-row-meta {
-  justify-content: flex-start;
 }
 .home-toolbar {
   display: flex;

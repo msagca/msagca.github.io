@@ -1,8 +1,2 @@
 readingTime = true
 subtitle = "Posts about graphics programming and game engine architecture"
-# Home/list layout, in rem. Preview heights are computed at build time
-# from these, so they must match what the rows actually render at.
-[postList]
-rowHeight = 3
-rowGap = 1.25
-imageWidth = 12
