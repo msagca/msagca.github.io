@@ -1,8 +1,6 @@
 ---
 title: "3D Rendering With OpenGL"
 date: 2025-08-30
-tags: ["C++", "OpenGL", "Linear Algebra"]
-series: "OpenGL"
 math: true
 shader: cover.glsl
 ---

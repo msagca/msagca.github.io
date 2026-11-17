@@ -4,7 +4,6 @@
   {{ with .Content }}<div class="page-content" style="padding:0 0 1.5rem;max-width:none">{{ . }}</div>{{ end }}
   {{ $pages := where .Pages "Type" "post" }}
   {{ if not $pages }}{{ $pages = .Pages }}{{ end }}
-  {{ partial "filter-chip.html" . }}
   {{ partial "post-list.html" $pages.ByDate.Reverse }}
 </div>
 {{ end }}

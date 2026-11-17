@@ -13,14 +13,9 @@
   {{ if hugo.IsProduction }}{{ $js = $js | js.Build | minify | fingerprint }}{{ else }}{{ $js = $js | js.Build }}{{ end }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 
-
   {{ $shader := resources.Get "js/shader-runtime.js" }}
   {{ if hugo.IsProduction }}{{ $shader = $shader | js.Build | minify | fingerprint }}{{ else }}{{ $shader = $shader | js.Build }}{{ end }}
   <script src="{{ $shader.RelPermalink }}" defer></script>
-
-  {{ $filter := resources.Get "js/post-filter.js" }}
-  {{ if hugo.IsProduction }}{{ $filter = $filter | js.Build | minify | fingerprint }}{{ else }}{{ $filter = $filter | js.Build }}{{ end }}
-  <script src="{{ $filter.RelPermalink }}" defer></script>
 
   {{ $rowScroll := resources.Get "js/row-scroll.js" }}
   {{ if hugo.IsProduction }}{{ $rowScroll = $rowScroll | js.Build | minify | fingerprint }}{{ else }}{{ $rowScroll = $rowScroll | js.Build }}{{ end }}
@@ -30,10 +25,6 @@
   {{ $share := resources.Get "js/post-share.js" }}
   {{ if hugo.IsProduction }}{{ $share = $share | js.Build | minify | fingerprint }}{{ else }}{{ $share = $share | js.Build }}{{ end }}
   <script src="{{ $share.RelPermalink }}" defer></script>
-
-  {{ $postHeader := resources.Get "js/post-header.js" }}
-  {{ if hugo.IsProduction }}{{ $postHeader = $postHeader | js.Build | minify | fingerprint }}{{ else }}{{ $postHeader = $postHeader | js.Build }}{{ end }}
-  <script src="{{ $postHeader.RelPermalink }}" defer></script>
   {{ end }}
 </body>
 </html>

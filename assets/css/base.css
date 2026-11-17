@@ -101,9 +101,7 @@ h4 {
   font-size: var(--text-base);
 }
 .scheme-picker,
-.post-row-meta,
 .post-meta,
-.tag-list li,
 code,
 figure figcaption,
 .shader-error {
@@ -203,67 +201,6 @@ pre code {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
-}
-.post-tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 0.5rem 0;
-  margin: 0.5rem 0;
-}
-.post-tags {
-  display: flex;
-  align-items: flex-start;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.post-tags .post-meta-icon {
-  min-height: var(--icon-box);
-  display: inline-flex;
-  align-items: center;
-}
-.post-share {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.post-share:only-child {
-  margin-left: auto;
-}
-.post-share .icon-btn.is-copied {
-  color: var(--emphasis);
-}
-.tag-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: var(--icon-box);
-}
-.tag-list li {
-  display: inline-flex;
-  align-items: center;
-}
-.tag-list li:not(:last-child)::after {
-  content: "";
-  flex-shrink: 0;
-  width: 0.38em;
-  height: 0.38em;
-  margin-inline: 0.6em;
-  background: var(--fg-dim);
-  transform: rotate(45deg);
-}
-.tag-list a {
-  display: inline-block;
-  color: var(--comment);
-}
-.tag-list a:hover {
-  color: var(--accent);
-  text-decoration: none;
 }
 mjx-container {
   max-width: 100%;

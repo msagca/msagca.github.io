@@ -13,31 +13,13 @@
   color: var(--comment);
   margin: 0.3rem 0;
 }
-.post-meta-group {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
+#post-share-btn.is-copied {
+  color: var(--emphasis);
 }
-.post-meta-icon,
 .rail-title-icon {
   flex-shrink: 0;
   margin-right: 0.45rem;
   color: var(--comment);
-}
-.post-meta-icon-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: var(--icon-box);
-  color: var(--comment);
-}
-.post-meta--wrapped .post-meta-group:last-child {
-  flex-direction: row-reverse;
-}
-.post-meta--wrapped .post-meta-icon-box {
-  width: auto;
-  margin-right: 0.45rem;
 }
 .rail-title {
   display: flex;

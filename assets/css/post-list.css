@@ -47,63 +47,6 @@
   outline: 2px solid var(--accent);
   outline-offset: 6px;
 }
-.post-row-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.2rem 0.9em;
-  color: var(--comment);
-}
-.post-row-filter {
-  position: relative;
-  z-index: 1;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-.post-row-filter:hover,
-.post-row-filter:focus-visible {
-  color: var(--accent);
-}
-.post-row-series-index {
-  font-weight: 600;
-  margin-left: 0.35em;
-}
-.post-row-series-index::before {
-  content: "#";
-}
-.home-toolbar {
-  display: flex;
-  justify-content: flex-end;
-}
-.home-toolbar:has(.post-filter-chip:not([hidden])) {
-  margin-bottom: 1.5rem;
-}
-.post-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font: inherit;
-  font-size: var(--text-sm);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  border: 1px solid var(--accent);
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.post-filter-chip:hover,
-.post-filter-chip:focus-visible {
-  color: var(--fg);
-}
-.post-filter-chip[hidden] {
-  display: none;
-}
 @media (max-width: 640px) {
   .post-list {
     gap: 1.4rem;
@@ -111,4 +54,8 @@
   .post-row-title {
     font-size: 1.12rem;
   }
+}
+.post-row-date {
+  font-size: var(--text-sm);
+  color: var(--comment);
 }

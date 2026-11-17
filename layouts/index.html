@@ -1,6 +1,5 @@
 {{ define "main" }}
 <div class="post-list-wrap">
-  {{ partial "filter-chip.html" . }}
   {{ partial "post-list.html" (where site.RegularPages "Type" "post").ByDate.Reverse }}
 </div>
 {{ end }}

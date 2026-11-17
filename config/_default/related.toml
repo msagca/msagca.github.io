@@ -1,4 +1,5 @@
 includeNewer = true
-threshold = 60
+threshold = 0
 toLower = false
-indices = [{ name = "tags", weight = 100 }]
+# No tags: related posts are the ones written closest in time.
+indices = [{ name = "date", weight = 100 }]

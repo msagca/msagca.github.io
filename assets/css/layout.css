@@ -67,9 +67,7 @@
 }
 .icon-btn i,
 .social-links i,
-.rail-title-icon,
-.post-meta-icon,
-.post-meta-icon-box i {
+.rail-title-icon {
   font-size: var(--icon);
   line-height: 1;
 }

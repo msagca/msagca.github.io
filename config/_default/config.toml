@@ -3,9 +3,9 @@ languageCode = "en-us"
 title = "msagca"
 defaultContentLanguage = "en"
 hasCJKLanguage = false
+disableKinds = ["taxonomy", "term"]
 [pagination]
 pagerSize = 24
 [outputs]
 home = ["HTML", "RSS"]
 [taxonomies]
-tag = "tags"

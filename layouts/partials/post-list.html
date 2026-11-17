@@ -1,20 +1,8 @@
 <ol class="post-list">
   {{- range . }}
-  {{- $page := . }}
-  <li class="post-row"{{ with $page.Params.series }} data-series="{{ . }}"{{ end }}{{ with $page.Params.tags }} data-tags='{{ . | jsonify }}'{{ end }}>
-    <h2 class="post-row-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
-    <div class="post-row-meta">
-      <time datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format "Jan 2, 2006" }}</time>
-      {{- with $page.Params.series }}
-        {{- $name := . }}
-        {{- $index := 0 }}
-        {{- range $j, $p := (where site.RegularPages "Params.series" $name).ByDate }}{{ if eq $p $page }}{{ $index = add $j 1 }}{{ end }}{{ end }}
-      <button type="button" class="post-row-filter post-row-series" data-series-filter="{{ $name }}">{{ $name }}<span class="post-row-series-index">{{ $index }}</span></button>
-      {{- end }}
-      {{- range $page.Params.tags }}
-      <button type="button" class="post-row-filter" data-tag-filter="{{ . }}">{{ . }}</button>
-      {{- end }}
-    </div>
+  <li class="post-row">
+    <h2 class="post-row-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <time class="post-row-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
   </li>
   {{- end }}
 </ol>

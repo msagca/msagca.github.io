@@ -1,8 +1,6 @@
 ---
 title: "Procedurally Generated Maps for MOBAs"
 date: 2024-07-24
-tags: ["Unity", "C#"]
-series: "Unity"
 ---
 
 In recent months, I've been exploring procedural level generation techniques and algorithms to streamline the level design process for my future game projects so that I can spend more time on gameplay programming. While I haven't delved into some of the more advanced stuff, I think I gained enough experience to quickly create levels suitable for various genres. In this post, I will talk about my progress in incorporating procedural map generation into a [MOBA](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena) game I've been working on (in [Unity](https://unity.com)).

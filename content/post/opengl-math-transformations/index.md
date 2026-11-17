@@ -1,8 +1,6 @@
 ---
 title: "Math and Transformations for OpenGL"
 date: 2025-08-29
-tags: ["C++", "OpenGL", "Linear Algebra"]
-series: "OpenGL"
 math: true
 ---
 
