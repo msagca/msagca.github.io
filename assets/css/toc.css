@@ -123,3 +123,7 @@
     display: none;
   }
 }
+.post-rail .is-current {
+  color: var(--emphasis);
+  font-weight: 600;
+}

@@ -1,12 +1,30 @@
+{{- /*
+  Posts written around this one, newest first, with this post marked in
+  place. Up to two newer posts sit above it and the rest are older, so the
+  last item is always the next post back in time (when there is one).
+*/ -}}
 {{- $page := . -}}
-{{- $others := first 5 (where (where site.RegularPages "Type" "post").ByDate.Reverse "Permalink" "ne" $page.Permalink) -}}
-{{- if $others }}
+{{- $size := 5 -}}
+{{- $all := (where site.RegularPages "Type" "post").ByDate.Reverse -}}
+{{- $idx := 0 -}}
+{{- range $i, $p := $all }}{{ if eq $p.Permalink $page.Permalink }}{{ $idx = $i }}{{ end }}{{ end -}}
+{{- $olderAvail := sub (sub (len $all) $idx) 1 -}}
+{{- $nNewer := math.Min 2 $idx | int -}}
+{{- $nOlder := math.Min (sub $size $nNewer) $olderAvail | int -}}
+{{- $nNewer = math.Min (sub $size $nOlder) $idx | int -}}
+{{- $newer := after (sub $idx $nNewer) (first $idx $all) -}}
+{{- $older := first $nOlder (after (add $idx 1) $all) -}}
+{{- if or $newer $older }}
 <nav class="post-rail post-related" aria-label="Other posts">
   <p class="rail-title"><i class="fa-solid fa-link fa-fw rail-title-icon" aria-hidden="true"></i>Other Posts</p>
   <ul class="rail-body">
-    {{ range $others }}
+    {{- range $newer }}
     <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-    {{ end }}
+    {{- end }}
+    <li class="is-current" aria-current="page">{{ $page.Title }}</li>
+    {{- range $older }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- end }}
   </ul>
 </nav>
 {{- end -}}
